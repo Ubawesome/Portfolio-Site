@@ -1,0 +1,176 @@
+﻿@typeparam TItem
+
+<div>
+    <div class="ipp-carousel">
+        @if (ShowControls)
+        {
+            <i class="controls left fa fa-chevron-left" @onclick="PreviousSlide"></i>
+            <i class="controls right fa fa-chevron-right" @onclick="NextSlide"></i>
+        }
+        @foreach (TItem item in Items)
+        {
+            <div class="ipp-carousel-slide @GetSlideClass(item)">
+                @CarouselTemplate(item)
+            </div>
+        }
+    </div>
+    @FooterTemplate(Items.ElementAtOrDefault(CurrentSlide))
+</div>
+
+<style>
+    .ipp-carousel {
+        position: relative;
+        display: block;
+
+        width: 100%;
+        height: clamp(15rem, 20vw, 35rem);
+
+        overflow: hidden;
+    }
+
+    .ipp-carousel > .controls {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 10%;
+        border: none;
+        font-size: 100%;
+
+        text-align: center;
+        line-height: clamp(15rem, 20vw, 35rem);
+
+        z-index: 10;
+
+        cursor: pointer;
+
+        background-color: hsl(0 0% 0% / 0);
+
+        transition: background-color 0.25s linear 0s;
+    }
+
+    .ipp-carousel > .controls:focus,
+    .ipp-carousel > .controls:hover {
+        background-color: hsl(0 0% 0% / 0.1);
+
+    }
+
+    .ipp-carousel > .controls.left {
+        left: 0;
+    }
+
+    .ipp-carousel > .controls.right {
+        right: 0;
+    }
+
+    .ipp-carousel-slide {
+        position: absolute;
+        inset: 0;
+
+        transform: translateX(0%);
+        opacity: 0;
+    }
+
+    .ipp-carousel-slide > * {
+        width: 100%;
+        height: 100%;
+    }
+
+    .ipp-carousel-slide.current {
+        opacity: 1;
+
+        transition: transform 0.5s ease-out 0.1s,
+                    opacity 0.25s ease-out 0s;
+    }
+
+    .ipp-carousel-slide.previous,
+    .ipp-carousel-slide.next {
+        transition: transform 0.5s ease-in-out 0.1s,
+                    opacity 0.25s ease-out 0.1s;
+    }
+
+    .ipp-carousel-slide.previous {
+        transform: translateX(-100%);
+    }
+
+    .ipp-carousel-slide.next {
+        transform: translate(100%);
+    }
+</style>
+
+@code {
+    [Parameter]
+    public RenderFragment<TItem> CarouselTemplate { get; set; } = null;
+
+    [Parameter]
+    public RenderFragment<TItem> FooterTemplate { get; set; } = null;
+
+    [Parameter]
+    public List<TItem> Items { get; set; } = new List<TItem>();
+
+    [Parameter]
+    public bool Wrap { get; set; } = false;
+
+    [Parameter]
+    public bool ShowControls { get; set; } = true;
+
+    [Parameter]
+    public int CurrentSlide { get; set; } = 0;
+
+    [Parameter]
+    public EventCallback<int> CurrentSlideChanged { get; set; }
+
+    private int _currentSlide;
+
+    public async Task SelectSlide(int slide)
+    {
+        await SetCurrentSlide(slide);
+        StateHasChanged();
+    }
+
+    public async Task PreviousSlide()
+    {
+        await SetCurrentSlide(CurrentSlide - 1);
+    }
+
+    public async Task NextSlide()
+    {
+        await SetCurrentSlide(CurrentSlide + 1);
+    }
+
+    private async Task SetCurrentSlide(int slide)
+    {
+        _currentSlide = slide;
+
+        // If going outside of bounds, either wraps or clamps.
+        if (_currentSlide >= Items.Count())
+        {
+            _currentSlide = (Wrap) ? 0 : Items.Count() - 1;
+        }
+
+        if (_currentSlide < 0)
+        {
+            _currentSlide = (Wrap) ? Items.Count() - 1 : 0;
+        }
+
+        await CurrentSlideChanged.InvokeAsync(_currentSlide);
+    }
+
+    private string GetSlideClass(TItem item)
+    {
+        if (IsPrevious(item))
+        {
+            return "previous";
+        } else if (IsCurrent(item))
+        {
+            return "current";
+        } else if (IsNext(item))
+        {
+            return "next";
+        }
+        return "";
+    }
+
+    private bool IsPrevious(TItem item) => Items.IndexOf(item) == CurrentSlide - 1;
+    private bool IsCurrent(TItem item) => Items.IndexOf(item) == CurrentSlide;
+    private bool IsNext(TItem item) => Items.IndexOf(item) == CurrentSlide + 1;
+}
