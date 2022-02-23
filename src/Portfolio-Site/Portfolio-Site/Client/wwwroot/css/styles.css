@@ -1,12 +1,16 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 @import "variables.css";
 
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 body {
-    background-color: var(--primary);
+    background-color: var(--primary-100);
 }
 
 button {
@@ -14,9 +18,19 @@ button {
     background: none;
 }
 
-.main {
-    padding-inline: max(10rem, 20vw);
-    padding-block: 4rem;
+.content {
+    border: solid 0.25rem var(--primary-300);
+    border-radius: 0.5rem;
+
+    width: min(75%, 2000px);
+
+    margin-inline: auto;
+    margin-bottom: max(4rem, 10vh);
+    margin-top: 8rem;
+
+    padding-inline: 4rem;
+    padding-top: 2rem;
+    padding-bottom: max(8rem, 80%);
 }
 
 .btn {
@@ -26,13 +40,17 @@ button {
     --button-hover-color: var(--grey-900);
     --button-hover-bottom-border: var(--primary-900);
 
+    position: relative;
+    display: inline-block;
+
     background-color: var(--button-background-color);
+    border: 0.1rem var(--button-background-color) solid;
     color: var(--button-color);
 
     padding: 0.75rem;
     font-size: 1rem;
     line-height: 1rem;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
 
     cursor: pointer;
     transition: background-color ease-out 0.15s,
@@ -41,43 +59,122 @@ button {
 
 .btn:hover {
     background-color: var(--button-hover-background-color);
+    border: 0.1rem var(--button-hover-background-color) solid;
     color: var(--button-hover-color);
+}
 
-    border-bottom: solid 0.25rem var(--button-hover-bottom-border);
+.btn:hover::after {
+    position: absolute;
+    content: '';
+    left: 0.15rem;
+    right: 0.15rem;
+    bottom: 0.1rem;
+    height: 0.25rem;
+    border-radius: 0.5rem;
+
+    z-index: 1;
+    background-color: var(--button-hover-bottom-border);
+}
+
+.btn.outline {
+    background: none;
+    border: 0.1rem var(--button-background-color) solid;
+    color: var(--button-background-color);
+
+    box-shadow: 0px 0px 0.25rem inset var(--button-background-color);
+}
+
+.btn.outline:hover {
+    background-color: var(--button-background-color);
+    color: var(--grey-900);
+}
+
+.btn.outline:hover::after {
+    position: absolute;
+    display: block;
+    content: '';
+
+    left: 0.15rem;
+    right: 0.15rem;
+    bottom: 0.1rem;
+    height: 0.25rem;
+    border-radius: 0.5rem;
+
+    z-index: 1;
+    background-color: var(--button-hover-background-color);
 }
 
 .btn.primary {
-    --button-background-color: var(--primary-500);
+    --button-background-color: var(--primary-700);
     --button-color: var(--grey-900);
-    --button-hover-background-color: var(--primary-300);
+    --button-hover-background-color: var(--primary-500);
     --button-hover-color: var(--grey-900);
+    --button-hover-bottom-border: var(--primary-300);
 }
 
-    .btn.accent-1 {
-        --button-background-color: var(--accent-1-500);
-        --button-color: var(--grey-900);
-        --button-hover-background-color: var(--accent-1-300);
-        --button-hover-color: var(--grey-900);
-    }
+.btn.accent-1 {
+    --button-background-color: var(--accent-1-500);
+    --button-color: var(--grey-900);
+    --button-hover-background-color: var(--accent-1-300);
+    --button-hover-color: var(--grey-900);
+    --button-hover-bottom-border: var(--accent-1-100);
+}
 
-    .btn.accent-2 {
-        --button-background-color: var(--accent-2-500);
-        --button-color: var(--grey-900);
-        --button-hover-background-color: var(--accent-2-300);
-        --button-hover-color: var(--grey-900);
-    }
+.btn.accent-2 {
+    --button-background-color: var(--accent-2-500);
+    --button-color: var(--grey-900);
+    --button-hover-background-color: var(--accent-2-300);
+    --button-hover-color: var(--grey-900);
+    --button-hover-bottom-border: var(--accent-2-100);
+}
 
-    .btn.accent-3 {
-        --button-background-color: var(--accent-3-500);
-        --button-color: var(--grey-900);
-        --button-hover-background-color: var(--accent-3-300);
-        --button-hover-color: var(--grey-900);
-    }
+.btn.accent-3 {
+    --button-background-color: var(--accent-3-500);
+    --button-color: var(--grey-900);
+    --button-hover-background-color: var(--accent-3-300);
+    --button-hover-color: var(--grey-900);
+    --button-hover-bottom-border: var(--accent-3-100);
+}
 
-    .btn.success {
-        --button-background-color: var(--success-500);
-        --button-color: var(--grey-900);
-        --button-hover-background-color: var(--success-300);
-        --button-hover-color: var(--grey-900);
-    }
+.btn.success {
+    --button-background-color: var(--success-700);
+    --button-color: var(--grey-900);
+    --button-hover-background-color: var(--success-500);
+    --button-hover-color: var(--grey-900);
+    --button-hover-bottom-border: var(--success-300);
+}
 
+.btn.danger {
+    --button-background-color: var(--danger-500);
+    --button-color: var(--grey-900);
+    --button-hover-background-color: var(--danger-300);
+    --button-hover-color: var(--grey-900);
+    --button-hover-bottom-border: var(--danger-100);
+}
+
+
+
+/* Utility Classes */
+
+.flex {
+    display: flex;
+    margin-block: 1rem;
+    
+    gap: var(--gap, 1rem);
+}
+
+.flex.row {
+    flex-direction: row;
+}
+
+.flex.column {
+    flex-direction: column;
+}
+
+.flex.wrap {
+    flex-wrap: wrap;
+}
+
+.flex.no-wrap {
+    flex-wrap: nowrap;
+}

@@ -50,6 +50,17 @@
     --success-700: hsl(var(--success-h) var(--success-s) calc(var(--success-l) + 16%));
     --success-900: hsl(var(--success-h) var(--success-s) calc(var(--success-l) + 32%));
 
+    --danger-h: 360;
+    --danger-s: 82%;
+    --danger-l: 45%;
+
+    --danger-100: hsl(var(--danger-h) var(--danger-s) calc(var(--danger-l) - 32%));
+    --danger-300: hsl(var(--danger-h) var(--danger-s) calc(var(--danger-l) - 16%));
+    --danger-500: hsl(var(--danger-h) var(--danger-s) calc(var(--danger-l)));
+    --danger-700: hsl(var(--danger-h) var(--danger-s) calc(var(--danger-l) + 16%));
+    --danger-900: hsl(var(--danger-h) var(--danger-s) calc(var(--danger-l) + 32%));
+
+
     --accent-1: hsl(271 56% 16%);
     --accent-2: hsl(204 57% 80%);
     --accent-3: hsl(337 59% 53%);
