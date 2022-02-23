@@ -9,7 +9,7 @@
     width: var(--toggle-size);
     aspect-ratio: 1/1;
 
-    color: var(--grey-100);
+    color: var(--grey-900);
 
     z-index: 100;
     cursor: pointer;
@@ -24,54 +24,28 @@
 }
 
 .primary-nav {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-
-    display: flex;
-    flex-direction: column;
-
-    padding-block-start: 10rem;
-    padding-block-end: 15rem;
-    padding-inline: 1rem;
-    padding-inline-start: 0;
-    width: clamp(10rem, 15vw, 20rem);
-    background-image: linear-gradient(to right, var(--accent-2), hsl(0 0% 0% / 0));
-    transform: translateX(-100%);
-    transition: transform ease-out 0.5s;
-}
-
-.primary-nav.active {
-    transform: translateX(0%);
-}
-
-.primary-nav > ul {
-    display: flex;
-    flex-direction: column;
-    margin-right: auto;
-    width: min-content;
-    height: 100%;
+    --nav-color: var(--accent-1-300);
 }
 
 .primary-nav > ul > li {
-    background-color: var(--accent-2);
-    border-bottom-right-radius: 2rem;
-    border-top-right-radius: 2rem;
+    background-color: var(--accent-1-300);
+    outline: 0.25rem solid var(--accent-3-500);
     text-align: center;
     font-size: 1.25rem;
-
-    color: var(--grey-700);
-
-    padding-block: 0.75rem;
-    padding-inline: clamp(2rem, 4vw, 5rem);
-    margin-block: 1rem;
-
+    color: var(--grey-900);
     cursor: pointer;
+
+    transition:
+        background-color ease-out 0.15s,
+        color ease-out 0.15s,
+        box-shadow ease-out 0.15s;
 }
 
-.primary-nav > ul > li:hover {
+.primary-nav > ul > li:hover,
+.primary-nav > ul > li.active:hover {
     background-color: var(--accent-3);
     color: var(--grey-100);
+    box-shadow: 0px 0px 1rem 0rem var(--grey-900);
 }
 
 .primary-nav > ul > li.active {
@@ -79,20 +53,89 @@
     color: var(--grey-900);
 }
 
-@media (min-width: 1281px) {
+/* Mobile */
+@media (max-width: 1280px) {
     .primary-nav {
-        position: fixed;
+        position:fixed;
+        top: 0;
+        bottom: 0;
+
+        display: flex;
+        flex-direction: column;
+
+        padding: 10rem 1rem 15rem 0rem;
+
+        width: clamp(10rem, 15vw, 20rem);
+        background-image: linear-gradient(to right, var(--nav-color), hsl(0 0% 0% / 0));
+        transform: translateX(-100%);
+        transition: transform 0.25s ease-in-out 0s;
+    }
+
+    .primary-nav.active {
+        transform: translateX(0%);
+    }
+
+    .primary-nav > ul {
+        display: flex;
+        flex-direction: column;
+        margin-right: auto;
+        width: min-content;
+        height: 100%;
+    }
+
+    .primary-nav > ul > li {
+        border-bottom-right-radius: 2rem;
+        border-top-right-radius: 2rem;
+
+        padding-block: 0.75rem;
+        padding-inline: clamp(2rem, 4vw, 5rem);
+        margin-block: 1rem;
+    }
+
+    .primary-nav > ul > li.push {
+        margin-block: auto;
+    }
+}
+
+/* Desktop / Tablet */
+
+@media (min-width: 1281px) {
+    .nav-toggle {
+        display: none;
+    }
+
+    .primary-nav {
+        position: sticky;
         left: 0;
         right: 0;
         display: flex;
         flex-direction: row;
-        padding-block-start: 10rem;
-        padding-block-end: 15rem;
-        padding-inline: 1rem;
-        padding-inline-start: 0;
-        width: clamp(10rem, 15vw, 20rem);
-        background-image: linear-gradient(to right, var(--accent-2), hsl(0 0% 0% / 0));
-        transform: translateX(-100%);
-        transition: transform ease-out 0.5s;
+        width: auto;
+        padding-top: 0;
+        padding-left: 4rem;
+        padding-right: 2rem;
+        padding-bottom: 1rem;
+        background-color: var(--nav-color);
     }
+
+    .primary-nav > ul { 
+        display: flex;
+        flex-direction: row;
+        margin-bottom: auto;
+        height: min-content;
+        width: 100%;
+    }
+
+    .primary-nav > ul > li {
+        border-bottom-right-radius: 2rem;
+        border-bottom-left-radius: 2rem;
+        padding-block: 0.75rem;
+        padding-inline: clamp(2rem, 4vw, 5rem);
+        margin-inline: 1rem;
+    }
+
+    .primary-nav > ul > li.push {
+        margin-left: auto;
+    }
+
 }

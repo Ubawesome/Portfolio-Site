@@ -5,23 +5,79 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+body {
+    background-color: var(--primary);
+}
+
 button {
     border: none;
     background: none;
 }
 
-.push-down {
-    margin-top: auto !important;
+.main {
+    padding-inline: max(10rem, 20vw);
+    padding-block: 4rem;
 }
 
-.push-up {
-    margin-bottom: auto !important;
+.btn {
+    --button-background-color: var(--accent-2-500);
+    --button-color: var(--grey-900);
+    --button-hover-background-color: var(--accent-2-300);
+    --button-hover-color: var(--grey-900);
+    --button-hover-bottom-border: var(--primary-900);
+
+    background-color: var(--button-background-color);
+    color: var(--button-color);
+
+    padding: 0.75rem;
+    font-size: 1rem;
+    line-height: 1rem;
+    border-radius: 0.25rem;
+
+    cursor: pointer;
+    transition: background-color ease-out 0.15s,
+                color ease-out 0.15s;
 }
 
-.push-left {
-    margin-right: auto !important;
+.btn:hover {
+    background-color: var(--button-hover-background-color);
+    color: var(--button-hover-color);
+
+    border-bottom: solid 0.25rem var(--button-hover-bottom-border);
 }
 
-.push-right {
-    margin-left: auto !important;
+.btn.primary {
+    --button-background-color: var(--primary-500);
+    --button-color: var(--grey-900);
+    --button-hover-background-color: var(--primary-300);
+    --button-hover-color: var(--grey-900);
 }
+
+    .btn.accent-1 {
+        --button-background-color: var(--accent-1-500);
+        --button-color: var(--grey-900);
+        --button-hover-background-color: var(--accent-1-300);
+        --button-hover-color: var(--grey-900);
+    }
+
+    .btn.accent-2 {
+        --button-background-color: var(--accent-2-500);
+        --button-color: var(--grey-900);
+        --button-hover-background-color: var(--accent-2-300);
+        --button-hover-color: var(--grey-900);
+    }
+
+    .btn.accent-3 {
+        --button-background-color: var(--accent-3-500);
+        --button-color: var(--grey-900);
+        --button-hover-background-color: var(--accent-3-300);
+        --button-hover-color: var(--grey-900);
+    }
+
+    .btn.success {
+        --button-background-color: var(--success-500);
+        --button-color: var(--grey-900);
+        --button-hover-background-color: var(--success-300);
+        --button-hover-color: var(--grey-900);
+    }
+
