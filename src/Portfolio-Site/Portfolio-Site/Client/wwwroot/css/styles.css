@@ -47,9 +47,8 @@ button {
     box-shadow: 0.15rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
 }
 
-.card > *:not(:first-child):not(:last-child) {
-    border-top: 0.25rem solid var(--primary-100);
-    border-bottom: 0.25rem solid var(--primary-100);
+.card > * + * {
+    border-top: 0.35rem solid var(--primary-100);
 }
 
 .card-image,
@@ -74,6 +73,7 @@ button {
 
 .card-title {
     font-size: 1.25rem;
+    font-weight: 600;
     color: var(--grey-900);
 
     padding-inline: clamp(2rem, 2vw, 6rem);
@@ -87,6 +87,10 @@ button {
 }
 
 .btn {
+    --button-font-size: 1rem;
+    --button-font-weight: 400;
+    --button-padding: 0.65rem 1rem;
+
     --button-background-color: var(--accent-2-500);
     --button-color: var(--grey-900);
     --button-hover-background-color: var(--accent-2-300);
@@ -100,15 +104,32 @@ button {
     border: 0.1rem var(--button-background-color) solid;
     color: var(--button-color);
 
-    padding: 0.75rem;
-    font-size: 1rem;
-    line-height: 1rem;
+    padding: var(--button-padding);
+    font-size: var(--button-font-size);
+    font-weight: var(--button-font-weight);
+    line-height: 1.5;
     border-radius: 0.5rem;
+
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
 
     cursor: pointer;
     transition: background-color ease-out 0.15s,
-                border-color: ease-out 0.15s
+                border-color: ease-out 0.15s,
                 color ease-out 0.15s;
+}
+
+.btn.small {
+    --button-font-size: 0.875rem;
+    --button-font-weight: 400;
+    --button-padding: 0.55rem 1rem;
+}
+
+.btn.large {
+    --button-font-size: 1.25rem;
+    --button-font-weight: 500;
+    --button-padding: 0.65rem 1.25em;
 }
 
 .btn::after {
@@ -130,13 +151,14 @@ button {
                 opacity ease-out 0.15s;
 }
 
-.btn:hover {
+.btn:hover, .btn:focus-visible {
     background-color: var(--button-hover-background-color);
     border-color: var(--button-hover-background-color);
     color: var(--button-hover-color);
 }
 
-.btn:hover::after {
+.btn:hover::after,
+.btn:focus-visible::after {
     transform: translateY(0%);
     opacity: 1;
 }
@@ -149,12 +171,13 @@ button {
     box-shadow: 0px 0px 0.25rem inset var(--button-background-color);
 }
 
-.btn.outline:hover {
+.btn.outline:hover, .btn.outline:focus-visible {
     background-color: var(--button-background-color);
     color: var(--grey-900);
 }
 
-.btn.outline:hover::after {
+.btn.outline:hover::after,
+.btn.outline:focus-visible::after {
     background-color: var(--button-hover-background-color);
 }
 
