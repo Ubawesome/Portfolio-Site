@@ -47,6 +47,11 @@ button {
     box-shadow: 0.15rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
 }
 
+.card > *:not(:first-child):not(:last-child) {
+    border-top: 0.25rem solid var(--primary-100);
+    border-bottom: 0.25rem solid var(--primary-100);
+}
+
 .card-image,
 .card-image img {
     width: 100%;
@@ -75,19 +80,11 @@ button {
     padding-block: clamp(1rem, 1vh, 2rem);
 }
 
-.card-title:not(:first-child) {
-    border-top: 0.25rem solid var(--primary-100);
-}
-
-.card-title:not(:last-child) {
-    border-bottom: 0.25rem solid var(--primary-100);
-}
 
 .card-body {
     padding-block: clamp(2rem, 2vh, 6rem);
     padding-inline: clamp(2rem, 2vw, 6rem);
 }
-
 
 .btn {
     --button-background-color: var(--accent-2-500);
@@ -110,16 +107,11 @@ button {
 
     cursor: pointer;
     transition: background-color ease-out 0.15s,
+                border-color: ease-out 0.15s
                 color ease-out 0.15s;
 }
 
-.btn:hover {
-    background-color: var(--button-hover-background-color);
-    border: 0.1rem var(--button-hover-background-color) solid;
-    color: var(--button-hover-color);
-}
-
-.btn:hover::after {
+.btn::after {
     position: absolute;
     content: '';
     left: 0.15rem;
@@ -130,6 +122,23 @@ button {
 
     z-index: 1;
     background-color: var(--button-hover-bottom-border);
+
+    transform: translateY(100%);
+    opacity: 0;
+
+    transition: transform ease-out 0.15s,
+                opacity ease-out 0.15s;
+}
+
+.btn:hover {
+    background-color: var(--button-hover-background-color);
+    border-color: var(--button-hover-background-color);
+    color: var(--button-hover-color);
+}
+
+.btn:hover::after {
+    transform: translateY(0%);
+    opacity: 1;
 }
 
 .btn.outline {
@@ -146,17 +155,6 @@ button {
 }
 
 .btn.outline:hover::after {
-    position: absolute;
-    display: block;
-    content: '';
-
-    left: 0.15rem;
-    right: 0.15rem;
-    bottom: 0.1rem;
-    height: 0.25rem;
-    border-radius: 0.5rem;
-
-    z-index: 1;
     background-color: var(--button-hover-background-color);
 }
 
