@@ -34,30 +34,77 @@ button {
 }
 
 .card {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-auto-rows: max-content;
+    gap: 0.35rem;
 
     position: relative;
 
     width: fit-content;
+
     border-radius: 0.25rem;
 
     color: var(--grey-700);
 
     overflow: auto;
+}
 
+.card > * {
+    height: fit-content;
     background-color: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 2%));
 
     box-shadow: 0.15rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
 }
 
-.card.vertical {
-    flex-direction: column;
+.card.horizontal {
+    /*grid-template-columns: auto auto;*/
+/*    grid-template-rows: min-content min-content;
+*/
+    /*width: min-content;*/
+/*    height: fit-content;
+*/
 }
 
-.card.horizontal {
-    flex-direction: row;
+.card.horizontal > * {
+    height: auto;
 }
+
+
+.card.horizontal > .card-image:first-child {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 2;
+}
+
+.card.horizontal > .card-image:last-child {
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 2;
+}
+
+.card.horizontal > .card-title {
+/*    max-height: min-content;
+    height: min-content;
+*/
+}
+
+/*.card.horizontal > .card-image:first-child {
+    border-right: 0.35rem solid var(--primary-100);
+}
+
+.card.horizontal > .card-image:last-child {
+    border-left: 0.35rem solid var(--primary-100);
+}
+
+.card.horizontal > .card-title:first-child,
+.card.horizontal > .card-body:first-child {
+    border-bottom: 0.35rem solid var(--primary-100);
+}
+
+.card.horizontal > .card-title:last-child,
+.card.horizontal > .card-body:last-child {
+    border-top: 0.35rem solid var(--primary-100);
+}
+
+*/
 
 .card:not(.horizontal), .card:not(horizontal).md,
 .card.vertical, card.vertical.md {
@@ -92,15 +139,11 @@ button {
     max-width: clamp(32em, 35vw, 64em);
 }
 
-.card:not(.horizontal) > * + *,
+/*.card:not(.horizontal) > * + *,
 .card.vertical > * + * {
     border-top: 0.35rem solid var(--primary-100);
 }
-
-.card.horizontal > * + * {
-    border-left: 0.35rem solid var(--primary-100);
-}
-
+*/
 .card > *:first-child,
 .card.vertical > *:first-child {
     border-top-left-radius: 0.25rem;
