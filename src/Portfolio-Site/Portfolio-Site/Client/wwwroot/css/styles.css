@@ -6,7 +6,7 @@
 }
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: var(--font-body);
 }
 
 body {
@@ -32,6 +32,62 @@ button {
     padding-top: 2rem;
     padding-bottom: max(8rem, 80%);
 }
+
+.card {
+    display: block;
+    position: relative;
+
+    width: fit-content;
+    border-radius: 0.25rem;
+
+    color: var(--grey-700);
+
+    background-color: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 2%));
+
+    box-shadow: 0.15rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
+}
+
+.card-image,
+.card-image img {
+    width: 100%;
+    object-fit: contain;
+    aspect-ratio: auto;
+}
+
+.card-image:first-child,
+.card-image:first-child img {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+.card-image:last-child,
+.card-image:last-child img {
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+
+.card-title {
+    font-size: 1.25rem;
+    color: var(--grey-900);
+
+    padding-inline: clamp(2rem, 2vw, 6rem);
+    padding-block: clamp(1rem, 1vh, 2rem);
+}
+
+.card-title:not(:first-child) {
+    border-top: 0.25rem solid var(--primary-100);
+}
+
+.card-title:not(:last-child) {
+    border-bottom: 0.25rem solid var(--primary-100);
+}
+
+.card-body {
+    padding-block: clamp(2rem, 2vh, 6rem);
+    padding-inline: clamp(2rem, 2vw, 6rem);
+}
+
 
 .btn {
     --button-background-color: var(--accent-2-500);
@@ -177,4 +233,8 @@ button {
 
 .flex.no-wrap {
     flex-wrap: nowrap;
+}
+
+.grid {
+    display: grid;
 }

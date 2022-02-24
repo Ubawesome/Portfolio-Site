@@ -1,8 +1,12 @@
 ﻿:root {
+    --font-header: 'Karla', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-body: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
     --primary-h: 220;
     --primary-s: 7%;
     --primary-l: 16%;
 
+    --primary: var(--primary-h) var(--primary-s) var(--primary-l);
 
     --primary-100: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
     --primary-300: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) + 16%));

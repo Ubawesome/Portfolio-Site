@@ -24,14 +24,15 @@
 }
 
 .primary-nav {
-    --nav-color: var(--primary-300);
+    --nav-color: var(--grey-100);
+    font-family: var(--font-header);
 }
 
-.primary-nav > ul > li {
-    background: none;
-    outline: 0.25rem solid var(--accent-1-500);
+.primary-nav .nav-link {
+    position: relative;
+    display: block;
 
-    box-shadow: 0px 0px 0.5rem inset var(--accent-1-500);
+    background: none;
 
     text-align: center;
     font-size: 1.15rem;
@@ -44,15 +45,27 @@
         box-shadow ease-out 0.15s;
 }
 
-.primary-nav > ul > li:hover,
-.primary-nav > ul > li.active:hover {
+.primary-nav .nav-link:hover,
+.primary-nav .nav-link.active:hover {
     background-color: var(--accent-1-500);
     color: var(--grey-900);
     box-shadow: 0px 0px 1rem 0rem var(--accent-1-500);
 }
 
-.primary-nav > ul > li.active {
-    text-decoration: underline;
+.primary-nav .nav-link.active::after,
+.primary-nav .nav-link:hover::after {
+    position: absolute;
+    content: '';
+    left: 0.15rem;
+    right: 0.15rem;
+    bottom: 0.1rem;
+    height: 0.25rem;
+    border-radius: 0.5rem;
+    z-index: 1;
+    background-color: var(--primary-900);
+}
+
+.primary-nav .nav-link.active {
     color: var(--grey-900);
 }
 
@@ -87,11 +100,11 @@
         height: 100%;
     }
 
-    .primary-nav > ul > li {
+    .primary-nav .nav-link {
         text-align: left;
 
-        border-bottom-right-radius: 0.5rem;
-        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
 
         padding-block: 0.75rem;
         padding-left: 0.75rem;
@@ -142,14 +155,16 @@
     }
 
     .primary-nav > ul > li {
-        border-bottom-right-radius: 0.5rem;
-        border-bottom-left-radius: 0.5rem;
-
-        padding-inline: clamp(2rem, 3vw, 5rem);
-        padding-top: 1.75rem;
-        padding-bottom: 0rem;
-
         margin-inline: 1rem;
+    }
+
+    .primary-nav .nav-link {
+        border-bottom-right-radius: 0.25rem;
+        border-bottom-left-radius: 0.25rem;
+
+        height: 100%;
+        padding-block: 2rem;
+        padding-inline: clamp(2rem, 3vw, 5rem);
     }
 
     .primary-nav > ul > li.push {
