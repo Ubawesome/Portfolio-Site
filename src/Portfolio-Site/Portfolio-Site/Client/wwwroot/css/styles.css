@@ -34,7 +34,9 @@ button {
 }
 
 .card {
-    display: block;
+    display: flex;
+    flex-direction: column;
+
     position: relative;
 
     width: fit-content;
@@ -42,34 +44,92 @@ button {
 
     color: var(--grey-700);
 
+    overflow: auto;
+
     background-color: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 2%));
 
     box-shadow: 0.15rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
 }
 
-.card > * + * {
+.card.vertical {
+    flex-direction: column;
+}
+
+.card.horizontal {
+    flex-direction: row;
+}
+
+.card:not(.horizontal), .card:not(horizontal).md,
+.card.vertical, card.vertical.md {
+    min-width: clamp(4em, 8vw, 8em);
+    max-width: clamp(24em, 25vw, 48em);
+}
+
+.card:not(horizontal).sm,
+.card.vertical.sm {
+    min-width: clamp(2em, 6vw, 6em);
+    max-width: clamp(12em, 15vw, 32em);
+}
+
+.card:not(horizontal).lg,
+.car.vertical.lg {
+    min-width: clamp(6em, 12vw, 12em);
+    max-width: clamp(32em, 35vw, 64em);
+}
+
+.card.horizontal.md {
+    min-height: clamp(4em, 8vw, 8em);
+    max-height: clamp(24em, 25vw, 48em);
+}
+
+.card.horizontal.sm {
+    min-width: clamp(2em, 6vw, 6em);
+    max-width: clamp(12em, 15vw, 32em);
+}
+
+.card.horizontal.lg {
+    min-width: clamp(6em, 12vw, 12em);
+    max-width: clamp(32em, 35vw, 64em);
+}
+
+.card:not(.horizontal) > * + *,
+.card.vertical > * + * {
     border-top: 0.35rem solid var(--primary-100);
+}
+
+.card.horizontal > * + * {
+    border-left: 0.35rem solid var(--primary-100);
+}
+
+.card > *:first-child,
+.card.vertical > *:first-child {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+.card > *:last-child,
+.card.vertical > *:last-child {
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.card.horizontal > *:first-child {
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+.card.horizontal > *:last-child {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
 }
 
 .card-image,
 .card-image img {
     width: 100%;
+    height: 100%;
     object-fit: contain;
-    aspect-ratio: auto;
+    overflow: hidden;
 }
-
-.card-image:first-child,
-.card-image:first-child img {
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
-}
-
-.card-image:last-child,
-.card-image:last-child img {
-    border-bottom-left-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
-}
-
 
 .card-title {
     font-size: 1.25rem;
@@ -79,7 +139,6 @@ button {
     padding-inline: clamp(2rem, 2vw, 6rem);
     padding-block: clamp(1rem, 1vh, 2rem);
 }
-
 
 .card-body {
     padding-block: clamp(2rem, 2vh, 6rem);
