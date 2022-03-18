@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Shared\Portfolio-Site.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\css\img\" />
+  </ItemGroup>
+
 </Project>

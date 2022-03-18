@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+@supports ("scrollbar-width", "thin") {
+    scrollbar-width: thin !important;
+}
+
+
 html, body {
     font-family: var(--font-body);
 }
@@ -17,20 +22,70 @@ button {
     border: none;
     background: none;
 }
-
-.content {
-    border: solid 0.25rem var(--primary-300);
-    border-radius: 0.5rem;
-
-    width: min(75%, 2000px);
-
-    margin-inline: auto;
+.main {
+    /*    margin-top: 8rem;
     margin-bottom: max(4rem, 10vh);
-    margin-top: 8rem;
+*/
+}
 
+.title {
+    font-size: 5rem;
+    color: white;
+    text-shadow: 0 0 5px black;
+}
+
+.splash {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    perspective: 10px;
+    transform-style: preserve-3d;
+
+    /*height: 100vh;
+    background-attachment: fixed;
+    background-image: url('https://loremflickr.com/1920/1080');*/
+    /*background-image: url('img/Mountain.png');*/
+    /*background-size: cover;*/
+}
+
+.background, .foreground {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.background {
+    transform: translateZ(-10px) scale(2);
+}
+
+.foreground{
+    transform: translateZ(-5px) scale(1.5);
+}
+
+.container {
+    box-shadow: 0.1rem 0.1rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
+
+    width: clamp(20rem, 70vw, 2000px);
+    margin-inline: auto;
+    margin-block: 2rem;
     padding-inline: 4rem;
-    padding-top: 2rem;
-    padding-bottom: max(8rem, 80%);
+    padding-block: 2rem;
+}
+
+.container-full {
+    box-shadow: 0.1rem 0.1rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
+
+    width: 100%;
+    margin-inline: auto;
+    margin-block: 2rem;
+    padding-inline: clamp(10rem, 15vw + 3.5rem, 1000px);
+    padding-block: 2rem;
+    /*    padding-bottom: max(8rem, 80%);*/
 }
 
 .card {
@@ -176,6 +231,7 @@ button {
 
 .card-title {
     font-size: 1.25rem;
+    line-height 1.1em;
     font-weight: 600;
     color: var(--grey-900);
 
@@ -191,7 +247,7 @@ button {
 .btn {
     --button-font-size: 1rem;
     --button-font-weight: 400;
-    --button-padding: 0.65rem 1rem;
+    --button-padding: 0.75em 1em;
 
     --button-background-color: var(--accent-2-500);
     --button-color: var(--grey-900);
@@ -209,7 +265,8 @@ button {
     padding: var(--button-padding);
     font-size: var(--button-font-size);
     font-weight: var(--button-font-weight);
-    line-height: 1.5;
+    line-height: 1em;
+    letter-spacing: 0.15ch;
     border-radius: 0.5rem;
 
     text-decoration: none;
@@ -225,13 +282,11 @@ button {
 .btn.small {
     --button-font-size: 0.875rem;
     --button-font-weight: 400;
-    --button-padding: 0.55rem 1rem;
 }
 
 .btn.large {
     --button-font-size: 1.25rem;
     --button-font-weight: 500;
-    --button-padding: 0.65rem 1.25em;
 }
 
 .btn::after {

@@ -8,6 +8,8 @@
 
     --primary: var(--primary-h) var(--primary-s) var(--primary-l);
 
+    --primary-000: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
+    --primary-050: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 2%));
     --primary-100: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
     --primary-300: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) + 16%));
     --primary-500: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) + 32%));
