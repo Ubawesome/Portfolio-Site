@@ -1,0 +1,34 @@
+﻿@namespace Portfolio_Site.Components
+
+<div class="scrollable">
+    @if (Background != null)
+    {
+        <div class="scrollable-background">
+            @Background
+        </div>
+    }
+
+    @if (Foreground != null) {
+        <div class="scrollable-foreground">@Foreground</div>
+
+    }
+
+    @if (Title != null) {
+        <div class="scrollable-title">@Title</div>
+
+    }
+
+@*    <img src="/css/img/paper-crease.jpg" class="scrollable-background" />
+
+    <h1 class="scrollable-title">This is the title</h1>
+*@
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment Background { get; set; } = null;
+    [Parameter]
+    public RenderFragment Foreground { get; set; } = null;
+    [Parameter]
+    public RenderFragment Title { get; set; } = null;
+}

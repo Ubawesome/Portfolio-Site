@@ -28,48 +28,13 @@ button {
 */
 }
 
-.title {
-    font-size: 5rem;
-    color: white;
-    text-shadow: 0 0 5px black;
-}
 
-.splash {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    perspective: 10px;
-    transform-style: preserve-3d;
-
-    /*height: 100vh;
-    background-attachment: fixed;
-    background-image: url('https://loremflickr.com/1920/1080');*/
-    /*background-image: url('img/Mountain.png');*/
-    /*background-size: cover;*/
-}
-
-.background, .foreground {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    z-index: -1;
-}
-
-.background {
-    transform: translateZ(-10px) scale(2);
-}
-
-.foreground{
-    transform: translateZ(-5px) scale(1.5);
+.container, .container-full {
+    box-shadow: 0.1rem 0.1rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
+    background-color: var(--primary-100);
 }
 
 .container {
-    box-shadow: 0.1rem 0.1rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
-
     width: clamp(20rem, 70vw, 2000px);
     margin-inline: auto;
     margin-block: 2rem;
@@ -78,8 +43,6 @@ button {
 }
 
 .container-full {
-    box-shadow: 0.1rem 0.1rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
-
     width: 100%;
     margin-inline: auto;
     margin-block: 2rem;
@@ -386,6 +349,42 @@ button {
     --button-hover-bottom-border: var(--danger-100);
 }
 
+
+/* Scrollable Classes */
+.scrollable {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    perspective: 10px;
+    transform-style: preserve-3d;
+    z-index: -1;
+}
+
+.scrollable-background, .scrollable-foreground {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.scrollable-background {
+    transform: translateZ(-10px) scale(2);
+}
+
+.scrollable-foreground {
+    transform: translateZ(-5px);
+}
+
+.scrollable-title {
+    font-size: 5rem;
+    color: white;
+    text-shadow: 0 0 5px black;
+}
 
 
 /* Utility Classes */
