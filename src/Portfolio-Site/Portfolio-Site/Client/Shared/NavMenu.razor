@@ -1,57 +1,29 @@
 ﻿<button class="nav-toggle @NavClass" @onclick="ToggleNav">
-    <span class="oi oi-menu"></span>
+    <i class="fi-xnsuxl-three-bars-solid"></i>
 </button>
 
 <nav class="primary-nav @NavClass">
     <ul>
         <li>
-            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link active" href="#"><i class="fi-xnluxl-home" aria-hidden="true"></i>Home</a>
         </li>
         <li class="push">
-            <a class="nav-link" href="#">Who am I?</a>
+            <a class="nav-link" href="#"><i class="fi-cnluxl-anonymous-user-circle" aria-hidden="true"></i>Who am I?</a>
         </li>
         <li>
-            <a class="nav-link" href="#">What have I done?</a>
+            
+            <a class="nav-link" href="#"><i class="fi-xnluxl-clipboard-list" aria-hidden="true"></i>What have I done?</a>
         </li>
         <li>
-            <a class="nav-link" href="#">What can I do?</a>
+            <a class="nav-link" href="#"><i class="fi-xnluxl-question-mark-alt" aria-hidden="true"></i>What can I do?</a>
         </li>
         <li class="push">
-            <a class="nav-link" href="#">Contact me</a>
+            <a class="nav-link" href="#"><i class="fi-xnluxl-comment-square" aria-hidden="true"></i>Contact me</a>
         </li>
 
     </ul>
 </nav>
 
-@*<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Portfolio-Site</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
-
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </div>
-    </nav>
-</div>
-*@
 @code {
     private bool showNav = false;
 

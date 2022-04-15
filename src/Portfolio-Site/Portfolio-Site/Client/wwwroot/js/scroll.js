@@ -47,7 +47,7 @@ function updateScroll() {
         backgroundList.forEach(function (background) {
             let currentScroll = scroll - background.getBoundingClientRect().top;
 
-            console.log('background scroll is ' + currentScroll + ', scroll is ' + scroll)
+            //console.log('background scroll is ' + currentScroll + ', scroll is ' + scroll)
 
             let backgroundScroll = 'translateY(' + currentScroll * backgroundScrollRatio + 'px)';
             let backgroundScale = 'translateZ(' + ((currentScroll * backgroundScaleRatio) - 10) + 'px) scale(2)';

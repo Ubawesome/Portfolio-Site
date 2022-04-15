@@ -6,16 +6,19 @@
     left: 1rem;
     padding: 0;
 
-    width: var(--toggle-size);
+    width: fit-content;
     aspect-ratio: 1/1;
 
     color: var(--grey-900);
 
     z-index: 999;
     cursor: pointer;
+
+    background-color: hsl(0 0% 0% / 0.15);
+    box-shadow: 0 0 1rem 1rem hsl(0 0% 0% / 0.15);
 }
 
-.nav-toggle > span {
+.nav-toggle * {
     font-size: var(--toggle-size);
 }
 
@@ -33,7 +36,9 @@
 
 .primary-nav .nav-link {
     position: relative;
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 
     width: max-content;
 
@@ -115,7 +120,7 @@
         display: flex;
         flex-direction: column;
 
-        padding: 10rem 1rem 15rem 0rem;
+        padding: 10rem 10rem 15rem 0rem;
 
         width: max-content;
         background-image: linear-gradient(to right, var(--nav-color), hsl(0 0% 0% / 0));
