@@ -26,9 +26,9 @@ var windowWidth, containerHeight, imageHeight
 
 
 // Set CSS `tranform` property for an element
-function setTransform(el, transform) {
-    el.style.transform = transform
-    el.style.WebkitTransform = transform
+function setTransform(element, transform) {
+    element.style.transform = transform
+    element.style.WebkitTransform = transform
 }
 
 function setTop(element, top) {
@@ -50,40 +50,67 @@ function updateNavScroll() {
 
 // Update scroll `target`, and start the animation if it is not running already
 function updateScroll() {
-
+    let scrollableList = document.querySelectorAll('.scrollable');
     let backgroundList = document.querySelectorAll('.scrollable > .scrollable-background');
     let titleList = document.querySelectorAll('.scrollable > .scrollable-title');
 
+    let scroll = (window.scrollY || window.pageYOffset);
 
-    // scroll 0, 100vh - 8rem
-    // scrol 100vh, 0
-    //setTop(primaryNav, 'clamp(0, ' + scroll + 'px + 100vh - 10rem, 100vh - 10rem)');
-    setTop(primaryNav, 'max(0px, 100vh - 10rem - ' + scroll + 'px)');
+    if (scrollableList !== null) {
+        scrollableList.forEach(function (scrollable) {
+            let currentScroll = scrollable.getBoundingClientRect().top;
 
-    if (backgroundList !== null) {
-        backgroundList.forEach(function (background) {
-            let currentScroll = scroll - background.getBoundingClientRect().top;
+            if (scrollable.hasAttribute('data-scroll-speed')) {
+                currentScroll = currentScroll * scrollable.getAttribute('data-scroll-speed');
+            }
 
-            //console.log('background scroll is ' + currentScroll + ', scroll is ' + scroll)
+            currentScroll = Math.min(currentScroll, 0);
 
-            let backgroundScroll = 'translateY(' + currentScroll * backgroundScrollRatio + 'px)';
-            let backgroundScale = 'translateZ(' + ((currentScroll * backgroundScaleRatio) - 10) + 'px) scale(2)';
+            let children = scrollable.childNodes;
+            children.forEach(function (child) {
+                let scrollSpeed = 1;
 
-            let backgroundTransform = backgroundScroll + ' ' + backgroundScale;
+                if (child.hasAttribute('data-scroll-speed')) {
+                    scrollSpeed = child.getAttribute('data-scroll-speed');
+                }
 
+                let scrollAmount = currentScroll * scrollSpeed;
+                //let scrollAmount = Math.min((currentScroll * scrollSpeed), 0);
 
-            setTransform(background, backgroundTransform);
+                let scrollTransform = 'translateY(' + scrollAmount + 'px)' // translateZ(-10px) scale(2)';
+
+                setTransform(child, scrollTransform);
+            });
         });
     }
 
-    if (titleList !== null) {
-        titleList.forEach(function (title) {
-            let currentScroll = scroll - title.getBoundingClientRect().top;
-            let titleScroll = 'translateY(' + currentScroll * titleScrollRatio + 'px)';
 
-            setTransform(title, titleScroll);
-        });
-    }
+
+    //if (backgroundList !== null) {
+    //    backgroundList.forEach(function (background) {
+    //        let currentScroll = scroll - background.getBoundingClientRect().top;
+    //        //console.log('background scroll is ' + currentScroll + ', scroll is ' + scroll)
+
+    //        let backgroundScroll = 'translateY(' + currentScroll * backgroundScrollRatio + 'px)';
+    //        let backgroundScale = 'translateZ(' + ((currentScroll * backgroundScaleRatio) - 10) + 'px) scale(2)';
+
+    //        let backgroundTransform = backgroundScroll + ' ' + backgroundScale;
+
+
+    //        setTransform(background, backgroundTransform);
+    //    });
+    //}
+
+    //if (titleList !== null) {
+    //    titleList.forEach(function (title) {
+    //        let currentScroll = scroll - title.getBoundingClientRect().top;
+    //        let titleScroll = 'translateY(' + currentScroll * titleScrollRatio + 'px)';
+
+    //        setTransform(title, titleScroll);
+    //    });
+    //}
+
+
 
 
 //    let backgroundScroll = 'translateY(' + currentScroll * backgroundScrollRatio + 'px)';
@@ -108,8 +135,8 @@ function updateScroll() {
 }
 
 // Listen for `scroll` event to update `target` scroll position
-window.addEventListener('scroll', updateScroll)
-window.addEventListener('scroll', updateNavScroll)
+window.addEventListener('scroll', updateNavScroll);
+window.addEventListener('scroll', updateScroll);
 
 // Start the animation, if it is not running already
 //function startAnimation() {
