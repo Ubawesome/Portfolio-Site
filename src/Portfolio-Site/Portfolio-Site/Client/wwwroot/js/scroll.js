@@ -31,17 +31,34 @@ function setTransform(el, transform) {
     el.style.WebkitTransform = transform
 }
 
+function setTop(element, top) {
+    element.style.top = top;
+}
+
 function setScroll(element, scroll) {
-    element.dataset.scroll = scroll;
+    //element.dataset.scroll = scroll;
+    element.setAttribute('data-scroll', scroll);
 }
 
 
+function updateNavScroll() {
+    let primaryNav = document.querySelector('#primary-nav');
+    let scroll = (window.scrollY || window.pageYOffset);
+
+    setTop(primaryNav, 'max(0px, 100vh - 10rem - ' + scroll + 'px)');
+}
 
 // Update scroll `target`, and start the animation if it is not running already
 function updateScroll() {
+
     let backgroundList = document.querySelectorAll('.scrollable > .scrollable-background');
     let titleList = document.querySelectorAll('.scrollable > .scrollable-title');
-    let scroll = (window.scrollY || window.pageYOffset);
+
+
+    // scroll 0, 100vh - 8rem
+    // scrol 100vh, 0
+    //setTop(primaryNav, 'clamp(0, ' + scroll + 'px + 100vh - 10rem, 100vh - 10rem)');
+    setTop(primaryNav, 'max(0px, 100vh - 10rem - ' + scroll + 'px)');
 
     if (backgroundList !== null) {
         backgroundList.forEach(function (background) {
@@ -92,6 +109,7 @@ function updateScroll() {
 
 // Listen for `scroll` event to update `target` scroll position
 window.addEventListener('scroll', updateScroll)
+window.addEventListener('scroll', updateNavScroll)
 
 // Start the animation, if it is not running already
 //function startAnimation() {
