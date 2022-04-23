@@ -34,7 +34,7 @@
     --accent-2-300: hsl(var(--accent-2-h) var(--accent-2-s) calc(var(--accent-2-l) - 32%));
     --accent-2-500: hsl(var(--accent-2-h) var(--accent-2-s) calc(var(--accent-2-l) - 16%));
     --accent-2-700: hsl(var(--accent-2-h) var(--accent-2-s) calc(var(--accent-2-l)));
-    --accent-2-900: hsl(var(--accent-2-h) var(--accent-2-s) calc(var(--accent-2-l) + 16%));
+    --accent-2-900: hsl(var(--accent-2-h) var(--accent-2-s) calc(var(--accent-2-l) + 8%));
 
     --accent-3-h: 337;
     --accent-3-s: 59%;
@@ -43,8 +43,8 @@
     --accent-3-100: hsl(var(--accent-3-h) var(--accent-3-s) calc(var(--accent-3-l) - 32%));
     --accent-3-300: hsl(var(--accent-3-h) var(--accent-3-s) calc(var(--accent-3-l) - 16%));
     --accent-3-500: hsl(var(--accent-3-h) var(--accent-3-s) calc(var(--accent-3-l)));
-    --accent-3-700: hsl(var(--accent-3-h) var(--accent-3-s) calc(var(--accent-3-l)) + 16%);
-    --accent-3-900: hsl(var(--accent-3-h) var(--accent-3-s) calc(var(--accent-3-l)) + 32%);
+    --accent-3-700: hsl(var(--accent-3-h) var(--accent-3-s) calc(var(--accent-3-l) + 16%));
+    --accent-3-900: hsl(var(--accent-3-h) var(--accent-3-s) calc(var(--accent-3-l) + 32%));
 
     --success-h: 86;
     --success-s: 93%;

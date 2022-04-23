@@ -29,6 +29,11 @@ button {
 */
 }
 
+h1, h2, h3, h4, h5 {
+    font-family: var(--font-header);
+    font-weight: lighter;
+}
+
 
 .container, .container-full {
     box-shadow: 0.1rem 0.1rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
@@ -394,7 +399,8 @@ button {
     width: min(40vw, 48rem);
     aspect-ratio: 1 / 1;
 
-    filter: drop-shadow(1rem 1rem 2rem var(--primary-100));
+    /*filter: drop-shadow(1rem 1rem 2rem var(--primary-100));*/
+    filter: drop-shadow(0.5rem 0.5rem 1rem var(--primary-000));
 }
 
 .splash-block-img {
@@ -421,13 +427,16 @@ button {
 .splash-block-title {
     position: absolute;
     top: 25%;
-    left: 50%;
+    left: 25%;
 
     width: max-content;
 
+    font-size: clamp(2rem, 6vw, 8rem);
     font-weight: 500;
-    font-size: 8rem;
-    color: white;
+    letter-spacing: clamp(0.25rem, 1vw, 1rem);
+
+    color: var(--accent-2-900);
+    text-shadow: none;
 }
 
 
@@ -439,7 +448,8 @@ button {
     display: grid;
     gap: 1rem;
 
-    font-size: 4rem;
+    font-size: clamp(1rem, 3vw, 4rem);
+    font-weight: 100;
     color: var(--primary-900);
 
     text-align: right;
@@ -473,4 +483,20 @@ button {
 
 .grid {
     display: grid;
+}
+
+.m-block-0 {
+    margin-block: 0;
+}
+
+.m-inline-0 {
+    margin-inline: 0;
+}
+
+.p-block-0 {
+    padding-block: 0;
+}
+
+.p-inline-0 {
+    padding-inline: 0;
 }
