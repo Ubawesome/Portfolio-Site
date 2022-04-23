@@ -12,6 +12,7 @@
 
 html, body {
     font-family: var(--font-body);
+    scroll-behavior: smooth;
 }
 
 body {
@@ -381,11 +382,67 @@ button {
 }
 
 .scrollable-title {
-    position: absolute;
     font-size: 5rem;
     color: white;
     text-shadow: 0 0 5px black;
-    top: 0;
+}
+
+.splash-block {
+    position: relative;
+    left: -25%;
+
+    width: min(40vw, 48rem);
+    aspect-ratio: 1 / 1;
+
+    filter: drop-shadow(1rem 1rem 2rem var(--primary-100));
+}
+
+.splash-block-img {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    background-image:
+                      linear-gradient(to top, hsl(0 0% 0% / 0.4), hsl(0 0% 0% / 0 )),
+        url("img/nature-waterfall.jpg");
+    background-color: var(--primary-000);
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat, no-repeat;
+
+    filter: blur(0.1rem);
+
+    z-index: -1;
+}
+
+.splash-block-title {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+
+    width: max-content;
+
+    font-weight: 500;
+    font-size: 8rem;
+    color: white;
+}
+
+
+.splash-block-subtitle {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+
+    display: grid;
+    gap: 1rem;
+
+    font-size: 4rem;
+    color: var(--primary-900);
+
+    text-align: right;
 }
 
 
