@@ -4,9 +4,9 @@
 
 <PageTitle>Index</PageTitle>
 
-<Splash ScrollSpeed="0.25" BackgroundScrollSpeed="0.5" TitleScrollSpeed="-0.4">
+<Splash ScrollSpeed="1" BackgroundScrollSpeed="0.5" TitleScrollSpeed="-0.25" id="home">
     <Background>
-        <img src="/css/img/paper-crease.jpg" />
+        <img src="/css/img/ocean-waves.jpg" class="filter-blur-2" />
     </Background>
     <Title>
         <div class="splash-block">
@@ -21,6 +21,17 @@
     </Title>
 </Splash>
 
+<Splash ScrollSpeed="1" BackgroundScrollSpeed="0.25" TitleScrollSpeed="-0.5" id="who-am-i">
+    <Background>
+        @*<img src="/css/img/paper-crease.jpg" />*@
+        <img src="/css/img/clouds-sunset.jpg" class="filter-blur-1" />
+    </Background>
+    <Title>
+        <h1>Who am I?</h1>
+    </Title>
+</Splash>
+
+
 <div class="container-full m-block-0">
     <div class="flex row wrap">
         <div class="card">
@@ -28,7 +39,7 @@
                 <img src="https://loremflickr.com/1280/720" />
             </div>
 
-            <div class="card-title">Regular buttons</div>
+            <div class="card-title"><h5>Regular buttons</h5></div>
 
             <div class="card-body">
                 <p>
@@ -98,12 +109,23 @@
     </div>
 </div>
 
-<Splash ScrollSpeed="1" BackgroundScrollSpeed="0.25" TitleScrollSpeed="0.2">
+<span id="what_have_i_done" style="display: none;"></span>
+
+<Splash ScrollSpeed="1" BackgroundScrollSpeed="0.25" TitleScrollSpeed="-0.5">
     <Background>
-        <img src="/css/img/paper-crease.jpg" />
+        <img src="/css/img/feathers-blur.jpg" class="filter-blur-1" />
     </Background>
     <Title>
-        <h1>This is the title</h1>
+        <h1>What have I done?</h1>
+    </Title>
+</Splash>
+
+<Splash ScrollSpeed="1" BackgroundScrollSpeed="0.25" TitleScrollSpeed="-0.5" id="what-can-i-do">
+    <Background>
+        <img src="/css/img/painted-canvas.jpg" class="filter-blur-2" />
+    </Background>
+    <Title>
+        <h1>What can I do?</h1>
     </Title>
 </Splash>
 
@@ -171,3 +193,4 @@
         </div>
     </div>
 </div>
+

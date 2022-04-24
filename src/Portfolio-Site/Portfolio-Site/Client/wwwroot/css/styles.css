@@ -23,6 +23,7 @@ button {
     border: none;
     background: none;
 }
+
 .main {
     /*    margin-top: 8rem;
     margin-bottom: max(4rem, 10vh);
@@ -32,6 +33,26 @@ button {
 h1, h2, h3, h4, h5 {
     font-family: var(--font-header);
     font-weight: lighter;
+}
+
+h1 {
+    font-size: var(--fs-h-1);
+}
+
+h2 {
+    font-size: var(--fs-h-2);
+}
+
+h3 {
+    font-size: var(--fs-h-3);
+}
+
+h4 {
+    font-size: var(--fs-h-4);
+}
+
+h5 {
+    font-size: var(--fs-h-5);
 }
 
 
@@ -368,6 +389,7 @@ h1, h2, h3, h4, h5 {
     perspective: 10px;
     transform-style: preserve-3d;
     z-index: -1;
+    box-shadow: 0 0 5rem var(--grey-100);
 }
 
 .scrollable-background, .scrollable-foreground {
@@ -376,10 +398,17 @@ h1, h2, h3, h4, h5 {
     width: 100%;
     object-fit: cover;
     z-index: -1;
+    inset: 0;
 }
 
 .scrollable-background {
     transform: translateZ(-10px) scale(2);
+}
+
+.scrollable-background > *,
+.scrollable-foreground > * {
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .scrollable-foreground {
@@ -500,3 +529,20 @@ h1, h2, h3, h4, h5 {
 .p-inline-0 {
     padding-inline: 0;
 }
+
+.filter-blur-1 {
+    filter: blur(0.1rem);
+}
+
+.filter-blur-2 {
+    filter: blur(0.25rem);
+}
+
+.filter-blur-3 {
+    filter: blur(0.5rem);
+}
+
+.filter-blur-4 {
+    filter: blur(1rem);
+}
+

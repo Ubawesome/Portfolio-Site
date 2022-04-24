@@ -1,6 +1,6 @@
 ﻿@namespace Portfolio_Site.Components
 
-<div class="scrollable" data-scroll-speed="@ScrollSpeed">
+<div class="scrollable" data-scroll-speed="@ScrollSpeed" @attributes="@InputAttributes">
     @if (Background != null)
     {
         <div class="scrollable-background" data-scroll-speed="@BackgroundScrollSpeed">
@@ -25,6 +25,9 @@
 </div>
 
 @code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> InputAttributes { get; set; }
+
     [Parameter]
     public RenderFragment Background { get; set; } = null;
     [Parameter]
