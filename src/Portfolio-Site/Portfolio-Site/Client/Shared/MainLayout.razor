@@ -1,7 +1,25 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <NavMenu />
+    <NavMenu>
+        <NavItems>
+            <NavItem Href="#home">
+                <i class="fi-xnluxl-home" aria-hidden="true"></i>Home
+            </NavItem>
+            <NavItem Href="#who-am-i" class="push">
+                <i class="fi-cnluxl-anonymous-user-circle" aria-hidden="true"></i>Who am I?
+            </NavItem>
+            <NavItem Href="#what_have_i_done">
+                <i class="fi-xnluxl-clipboard-list" aria-hidden="true"></i>What have I done?
+            </NavItem>
+            <NavItem Href="#what-can-i-do">
+                <i class="fi-xnluxl-question-mark-alt" aria-hidden="true"></i>What can I do?
+            </NavItem>
+            <NavItem Href="test" class="push">
+                <i class="fi-xnluxl-comment-square" aria-hidden="true"></i>Contact me
+            </NavItem>
+        </NavItems>
+    </NavMenu>
 
     <main class="main">
         <article>

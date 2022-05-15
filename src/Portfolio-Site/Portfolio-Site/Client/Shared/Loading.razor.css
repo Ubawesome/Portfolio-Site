@@ -1,0 +1,10 @@
+﻿div {
+    position: fixed;
+    inset: 0;
+
+    background: black;
+}
+
+div > h1 {
+    color: white;
+}
