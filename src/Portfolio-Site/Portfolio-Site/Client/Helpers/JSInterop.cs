@@ -6,6 +6,7 @@ namespace PortfolioSite.Client.Helpers
 {
     public static class JSInterop
     {
-    public static async Task SetFocus(this IJSRuntime js, ElementReference element) => await js.InvokeVoidAsync("setFocus", element);
+        public static Task SetFocus(this IJSRuntime js, ElementReference element) => js.InvokeVoidAsync("setFocus", element).AsTask();
+        public static Task ScrollToElement(this IJSRuntime js, string elementId) => js.InvokeVoidAsync("scrollToElement", elementId).AsTask();
     }
 }

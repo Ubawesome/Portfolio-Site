@@ -24,7 +24,6 @@ let titleScrollRatio = -0.4
 // Variables for storing dimmensions
 var windowWidth, containerHeight, imageHeight
 
-
 // Set CSS `tranform` property for an element
 function setTransform(element, transform) {
     element.style.transform = transform
@@ -75,7 +74,6 @@ function updateScroll() {
                 }
 
                 let scrollAmount = currentScroll * scrollSpeed;
-                //let scrollAmount = Math.min((currentScroll * scrollSpeed), 0);
 
                 let scrollTransform = 'translateY(' + scrollAmount + 'px)' // translateZ(-10px) scale(2)';
 
@@ -137,31 +135,3 @@ function updateScroll() {
 // Listen for `scroll` event to update `target` scroll position
 window.addEventListener('scroll', updateNavScroll);
 window.addEventListener('scroll', updateScroll);
-
-// Start the animation, if it is not running already
-//function startAnimation() {
-//    if (!rafActive) {
-//        rafActive = true
-//        rafId = requestAnimationFrame(updateAnimation)
-//    }
-//}
-
-
-//// Do calculations and apply CSS `transform`s accordingly
-//function updateAnimation() {
-//    var diff = target - current
-//    var delta = Math.abs(diff) < 0.1 ? 0 : diff * ease
-
-//    if (delta) {
-//        current += delta
-//        current = parseFloat(current.toFixed(2))
-//        rafId = requestAnimationFrame(updateAnimation)
-//    } else {
-//        current = target
-//        rafActive = false
-//        cancelAnimationFrame(rafId)
-//    }
-
-//    // Set the CSS `transform` corresponding to the custom scroll effect
-//    setTransform(scroller, 'translateY(' + -current + 'px)')
-//}

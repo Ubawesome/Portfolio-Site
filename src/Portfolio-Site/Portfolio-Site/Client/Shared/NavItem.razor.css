@@ -26,24 +26,6 @@
     color: var(--grey-900);
 }
 
-
-.nav-link::before {
-    position: absolute;
-    content: '';
-    inset: 0;
-
-    /*box-shadow: 0px 0px 1rem 0rem var(--accent-1-500);*/
-    opacity: 0;
-
-    transition: opacity ease-out 0.15s;
-
-}
-
-.nav-link:hover::before,
-.nav-link:focus-visible::before {
-    opacity: 1;
-}
-
 .nav-link::after {
     position: absolute;
     content: '';

@@ -2,9 +2,12 @@
     position: fixed;
     inset: 0;
 
-    background: black;
+    background: var(--primary-100);
 }
 
 div > h1 {
-    color: white;
+    color: var(--accent-1-900);
+    width: fit-content;
+    margin-inline: auto;
+    margin-block: max(4rem, 10vw);
 }

@@ -1,9 +1,20 @@
-﻿@inject NavigationManager NavigationManager
+﻿@using PortfolioSite.Client.Helpers
+
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 <li @attributes="@AdditionalAttributes">
-    <a class="nav-link @GetActive(Href, NavLinkMatch.All)" href="@Href">
-        @ChildContent
-    </a>
+    @if (IsLink)
+    {
+        <a class="nav-link @GetActive(Destination, NavLinkMatch.All)" href="@Destination">
+            @ChildContent
+        </a>
+    } else
+    {
+        <a class="nav-link @GetActive(Destination, NavLinkMatch.All)" @onclick="@(async () => await JSRuntime.ScrollToElement(Destination))">
+            @ChildContent
+        </a>
+    }
 </li>
 
 @code {
@@ -14,7 +25,10 @@
     public bool IsDefault { get; set; } = false;
 
     [Parameter]
-    public string Href { get; set; }
+    public bool IsLink { get; set; } = true;
+
+    [Parameter]
+    public string Destination { get; set; }
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }

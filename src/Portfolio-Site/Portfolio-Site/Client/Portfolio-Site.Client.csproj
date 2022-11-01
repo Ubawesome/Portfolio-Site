@@ -8,10 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Components\SectionHeader.razor.css" />
     <None Remove="Shared\Loading.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Components\SectionHeader.razor.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="Shared\Loading.razor.css" />
   </ItemGroup>
 
