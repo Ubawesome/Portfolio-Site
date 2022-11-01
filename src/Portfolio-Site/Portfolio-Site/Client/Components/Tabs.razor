@@ -1,5 +1,5 @@
 ﻿<CascadingValue Value="this">
-    <div class="@GetContainerClass()">
+    <div class="@GetContainerClass() @Class" @attributes="@AdditionalAttributes">
         <div class="tabs-headers @GetHeaderGroupClass()">
             @foreach (var tab in TabList)
             {
@@ -29,6 +29,12 @@
 
     [Parameter]
     public TabStyle TabStyle { get; set; }
+
+    [Parameter]
+    public string Class { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     public List<Tab> TabList { get; set; } = new();
     public Tab ActiveTab { get; set; }
@@ -108,7 +114,7 @@
     public string GetActiveClass(Tab tab)
     {
         if (ActiveTab == tab)
-            return "active";
+            return "selected";
 
         return "";
     }
