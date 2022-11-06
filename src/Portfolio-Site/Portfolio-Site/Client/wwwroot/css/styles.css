@@ -844,15 +844,13 @@ grid-column: 1;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     background-image:
-                      linear-gradient(to top, hsl(0 0% 0% / 0.4), hsl(0 0% 0% / 0 )),
+                      linear-gradient(to top, hsl(0 0% 0% / 0.5) 50%, hsl(0 0% 0% / 0) 100%),
         url("img/nature-waterfall.jpg");
     background-color: var(--primary-000);
 
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat, no-repeat;
-
-    filter: blur(0.1rem);
 
     z-index: -1;
 }
