@@ -1,0 +1,64 @@
+﻿    <div class="tile @(Expanded ? "expanded" : "")" @attributes="@AdditionalAttributes">
+        <img class="tile-button tile-open-button" src="/css/icons/fi-xwsrxl-arrow-corner-solid.svg" />
+        <img class="tile-button tile-close-button" src="/css/icons/fi-xwslxl-arrow-corner-solid.svg" />
+
+        <div class="tile-image">
+            @if (TileImage != null)
+            {
+                @TileImage
+            }
+        </div>
+        <div class="tile-header" @onclick="OnHeaderClicked">
+            @if (TileHeader != null)
+            {
+                @TileHeader
+            }
+        </div>
+        <div class="tile-body" @onclick="OnBodyClicked">
+            @if (TileBody != null)
+            {
+                @TileBody
+            }
+        </div>
+    </div>
+
+
+@code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> AdditionalAttributes { get; set; }
+
+    [Parameter]
+    public RenderFragment TileImage { get; set; }
+
+    [Parameter]
+    public RenderFragment TileHeader { get; set; }
+
+    [Parameter]
+    public RenderFragment TileBody{ get; set; }
+
+    [Parameter]
+    public bool Expanded { get; set; }
+
+    private void OnBodyClicked()
+    {
+        if (!Expanded)
+        {
+            Expanded = true;
+        }
+    }
+
+    private void OnHeaderClicked()
+    {
+        if (Expanded)
+        {
+            Expanded = false;
+        }
+    }
+
+    private void OnButtonClicked()
+    {
+        Expanded = !Expanded;
+        StateHasChanged();
+    }
+
+}

@@ -112,44 +112,40 @@
             Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
         </Tab>
     </Tabs>
-
-<div class="container flex row wrap">
-    <Card Size="Size.Small" Class="aspect-ratio-1-2 effect-hover-1 effect-ease-in-out collapseable">
-        <CardImage>
+<div class="container inline flex row wrap">
+    <Tile style="--tile-body-bg-color: var(--accent-2-100);">
+        <TileImage>
             <img src="/css/img/dotnet-logo.png" />
-        </CardImage>
-        <CardTitle>
-            <h5>.NET</h5>
-        </CardTitle>
-        <CardBody>
+        </TileImage>
+        <TileHeader>
+            .NET
+        </TileHeader>
+        <TileBody>
             Cross-platform solutions for both front-end and back-end with MVC or Blazor.
-        </CardBody>
-    </Card>
-
-    <Card Size="Size.Small" Class="aspect-ratio-1-2 effect-hover-1 effect-ease-in-out collapseable">
-        <CardImage>
+        </TileBody>
+    </Tile>
+    <Tile>
+        <TileImage>
             <img src="/css/img/Responsive_Website_Design.jpg" />
-        </CardImage>
-        <CardTitle>
-            <h5>Web Design</h5>
-        </CardTitle>
-        <CardBody>
+        </TileImage>
+        <TileHeader>
+            Web Design
+        </TileHeader>
+        <TileBody>
             Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
-        </CardBody>
-    </Card>
-
-
-    <Card Size="Size.Small" Class="aspect-ratio-1-2 effect-hover-1 effect-ease-in-out collapseable">
-        <CardImage>
+        </TileBody>
+    </Tile>
+    <Tile>
+        <TileImage>
             <img src="/css/img/server-racks.jpg" />
-        </CardImage>
-        <CardTitle>
-            <h5>Database Design</h5>
-        </CardTitle>
-        <CardBody>
+        </TileImage>
+        <TileHeader>
+            Database Design
+        </TileHeader>
+        <TileBody>
             Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
-        </CardBody>
-    </Card>
+        </TileBody>
+    </Tile>
 </div>
 
 <SectionHeader Title="Examples" ContainerClass="bg-accent-2-7" TextClass="text-accent-2-1" />
@@ -234,3 +230,9 @@
     </div>
 </div>
 
+@code {
+    bool active = false;
+    private void OnImageClicked() {
+        active = !active;
+    }
+}
