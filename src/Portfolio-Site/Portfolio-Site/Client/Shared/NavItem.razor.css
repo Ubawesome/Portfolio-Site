@@ -13,6 +13,7 @@
     font-size: 0.9rem;
     letter-spacing: 0.1ch;
     text-decoration: none;
+    white-space: nowrap;
     color: var(--grey-700);
     cursor: pointer;
 
@@ -21,9 +22,19 @@
         color ease-out 0.15s;
 }
 
-.nav-link > i {
+.nav-link ::deep > i {
     font-size: 1.15rem;
     color: var(--grey-900);
+}
+
+.nav-link ::deep > img {
+    width: 1.5rem;
+    aspect-ratio: 1 / 1;
+
+    margin: 0;
+    padding: 0;
+
+    filter: invert(100%);
 }
 
 .nav-link::after {
@@ -61,7 +72,7 @@
 }
 
 /* Mobile */
-@media (max-width: 1280px) {
+@media (max-width: 1328px) {
 
     .nav-link {
         text-align: left;
@@ -84,7 +95,7 @@
 
 /* Desktop / Tablet */
 
-@media (min-width: 1281px) {
+@media (min-width: 1328px) {
     .nav-link {
         border-radius: 0.25rem;
 
