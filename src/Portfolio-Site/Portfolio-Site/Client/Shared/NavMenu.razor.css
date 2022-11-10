@@ -1,22 +1,92 @@
-.nav-toggle {
+
+#toggle-capsule {
+    --toggle-capsule-bg-color: var(--primary-000);
+    --toggle-capsule-width: calc(var(--toggle-size) + (var(--toggle-padding) * 2));
+    --toggle-capsule-height: 2rem;
+    --toggle-capsule-leg-width: 8rem;
     --toggle-size: 2rem;
-    /*--toggle-size: clamp(1.25rem, 3vw, 2rem);*/
+    --toggle-padding: 0.5rem;
+    --toggle-top-margin: 0.5rem;
+
+    --toggle-capsule-leg-shadow-width: calc(var(--toggle-capsule-leg-width) / 2);
+    --toggle-capsule-leg-shadow-height: calc(var(--toggle-capsule-height) / 2);
 
     position: fixed;
-    top: 1rem;
-    left: 1rem;
-    padding: 0;
+
+    width: var(--toggle-capsule-width);
+    height: var(--toggle-capsule-height);
+    background-color: var(--toggle-capsule-bg-color);
+
+    color: var(--grey-900);
+    z-index: 999;
+
+    transition: transform ease-in-out 250ms;
+}
+
+.toggle-capsule-left {
+    position: absolute;
+    right: 100%;
+    width: var(--toggle-capsule-leg-width);
+    height: var(--toggle-capsule-height);
+
+    background-color: transparent;
+
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.toggle-capsule-left::before {
+    content: '';
+    position: absolute;
+    display: block;
+
+    width: 200%;
+    height: 200%;
+    border-radius: 50%;
+
+    top: 0;
+    right: 0;
+    box-shadow: var(--toggle-capsule-leg-shadow-width) calc(var(--toggle-capsule-leg-shadow-height) * -1) 0 0 var(--toggle-capsule-bg-color);
+}
+
+.toggle-capsule-right{
+    position: absolute;
+    left: 100%;
+    width: var(--toggle-capsule-leg-width);
+    height: var(--toggle-capsule-height);
+
+    background-color: transparent;
+
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.toggle-capsule-right::before {
+    content: '';
+    position: absolute;
+    display: block;
+
+    width: 200%;
+    height: 200%;
+    border-radius: 50%;
+
+    top: 0;
+    left: 0;
+    box-shadow: calc(var(--toggle-capsule-leg-shadow-width) * -1) calc(var(--toggle-capsule-leg-shadow-height) * -1) 0 0 var(--toggle-capsule-bg-color);
+}
+
+
+.nav-toggle {
+    position: absolute;
+    padding: var(--toggle-padding);
 
     width: fit-content;
     aspect-ratio: 1/1;
 
-    color: var(--grey-900);
-
-    z-index: 999;
     cursor: pointer;
 
-    background-color: hsl(0 0% 0% / 0.15);
-    box-shadow: 0 0 1rem 1rem hsl(0 0% 0% / 0.15);
+    border-radius: 50%;
+    background-image: linear-gradient(45deg, var(--accent-1-300) 20%, var(--accent-2-100) 100%);
 }
 
 .nav-toggle * {
@@ -37,8 +107,6 @@
     z-index: 100;
 
     position: fixed;
-
-    overflow: hidden;
 }
 
 .nav-logo {
@@ -100,7 +168,6 @@
 
 /* Mobile */
 @media (max-width: 1328px) {
-
     .primary-nav {
         position: fixed;
 
@@ -121,9 +188,7 @@
         box-shadow: 0.5rem 0rem 0.5rem -0.5rem var(--primary-300);
 
         transform: translateX(-100%);
-        opacity: 0;
-        transition: transform ease-in-out 0.25s,
-                    opacity ease-in-out 0.25s;
+        transition: transform ease-in-out 0.25s;
 
         overflow: auto;
     }
@@ -131,6 +196,21 @@
     .primary-nav.active {
         transform: translateX(0%);
         opacity: 1;
+    }
+
+    #toggle-capsule {
+        width: auto;
+        height: auto;
+        background: none;
+    }
+
+    #toggle-capsule-left, .toggle-capsule-right {
+        display: none;
+    }
+
+    .nav-toggle {
+        top: var(--toggle-top-margin);
+        left: var(--toggle-top-margin);
     }
 
     .nav-logo {
@@ -156,28 +236,51 @@
 /* Desktop / Tablet */
 
 @media (min-width: 1328px) {
-    .nav-toggle {
-        display: none;
-    }
-
     .primary-nav {
         position: fixed;
 
-        top: calc(100vh - 10rem);
+        top: calc(100vh - 5rem);
         left: 0;
         right: 0;
+
+        margin-inline: 2rem;
 
         display: flex;
         flex-direction: row;
         width: auto;
 
         border-radius: 0.5rem;
-        margin-block-start: 2rem;
-        margin-inline: 2rem;
 
         background-color: var(--primary-000);
 
         box-shadow: 0rem 0.5rem 0.5rem -0.5rem var(--primary-300);
+
+        transform: translateY(-100%);
+        transition: transform ease-in-out 0.25s;
+    }
+
+    .primary-nav.active {
+        transform: none;
+    }
+
+    #toggle-capsule.hide {
+        transform: translate(-50%, -200%);
+    }
+
+    #toggle-capsule {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #toggle-capsule.active {
+        transform: translate(-50%, 4rem);
+    }
+
+    .nav-toggle {
+        top: var(--toggle-top-margin);
+
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .nav-logo {

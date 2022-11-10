@@ -1,4 +1,14 @@
-﻿const setFocus = (element) => {
+﻿function toggleElementClass(element, className) {
+    if (element instanceof HTMLElement && (typeof className === 'string' || className instanceof String)) {
+        if (element.classList.contains(className)) {
+            element.classList.remove(className);
+        } else {
+            element.classList.add(className);
+        }
+    }
+}
+
+function setFocus(element) {
     if (element instanceof HTMLElement) {
         element.focus();
     }

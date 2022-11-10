@@ -24,6 +24,7 @@ let titleScrollRatio = -0.4
 // Variables for storing dimmensions
 var windowWidth, containerHeight, imageHeight
 
+
 // Set CSS `tranform` property for an element
 function setTransform(element, transform) {
     element.style.transform = transform
@@ -42,9 +43,43 @@ function setScroll(element, scroll) {
 
 function updateNavScroll() {
     let primaryNav = document.querySelector('#primary-nav');
+    let toggle = document.querySelector('#toggle-capsule');
     let scroll = (window.scrollY || window.pageYOffset);
 
-    setTop(primaryNav, 'max(0px, 100vh - 10rem - ' + scroll + 'px)');
+    if (scroll <= window.innerHeight) {
+        primaryNav.classList.remove('active');
+        toggle.classList.remove('active');
+        toggle.classList.add('hide');
+    } else {
+        toggle.classList.remove('hide');
+    }
+
+    setTop(primaryNav, 'max(0px, 100vh - 5rem - ' + scroll + 'px)');
+}
+
+
+function updateSectionScroll() {
+    let sections = document.querySelectorAll('section');
+    let menuItems = document.querySelectorAll('nav ul li a');
+
+    sections.forEach((s) => {
+        let id = s.getAttribute('id');
+
+        let top = window.scrollY;
+        let offset = s.offsetTop;
+        let height = s.offsetHeight;
+
+        if (top >= offset && top < offset + height) {
+            console.log('in section ' + id);
+            menuItems.forEach((item) => {
+                item.classList.remove('active');
+                let href = item.getAttribute('data-scroll-to');
+                if (href === id) {
+                    item.classList.add('active');
+                }
+            })
+        }
+    });
 }
 
 // Update scroll `target`, and start the animation if it is not running already
@@ -81,57 +116,9 @@ function updateScroll() {
             });
         });
     }
-
-
-
-    //if (backgroundList !== null) {
-    //    backgroundList.forEach(function (background) {
-    //        let currentScroll = scroll - background.getBoundingClientRect().top;
-    //        //console.log('background scroll is ' + currentScroll + ', scroll is ' + scroll)
-
-    //        let backgroundScroll = 'translateY(' + currentScroll * backgroundScrollRatio + 'px)';
-    //        let backgroundScale = 'translateZ(' + ((currentScroll * backgroundScaleRatio) - 10) + 'px) scale(2)';
-
-    //        let backgroundTransform = backgroundScroll + ' ' + backgroundScale;
-
-
-    //        setTransform(background, backgroundTransform);
-    //    });
-    //}
-
-    //if (titleList !== null) {
-    //    titleList.forEach(function (title) {
-    //        let currentScroll = scroll - title.getBoundingClientRect().top;
-    //        let titleScroll = 'translateY(' + currentScroll * titleScrollRatio + 'px)';
-
-    //        setTransform(title, titleScroll);
-    //    });
-    //}
-
-
-
-
-//    let backgroundScroll = 'translateY(' + currentScroll * backgroundScrollRatio + 'px)';
-//    let backgroundScale = 'translateZ(' + map_range(currentScroll * backgroundScaleRatio, 0, 1000, -10, 1000) + 'px) scale(2)';
-
-//    let backgroundTransform = backgroundScroll + ' ' + backgroundScale;
-
-//    let titleScroll = 'translateY(' + currentScroll * titleScrollRatio + 'px)';
-
-//    if (backgroundList !== null) {
-//        backgroundList.forEach(function (background) {
-//            setTransform(background, backgroundTransform);
-//        });
-
-//    }
-
-//    if (titleList !== null) {
-//        titleList.forEach(function (title) {
-//            setTransform(title, titleScroll);
-//        });
-//    }
 }
 
 // Listen for `scroll` event to update `target` scroll position
 window.addEventListener('scroll', updateNavScroll);
+window.addEventListener('scroll', updateSectionScroll);
 window.addEventListener('scroll', updateScroll);

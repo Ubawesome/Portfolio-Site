@@ -4,17 +4,9 @@
 @inject IJSRuntime JSRuntime
 
 <li @attributes="@AdditionalAttributes">
-    @if (IsLink)
-    {
-        <a class="nav-link @GetActive(Destination, NavLinkMatch.All)" href="@Destination">
-            @ChildContent
-        </a>
-    } else
-    {
-        <a class="nav-link @GetActive(Destination, NavLinkMatch.All)" @onclick="@(async () => await JSRuntime.ScrollToElement(Destination))">
-            @ChildContent
-        </a>
-    }
+    <a class="nav-link @GetActive(Destination, NavLinkMatch.All)" @onclick="@((args) => GoToDestination(args))" data-scroll-to="@Destination">
+        @ChildContent
+    </a>
 </li>
 
 @code {
@@ -41,4 +33,15 @@
     }
 
     string GetActive(string href, NavLinkMatch navLinkMatch = NavLinkMatch.Prefix) => IsActive(href, navLinkMatch) ? "active" : "";
+
+    async Task GoToDestination(MouseEventArgs args)
+    {
+        if (IsLink)
+        {
+            NavigationManager.NavigateTo(Destination);
+        } else
+        {
+            await JSRuntime.ScrollToElement(Destination);
+        }
+    }
 }

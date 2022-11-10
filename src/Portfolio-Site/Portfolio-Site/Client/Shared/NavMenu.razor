@@ -1,8 +1,15 @@
-﻿<button class="nav-toggle @NavClass" @onclick="ToggleNav">
-    <img src="/css/icons/fi-xnsuxl-three-bars-solid.svg" />
-</button>
+﻿@using PortfolioSite.Client.Helpers
+@inject IJSRuntime JSRuntime
 
-<nav id="primary-nav" class="primary-nav @NavClass">
+<div @ref="toggle" id="toggle-capsule">
+    <div class="toggle-capsule-left"></div>
+    <div class="toggle-capsule-right"></div>
+    <button class="nav-toggle" @onclick="ToggleNav">
+        <img src="/css/icons/fi-xnsuxl-three-bars-solid.svg" />
+    </button>
+</div>
+
+<nav @ref="nav" id="primary-nav" class="primary-nav">
     <a href="home" class="nav-logo">CF</a>
     <ul>
         @NavItems
@@ -10,16 +17,15 @@
 </nav>
 
 @code {
-
-    private bool showNav = false;
-
-    private string? NavClass => showNav ? "active" : null;
+    ElementReference toggle;
+    ElementReference nav;
 
     [Parameter]
     public RenderFragment? NavItems { get; set; }
 
-    private void ToggleNav()
+    async Task ToggleNav()
     {
-        showNav = !showNav;
+        await JSRuntime.ToggleClass(toggle, "active");
+        await JSRuntime.ToggleClass(nav, "active");
     }
 }
