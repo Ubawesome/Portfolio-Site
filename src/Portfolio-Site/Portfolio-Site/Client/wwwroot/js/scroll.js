@@ -46,7 +46,7 @@ function updateNavScroll() {
     let toggle = document.querySelector('#toggle-capsule');
     let scroll = (window.scrollY || window.pageYOffset);
 
-    if (scroll <= window.innerHeight) {
+    if (scroll < window.innerHeight) {
         primaryNav.classList.remove('active');
         toggle.classList.remove('active');
         toggle.classList.add('hide');
@@ -69,7 +69,7 @@ function updateSectionScroll() {
         let offset = s.offsetTop;
         let height = s.offsetHeight;
 
-        if (top >= offset && top < offset + height) {
+        if (top + 1 >= offset && top - 1 < offset + height) {
             console.log('in section ' + id);
             menuItems.forEach((item) => {
                 item.classList.remove('active');
@@ -118,7 +118,11 @@ function updateScroll() {
     }
 }
 
-// Listen for `scroll` event to update `target` scroll position
 window.addEventListener('scroll', updateNavScroll);
 window.addEventListener('scroll', updateSectionScroll);
 window.addEventListener('scroll', updateScroll);
+
+window.addEventListener('DOMContentLoaded', updateNavScroll);
+window.addEventListener('DOMContentLoaded', updateSectionScroll);
+window.addEventListener('DOMContentLoaded', updateScroll);
+
