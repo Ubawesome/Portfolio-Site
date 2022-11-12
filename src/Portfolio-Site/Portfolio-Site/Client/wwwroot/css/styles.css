@@ -1,4 +1,6 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+@import 'animate.css';
+@import 'animations.css';
 @import "variables.css";
 
 *, ::before, ::after {
@@ -360,8 +362,15 @@ grid-column: 1;
     filter: brightness(1) blur(0.05rem);
     opacity: var(--tile-header-bg-opacity);
 
-    transition: filter ease 600ms, opacity ease 600ms;
+    transition: filter ease 600ms, opacity ease 600ms, scale ease-out 250ms;
 }
+
+.tile:hover .tile-image {
+    scale: 105%;
+
+    transition: scale ease-out 250ms;
+}
+
 
 .tile::before {
     --bg-glow-color: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) + 64%) / 10%);

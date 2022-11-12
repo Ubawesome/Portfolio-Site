@@ -1,20 +1,22 @@
 ﻿@using PortfolioSite.Client.Helpers
 @inject IJSRuntime JSRuntime
 
-<div @ref="toggle" id="toggle-capsule">
-    <div class="toggle-capsule-left"></div>
-    <div class="toggle-capsule-right"></div>
-    <button class="nav-toggle" @onclick="ToggleNav">
-        <img src="/css/icons/fi-xnsuxl-three-bars-solid.svg" />
-    </button>
-</div>
+<div id="nav-wrapper">
+    <div @ref="toggle" id="toggle-capsule">
+        <div class="toggle-capsule-left"></div>
+        <div class="toggle-capsule-right"></div>
+        <button class="nav-toggle" @onclick="ToggleNav">
+            <img src="/css/icons/fi-xnsuxl-three-bars-solid.svg" />
+        </button>
+    </div>
 
-<nav @ref="nav" id="primary-nav" class="primary-nav">
-    <a href="home" class="nav-logo">CF</a>
-    <ul>
-        @NavItems
-    </ul>
-</nav>
+    <nav @ref="nav" id="primary-nav" class="primary-nav">
+        <a href="home" class="nav-logo">CF</a>
+        <ul>
+            @NavItems
+        </ul>
+    </nav>
+</div>
 
 @code {
     ElementReference toggle;
