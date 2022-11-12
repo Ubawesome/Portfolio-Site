@@ -1,7 +1,10 @@
 ﻿@page "/"
 @page "/home"
 
+@using PortfolioSite.Client.Helpers
 @using Portfolio_Site.Components
+
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Index</PageTitle>
 
@@ -263,8 +266,11 @@
 </section>
 
 @code {
-    bool active = false;
-    private void OnImageClicked() {
-        active = !active;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.UpdateScroll();
+        }
     }
 }

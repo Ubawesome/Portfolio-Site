@@ -430,6 +430,8 @@ grid-column: 1;
 .tile.expanded > .tile-header {
     z-index: 1;
 
+    cursor: pointer;
+
     -webkit-clip-path: polygon(100% 80%, 80% 100%, 100% 100%);
     clip-path: polygon(100% 80%, 80% 100%, 100% 100%);
 }
@@ -460,6 +462,8 @@ grid-column: 1;
 
 .tile:not(.expanded) > .tile-body {
     z-index: 1;
+
+    cursor: pointer;
 }
 
 .tile:not(.expanded):hover > .tile-body {
@@ -813,6 +817,8 @@ grid-column: 1;
     object-fit: cover;
     z-index: -1;
     inset: 0;
+
+    pointer-events: none;
 }
 
 .scrollable-background {
@@ -833,6 +839,8 @@ grid-column: 1;
     font-size: 5rem;
     color: white;
     text-shadow: 0 0 5px black;
+
+    pointer-events: none;
 }
 
 .splash-block {
@@ -843,6 +851,8 @@ grid-column: 1;
     aspect-ratio: 1 / 1;
 
     filter: drop-shadow(0.5rem 0.5rem 1rem var(--primary-000));
+
+    pointer-events: none;
 }
 
 .splash-block-img {
