@@ -118,6 +118,8 @@
     aspect-ratio: 1 / 1;
 
     filter: invert(100%);
+
+    pointer-events: none;
 }
 
 .nav-toggle.active {
@@ -249,7 +251,7 @@
 
 /* Desktop / Tablet */
 
-@media (min-width: 1328px) {
+@media (min-width: 1329px) {
     .primary-nav {
         position: fixed;
 
