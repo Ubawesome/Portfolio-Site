@@ -850,7 +850,7 @@ grid-column: 1;
     width: min(60vmin, 48rem);
     aspect-ratio: 1 / 1;
 
-    filter: drop-shadow(0.5rem 0.5rem 1rem var(--primary-000));
+    filter: drop-shadow(0.5rem 0.5rem 0.5rem var(--primary-000));
 
     pointer-events: none;
 }
@@ -862,9 +862,8 @@ grid-column: 1;
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    background-image:
-                      linear-gradient(to top, hsl(0 0% 0% / 0.5) 50%, hsl(0 0% 0% / 0) 100%),
-        url("img/nature-waterfall.jpg");
+    background-image: linear-gradient(to top, hsl(0 0% 0% / 0.5) 50%, hsl(0 0% 0% / 0) 100%),
+                      url("img/nature-waterfall.jpg");
     background-color: var(--primary-000);
 
     background-position: center;
@@ -881,14 +880,29 @@ grid-column: 1;
 
     width: max-content;
 
-    font-size: clamp(2rem, 6vw, 8rem);
+    font-size: clamp(2rem, 10vmin, 8rem);
     font-weight: 500;
     letter-spacing: clamp(0.25rem, 1vw, 1rem);
 
-    color: var(--accent-2-900);
+    color: var(--primary-900);
     text-shadow: none;
+
+    background: linear-gradient(60deg, var(--accent-1-900) 0%, var(--accent-2-700) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
+.splash-accent-1 {
+    background: linear-gradient(60deg, var(--accent-1-700) 50%, var(--accent-2-500) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.splash-accent-2 {
+    background: linear-gradient(60deg, var(--accent-1-700) 0%, var(--accent-2-500) 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
 .splash-block-subtitle {
     position: absolute;

@@ -45,15 +45,19 @@ function updateNavScroll() {
     let toggle = document.querySelector('#toggle-capsule');
     let scroll = (window.scrollY || window.pageYOffset);
 
-    if (scroll < window.innerHeight) {
-        primaryNav.classList.add('locked');
-        toggle.classList.add('hide');
+    const isLargeScreen = window.matchMedia('(min-width: 1329px)').matches;
 
-        primaryNav.classList.add('active');
-        toggle.classList.add('active');
-    } else {
-        primaryNav.classList.remove('locked');
-        toggle.classList.remove('hide');
+    if (isLargeScreen) {
+        if (scroll < window.innerHeight) {
+            primaryNav.classList.add('locked');
+            toggle.classList.add('hide');
+
+            primaryNav.classList.add('active');
+            toggle.classList.add('active');
+        } else {
+            primaryNav.classList.remove('locked');
+            toggle.classList.remove('hide');
+        }
     }
 
     setTop(primaryNav, 'max(0px, 100vh - var(--nav-height) - var(--nav-bottom-margin) - ' + scroll + 'px)');
