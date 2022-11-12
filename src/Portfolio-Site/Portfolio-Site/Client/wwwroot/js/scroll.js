@@ -124,11 +124,3 @@ window.addEventListener('scroll', updateNavScroll);
 window.addEventListener('scroll', updateSectionScroll);
 window.addEventListener('scroll', updateScroll);
 
-window.addEventListener('DOMContentLoaded', updateNavScroll);
-window.addEventListener('DOMContentLoaded', updateSectionScroll);
-window.addEventListener('DOMContentLoaded', updateScroll);
-
-window.addEventListener('load', updateNavScroll);
-window.addEventListener('load', updateSectionScroll);
-window.addEventListener('load', updateScroll);
-

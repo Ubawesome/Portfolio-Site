@@ -9,5 +9,12 @@ namespace PortfolioSite.Client.Helpers
         public static Task ToggleClass(this IJSRuntime js, ElementReference element, string className) => js.InvokeVoidAsync("toggleElementClass", element, className).AsTask();
         public static Task SetFocus(this IJSRuntime js, ElementReference element) => js.InvokeVoidAsync("setFocus", element).AsTask();
         public static Task ScrollToElement(this IJSRuntime js, string elementId) => js.InvokeVoidAsync("scrollToElement", elementId).AsTask();
+
+        public static async Task UpdateScroll(this IJSRuntime js)
+        {
+            await js.InvokeVoidAsync("updateNavScroll");
+            await js.InvokeVoidAsync("updateSectionScroll");
+            await js.InvokeVoidAsync("updateScroll");
+        }
     }
 }

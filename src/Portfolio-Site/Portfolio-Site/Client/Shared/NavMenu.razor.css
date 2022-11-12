@@ -52,7 +52,6 @@
 
     background-color: transparent;
 
-    pointer-events: none;
     overflow: hidden;
 
     transform-origin: top right;
@@ -80,7 +79,6 @@
 
     background-color: transparent;
 
-    pointer-events: none;
     overflow: hidden;
 
     transform-origin: top left;
