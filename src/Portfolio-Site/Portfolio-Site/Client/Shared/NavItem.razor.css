@@ -103,10 +103,6 @@
         padding-inline: clamp(1.5rem, 2vw, 4rem);
     }
 
-    .primary-nav > ul > li {
-        margin-inline: 1rem;
-    }
-
     .primary-nav > ul > li.push {
         margin-left: auto;
     }

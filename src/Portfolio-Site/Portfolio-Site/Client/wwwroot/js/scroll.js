@@ -36,7 +36,6 @@ function setTop(element, top) {
 }
 
 function setScroll(element, scroll) {
-    //element.dataset.scroll = scroll;
     element.setAttribute('data-scroll', scroll);
 }
 
@@ -47,14 +46,17 @@ function updateNavScroll() {
     let scroll = (window.scrollY || window.pageYOffset);
 
     if (scroll < window.innerHeight) {
-        primaryNav.classList.remove('active');
-        toggle.classList.remove('active');
+        primaryNav.classList.add('locked');
         toggle.classList.add('hide');
+
+        primaryNav.classList.add('active');
+        toggle.classList.add('active');
     } else {
+        primaryNav.classList.remove('locked');
         toggle.classList.remove('hide');
     }
 
-    setTop(primaryNav, 'max(0px, 100vh - 5rem - ' + scroll + 'px)');
+    setTop(primaryNav, 'max(0px, 100vh - var(--nav-height) - var(--nav-bottom-margin) - ' + scroll + 'px)');
 }
 
 
@@ -125,4 +127,8 @@ window.addEventListener('scroll', updateScroll);
 window.addEventListener('DOMContentLoaded', updateNavScroll);
 window.addEventListener('DOMContentLoaded', updateSectionScroll);
 window.addEventListener('DOMContentLoaded', updateScroll);
+
+window.addEventListener('load', updateNavScroll);
+window.addEventListener('load', updateSectionScroll);
+window.addEventListener('load', updateScroll);
 
