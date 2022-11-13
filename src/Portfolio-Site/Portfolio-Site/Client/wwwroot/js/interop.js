@@ -57,9 +57,11 @@ function navDrag(element, dragY) {
     let offset = 0;
     if (element.classList.contains('active')) {
         const transformMatrix = getTransformValues(element);
-        const y = transformMatrix[13] || transformMatrix[5]; //translate y
+        if (transformMatrix !== undefined && transformMatrix !== null) {
+            const y = transformMatrix[13] || transformMatrix[5]; //translate y
 
-        offset = y;
+            offset = y;
+        }
     }
 
     const toggleButton = element.querySelector('.nav-toggle');
@@ -77,6 +79,9 @@ function navDragEnd(element) {
     element.style.setProperty('--toggle-drag-position', 0 + 'px');
 }
 
+function addNavMouseUpListener(element) {
+    window.addEventListener('onmouseup', function () { navDragEnd(element); });
+}
 
 function addToggleSwipeListener(element) {
     toggle = element;

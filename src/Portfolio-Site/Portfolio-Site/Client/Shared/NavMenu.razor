@@ -7,6 +7,7 @@
         <div class="toggle-capsule-right"></div>
         <div class="nav-toggle"
                                 @ontouchstart="OnTouchStart" @ontouchstart:stopPropagation="true" @ontouchstart:preventDefault="true"
+                                @ontouchmove="OnTouchMove" @ontouchmove:stopPropagation="true" @ontouchmove:preventDefault="true"
                                 @ontouchend="OnTouchEnd" @ontouchend:stopPropagation="true" @ontouchend:preventDefault="true"
                                 @onmousedown="OnMouseStart" @onmousedown:stopPropagation="true" @onmousedown:preventDefault="true"
                                 @onmousemove="OnMouseMove" @onmousemove:stopPropagation="true" @onmousemove:preventDefault="true"
@@ -32,28 +33,17 @@
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        //await JSRuntime.InvokeVoidAsync("addToggleSwipeListener", toggle);
-    }
-
-    async Task OnNavDragStart(MouseEventArgs mouseEventArgs)
-    {
-        //await JSRuntime.StartNavDrag(toggle, mouseEventArgs.ScreenY);
-    }
-
-    async Task OnNavDrag(MouseEventArgs mouseEventArgs)
-    {
-        //await JSRuntime.UpdateNavDrag(toggle, mouseEventArgs.OffsetY);
-    }
-
-    async Task OnNavDragEnd(MouseEventArgs mouseEventArgs)
-    {
-        //await JSRuntime.EndNavDrag(toggle, mouseEventArgs.ScreenY);
+        if (firstRender)
+            await JSRuntime.InvokeVoidAsync("addNavMouseUpListener", toggle);
     }
 
     public async Task ToggleNav()
     {
-        await JSRuntime.ToggleClass(toggle, "active");
-        await JSRuntime.ToggleClass(nav, "active");
+        if (!following)
+        {
+            await JSRuntime.ToggleClass(toggle, "active");
+            await JSRuntime.ToggleClass(nav, "active");
+        }
     }
 
     public async Task ShowNav()
@@ -96,7 +86,10 @@
         await JSRuntime.EndNavDrag(toggle, args.ClientY);
 
         if (xDown == null || yDown == null)
+        {
+            following = false;
             return;
+        }
 
         var xDiff = xDown.Value - args.ClientX;
         var yDiff = yDown.Value - args.ClientY;
@@ -104,6 +97,9 @@
         if (Math.Abs(xDiff) < sensitivity && Math.Abs(yDiff) < sensitivity)
         {
             xDown = yDown = null;
+
+            following = false;
+            await ToggleNav();
             return;
         }
 
@@ -135,23 +131,41 @@
     private void OnTouchStart(TouchEventArgs args)
     {
         Console.WriteLine("TouchStart");
+        following = true;
         xDown = args.Touches[0].ClientX;
         yDown = args.Touches[0].ClientY;
     }
 
+    private async Task OnTouchMove(TouchEventArgs args)
+    {
+        Console.WriteLine($"TouchMove: following {following}");
+        if (following)
+        {
+            await JSRuntime.UpdateNavDrag(toggle, args.ChangedTouches[0].ClientY);
+        }
+    }
 
-    private void OnTouchEnd(TouchEventArgs arg)
+    private async Task OnTouchEnd(TouchEventArgs args)
     {
         Console.WriteLine("TouchEnd");
-        if (xDown == null || yDown == null)
-            return;
+        following = false;
+        await JSRuntime.EndNavDrag(toggle, args.ChangedTouches[0].ClientY);
 
-        var xDiff = xDown.Value - arg.ChangedTouches[0].ClientX;
-        var yDiff = yDown.Value - arg.ChangedTouches[0].ClientY;
+        if (xDown == null || yDown == null)
+        {
+            following = false;
+            return;
+        }
+
+        var xDiff = xDown.Value - args.ChangedTouches[0].ClientX;
+        var yDiff = yDown.Value - args.ChangedTouches[0].ClientY;
 
         if (Math.Abs(xDiff) < sensitivity && Math.Abs(yDiff) < sensitivity)
         {
             xDown = yDown = null;
+
+            following = false;
+            await ToggleNav();
             return;
         }
 
@@ -159,22 +173,22 @@
         {
             if (xDiff > 0)
             {
-                InvokeAsync(() => OnSwipe(SwipeDirection.RightToLeft));
+                await InvokeAsync(() => OnSwipe(SwipeDirection.RightToLeft));
             }
             else
             {
-                InvokeAsync(() => OnSwipe(SwipeDirection.LeftToRight));
+                await InvokeAsync(() => OnSwipe(SwipeDirection.LeftToRight));
             }
         }
         else
         {
             if (yDiff > 0)
             {
-                InvokeAsync(() => OnSwipe(SwipeDirection.BottomToTop));
+                await InvokeAsync(() => OnSwipe(SwipeDirection.BottomToTop));
             }
             else
             {
-                InvokeAsync(() => OnSwipe(SwipeDirection.TopToBottom));
+                await InvokeAsync(() => OnSwipe(SwipeDirection.TopToBottom));
             }
         }
         xDown = yDown = null;
