@@ -5,6 +5,16 @@
     --nav-collapsed-margin: max(2rem, 10vw);
 
     --nav-color: var(--grey-100);
+
+    --toggle-size: 2rem;
+    --toggle-padding: 0.5rem;
+    --toggle-top-margin: 0.5rem;
+
+    --toggle-expanded-position: var(--nav-height);
+
+    --toggle-drag-position: 0rem;
+    --toggle-max-drag-neg: -2rem;
+    --toggle-max-drag-pos: 4rem;
 }
 
 .primary-nav {
@@ -16,23 +26,62 @@
     --nav-items-gap: clamp(0.5rem, 1vw, 1.5rem);
 }
 
+#toggle-tracker {
+    opacity: 0;
+    pointer-events: none;
+    z-index: 100000;
+
+    position: fixed;
+    inset: 0;
+    background: red;
+}
+
+#toggle-tracker::before {
+    --toggle-tracker-size: calc(var(--toggle-size) + (var(--toggle-padding) * 2));
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: var(--toggle-tracker-size);
+    aspect-ratio: 1 / 1;
+
+    border-radius: 50%;
+
+    background: hsl(var(--primary-h) var(--primary-s) var(--primary-l) / 20%);
+    z-index: 10000;
+
+    margin-top: calc(var(--toggle-tracker-size) * -0.5);
+    margin-left: calc(var(--toggle-tracker-size) * -0.5);
+
+    transform-origin: top right;
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity ease 250ms;
+    transform: translate(var(--toggle-tracker-pos-x, 0px), var(--toggle-tracker-pos-y, 0px));
+
+}
+
+#toggle-tracker.active {
+    pointer-events: all;
+}
+
+#toggle-tracker.active::before {
+    opacity: 1;
+    pointer-events: all;
+}
+
 #toggle-capsule {
     --toggle-capsule-bg-color: var(--primary-000);
     --toggle-capsule-width: calc(var(--toggle-size) + (var(--toggle-padding) * 2));
-    --toggle-capsule-height: 2rem;
+    --toggle-capsule-height: calc(2rem + var(--toggle-drag-position));
     --toggle-capsule-leg-width: 4rem;
     --toggle-capsule-leg-expanded-perc: 200%;
-
 
     --toggle-capsule-leg-shadow-width: calc(var(--toggle-capsule-leg-width) / 2);
     --toggle-capsule-leg-shadow-height: calc(var(--toggle-capsule-height) / 2);
 
-    --toggle-size: 2rem;
-    --toggle-padding: 0.5rem;
-    --toggle-top-margin: 0.5rem;
-
-    --toggle-position: 0rem;
-    --toggle-expanded-position: var(--nav-height);
 
     position: fixed;
 
@@ -337,7 +386,9 @@
     }
 
     .nav-toggle {
-        top: var(--toggle-top-margin);
+        /*top: var(--toggle-top-margin);*/
+
+        bottom: calc((var(--toggle-size) - var(--toggle-padding)) * -1);
 
         left: 50%;
         transform: translateX(-50%);
