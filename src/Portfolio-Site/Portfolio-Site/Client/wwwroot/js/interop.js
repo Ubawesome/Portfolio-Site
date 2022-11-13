@@ -63,11 +63,18 @@ function navDrag(element, dragY) {
     }
 
     const toggleButton = element.querySelector('.nav-toggle');
-    element.style.setProperty('--toggle-drag-position', (Number(dragY) - Number(offset) - (toggleButton.clientHeight / 2)) + 'px');
+
+    let dragPosition = Number(dragY);
+    dragPosition -= Number(offset);
+    dragPosition -= (toggleButton.clientHeight / 2);
+
+    const dragValue = 'clamp(var(--toggle-max-drag-neg), ' + dragPosition + 'px, var(--toggle-max-drag-pos))';
+
+    element.style.setProperty('--toggle-drag-position', dragValue);
 }
 
 function navDragEnd(element) {
-    toggle.style.setProperty('--toggle-drag-position', 0 + 'px');
+    element.style.setProperty('--toggle-drag-position', 0 + 'px');
 }
 
 
@@ -79,6 +86,8 @@ function addToggleSwipeListener(element) {
 function navSwipe(e) {
     console.log(e);
 }
+
+//window.addEventListener('onmouseup', navDragEnd);
 
 //window.addEventListener('onmousemove', navDrag);
 //window.addEventListener('onmouseup', navDragEnd);

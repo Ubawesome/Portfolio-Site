@@ -93,7 +93,7 @@
     {
         Console.WriteLine("MouseDownEnd");
         following = false;
-        await JSRuntime.UpdateNavDrag(toggle, args.ClientY);
+        await JSRuntime.EndNavDrag(toggle, args.ClientY);
 
         if (xDown == null || yDown == null)
             return;
