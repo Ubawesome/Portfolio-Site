@@ -5,6 +5,8 @@
     --nav-collapsed-margin: max(2rem, 10vw);
 
     --nav-color: var(--grey-100);
+
+    --toggle-drag-position: 0rem;
 }
 
 .primary-nav {
@@ -19,7 +21,7 @@
 #toggle-capsule {
     --toggle-capsule-bg-color: var(--primary-000);
     --toggle-capsule-width: calc(var(--toggle-size) + (var(--toggle-padding) * 2));
-    --toggle-capsule-height: 2rem;
+    --toggle-capsule-height: calc(2rem + var(--toggle-drag-position));
     --toggle-capsule-leg-width: 4rem;
     --toggle-capsule-leg-expanded-perc: 200%;
 
@@ -337,7 +339,9 @@
     }
 
     .nav-toggle {
-        top: var(--toggle-top-margin);
+        /*top: var(--toggle-top-margin);*/
+
+        bottom: calc((var(--toggle-size) - var(--toggle-padding)) * -1);
 
         left: 50%;
         transform: translateX(-50%);
