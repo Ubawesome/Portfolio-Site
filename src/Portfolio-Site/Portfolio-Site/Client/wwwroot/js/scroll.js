@@ -76,7 +76,6 @@ function updateSectionScroll() {
         let height = s.offsetHeight;
 
         if (top + 1 >= offset && top - 1 < offset + height) {
-            console.log('in section ' + id);
             menuItems.forEach((item) => {
                 item.classList.remove('active');
                 let href = item.getAttribute('data-scroll-to');

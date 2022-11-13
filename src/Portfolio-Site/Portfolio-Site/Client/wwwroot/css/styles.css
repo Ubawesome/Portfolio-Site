@@ -102,7 +102,7 @@ blockquote {
     max-width: 100%;
     margin-inline: auto;
     margin-block: 2rem;
-    padding-inline: 4rem;
+    padding-inline: clamp(0.25rem, 4vw, 4rem);
     padding-block: 2rem;
 }
 
@@ -110,7 +110,7 @@ blockquote {
     width: 100%;
     margin-inline: auto;
     margin-block: 2rem;
-    padding-inline: clamp(10rem, 15vw + 3.5rem, 1000px);
+    padding-inline: clamp(0.25rem, 15vw, 800px);
     padding-block: 2rem;
 }
 
@@ -285,6 +285,18 @@ grid-column: 1;
 
 /* Tile Styles */
 
+.tile-grid {
+    display: grid;
+    grid-auto-flow: dense;
+    place-items: center;
+    max-width: 100%;
+    grid-template-columns: repeat(auto-fit, clamp(10rem, 25vw, 30rem));
+    justify-content: center;
+
+    gap: var(--gap, 1rem);
+}
+
+
 .tile {
     --tile-body-bg-color: var(--accent-1-100);
 
@@ -297,6 +309,7 @@ grid-column: 1;
     --tile-header-bg-opacity: 1;
 
     position: relative;
+    width: 100%;
     max-width: 100%;
     aspect-ratio: 1 / 1;
     margin: 0;
@@ -836,9 +849,10 @@ grid-column: 1;
 }
 
 .scrollable-title {
-    font-size: 5rem;
+    font-size: var(--fs-h-2);
     color: white;
     text-shadow: 0 0 5px black;
+    text-align: center;
 
     pointer-events: none;
 }
@@ -910,8 +924,9 @@ grid-column: 1;
     right: 1rem;
 
     display: grid;
-    gap: 1rem;
-
+    gap: clamp(0.25rem, 2vmin, 1rem);
+/*    gap: 1rem;
+*/
     font-size: clamp(1rem, 3vw, 4rem);
     font-weight: 100;
     color: var(--primary-900);

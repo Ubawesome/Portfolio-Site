@@ -75,7 +75,3 @@ function navDragEnd(element) {
     element.style.setProperty('--toggle-drag-position', 0 + 'px');
 }
 
-function addNavMouseUpListener(element) {
-    window.addEventListener('onmouseup', function () { navDragEnd(element); });
-}
-
