@@ -44,16 +44,7 @@ function getTransformValues(element) {
     }
 }
 
-let follow = false;
-
-let toggle;
-
-function navDragStart(element) {
-    follow = true;
-    toggle = element;
-}
-
-function navDrag(element, dragY) {
+function navDrag(element, dragX, dragY) {
     let offset = 0;
     if (element.classList.contains('active')) {
         const transformMatrix = getTransformValues(element);
@@ -64,8 +55,8 @@ function navDrag(element, dragY) {
         }
     }
 
-    const toggleButton = element.querySelector('.nav-toggle');
 
+    const toggleButton = element.querySelector('.nav-toggle');
     let dragPosition = Number(dragY);
     dragPosition -= Number(offset);
     dragPosition -= (toggleButton.clientHeight / 2);
@@ -73,6 +64,11 @@ function navDrag(element, dragY) {
     const dragValue = 'clamp(var(--toggle-max-drag-neg), ' + dragPosition + 'px, var(--toggle-max-drag-pos))';
 
     element.style.setProperty('--toggle-drag-position', dragValue);
+
+    const toggleTracker = document.querySelector('#toggle-tracker');
+
+    toggleTracker.style.setProperty('--toggle-tracker-pos-x', dragX + 'px');
+    toggleTracker.style.setProperty('--toggle-tracker-pos-y', dragY + 'px');
 }
 
 function navDragEnd(element) {
@@ -82,18 +78,4 @@ function navDragEnd(element) {
 function addNavMouseUpListener(element) {
     window.addEventListener('onmouseup', function () { navDragEnd(element); });
 }
-
-function addToggleSwipeListener(element) {
-    toggle = element;
-
-}
-
-function navSwipe(e) {
-    console.log(e);
-}
-
-//window.addEventListener('onmouseup', navDragEnd);
-
-//window.addEventListener('onmousemove', navDrag);
-//window.addEventListener('onmouseup', navDragEnd);
 

@@ -19,15 +19,11 @@ namespace PortfolioSite.Client.Helpers
             await js.InvokeVoidAsync("updateScroll");
         }
 
-        public static async Task StartNavDrag(this IJSRuntime js, ElementReference element, double dragY)
+        public static async Task UpdateNavDrag(this IJSRuntime js, ElementReference element, double dragX, double dragY)
         {
-            await js.InvokeVoidAsync("navDragStart", element);
+            await js.InvokeVoidAsync("navDrag", element, dragX, dragY);
         }
-        public static async Task UpdateNavDrag(this IJSRuntime js, ElementReference element, double dragY)
-        {
-            await js.InvokeVoidAsync("navDrag", element, dragY);
-        }
-        public static async Task EndNavDrag(this IJSRuntime js, ElementReference element, double dragY)
+        public static async Task EndNavDrag(this IJSRuntime js, ElementReference element)
         {
             await js.InvokeVoidAsync("navDragEnd", element);
         }
