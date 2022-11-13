@@ -9,7 +9,7 @@
                                 @ontouchcancel="OnCancel" @ontouchcancel:stopPropagation="true" @ontouchcancel:preventDefault="true"
                                 @onmousemove="OnMouseMove" @onmousemove:stopPropagation="true" @onmousemove:preventDefault="true"
                                 @onmouseup="OnMouseEnd" @onmouseup:stopPropagation="true" @onmouseup:preventDefault="true"
-                                @onmouseout="OnCancel" @onmouseout:stopPropagation="true" @onmouseout:preventDefault="true">
+                                @onmouseout="OnMouseEnd" @onmouseout:stopPropagation="true" @onmouseout:preventDefault="true">
                             </div>
     <div @ref="toggle" id="toggle-capsule">
         <div class="toggle-capsule-left"></div>
@@ -82,13 +82,10 @@
         await JSRuntime.AddClass(toggleTracker, "active");
 
         await OnMouseMove(args);
-
-        Console.WriteLine("MouseStart");
     }
 
     private async Task OnMouseMove(MouseEventArgs args)
     {
-        Console.WriteLine($"MouseMove: following {following}");
         if (following)
         {
             await JSRuntime.UpdateNavDrag(toggle, args.ClientX, args.ClientY);
@@ -97,7 +94,6 @@
 
     private async Task OnMouseEnd(MouseEventArgs args)
     {
-        Console.WriteLine("MouseDownEnd");
         following = false;
 
         await JSRuntime.RemoveClass(toggleTracker, "active");
@@ -148,7 +144,6 @@
 
     private async Task OnTouchStart(TouchEventArgs args)
     {
-        Console.WriteLine("TouchStart");
         following = true;
         xDown = args.Touches[0].ClientX;
         yDown = args.Touches[0].ClientY;
@@ -158,7 +153,6 @@
 
     private async Task OnTouchMove(TouchEventArgs args)
     {
-        Console.WriteLine($"TouchMove: following {following}");
         if (following)
         {
             await JSRuntime.UpdateNavDrag(toggle, args.ChangedTouches[0].ClientX, args.ChangedTouches[0].ClientY);
@@ -167,7 +161,6 @@
 
     private async Task OnTouchEnd(TouchEventArgs args)
     {
-        Console.WriteLine("TouchEnd");
         following = false;
 
         await JSRuntime.RemoveClass(toggleTracker, "active");
@@ -226,7 +219,6 @@
 
     private async Task OnSwipe(SwipeDirection swipeDirection)
     {
-        Console.WriteLine($"Swiped: {swipeDirection.ToString()}");
         switch(swipeDirection)
         {
             case SwipeDirection.TopToBottom:
