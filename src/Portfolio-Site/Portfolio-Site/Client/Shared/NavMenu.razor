@@ -1,15 +1,30 @@
 ﻿@using PortfolioSite.Client.Helpers
+
 @inject IJSRuntime JSRuntime
 
 <div id="nav-wrapper">
+    <div @ref="toggleTracker" id="toggle-tracker"
+                                @ontouchmove="OnTouchMove" @ontouchmove:stopPropagation="true" @ontouchmove:preventDefault="true"
+                                @ontouchend="OnTouchEnd" @ontouchend:stopPropagation="true" @ontouchend:preventDefault="true"
+                                @ontouchcancel="OnCancel" @ontouchcancel:stopPropagation="true" @ontouchcancel:preventDefault="true"
+                                @onmousemove="OnMouseMove" @onmousemove:stopPropagation="true" @onmousemove:preventDefault="true"
+                                @onmouseup="OnMouseEnd" @onmouseup:stopPropagation="true" @onmouseup:preventDefault="true"
+                                @onmouseout="OnCancel" @onmouseout:stopPropagation="true" @onmouseout:preventDefault="true">
+                            </div>
     <div @ref="toggle" id="toggle-capsule">
         <div class="toggle-capsule-left"></div>
         <div class="toggle-capsule-right"></div>
-        <button class="nav-toggle" @onclick="ToggleNav">
+        <div class="nav-toggle"
+                                @ontouchstart="OnTouchStart" @ontouchstart:stopPropagation="true" @ontouchstart:preventDefault="true"
+                                @ontouchmove="OnTouchMove" @ontouchmove:stopPropagation="true" @ontouchmove:preventDefault="true"
+                                @ontouchend="OnTouchEnd" @ontouchend:stopPropagation="true" @ontouchend:preventDefault="true"
+                                @ontouchcancel="OnCancel" @ontouchcancel:stopPropagation="true" @ontouchcancel:preventDefault="true"
+                                @onmousedown="OnMouseStart" @onmousedown:stopPropagation="true" @onmousedown:preventDefault="true"
+                                @onmousemove="OnMouseMove" @onmousemove:stopPropagation="true" @onmousemove:preventDefault="true"
+                                @onmouseup="OnMouseEnd" @onmouseup:stopPropagation="true" @onmouseup:preventDefault="true">
             <img src="/css/icons/fi-xnsuxl-three-bars-solid.svg" />
-        </button>
+        </div>
     </div>
-
     <nav @ref="nav" id="primary-nav" class="primary-nav">
         <a href="home" class="nav-logo">CF</a>
         <ul>
@@ -19,15 +34,216 @@
 </div>
 
 @code {
+    ElementReference toggleTracker;
+
     ElementReference toggle;
     ElementReference nav;
 
     [Parameter]
     public RenderFragment? NavItems { get; set; }
 
-    async Task ToggleNav()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JSRuntime.ToggleClass(toggle, "active");
-        await JSRuntime.ToggleClass(nav, "active");
+        if (firstRender)
+            await JSRuntime.InvokeVoidAsync("addNavMouseUpListener", toggle);
+    }
+
+    public async Task ToggleNav()
+    {
+        if (!following)
+        {
+            await JSRuntime.ToggleClass(toggle, "active");
+            await JSRuntime.ToggleClass(nav, "active");
+        }
+    }
+
+    public async Task ShowNav()
+    {
+        await JSRuntime.AddClass(toggle, "active");
+        await JSRuntime.AddClass(nav, "active");
+    }
+
+    public async Task HideNav()
+    {
+        await JSRuntime.RemoveClass(toggle, "active");
+        await JSRuntime.RemoveClass(nav, "active");
+    }
+
+    private bool following;
+    private double? xDown, yDown;
+    private int sensitivity = 10;
+
+    private async Task OnMouseStart(MouseEventArgs args)
+    {
+        following = true;
+        xDown = args.ClientX;
+        yDown = args.ClientY;
+
+        await JSRuntime.AddClass(toggleTracker, "active");
+
+        await OnMouseMove(args);
+
+        Console.WriteLine("MouseStart");
+    }
+
+    private async Task OnMouseMove(MouseEventArgs args)
+    {
+        Console.WriteLine($"MouseMove: following {following}");
+        if (following)
+        {
+            await JSRuntime.UpdateNavDrag(toggle, args.ClientX, args.ClientY);
+        }
+    }
+
+    private async Task OnMouseEnd(MouseEventArgs args)
+    {
+        Console.WriteLine("MouseDownEnd");
+        following = false;
+
+        await JSRuntime.RemoveClass(toggleTracker, "active");
+        await JSRuntime.EndNavDrag(toggle);
+
+        if (xDown == null || yDown == null)
+        {
+            following = false;
+            return;
+        }
+
+        var xDiff = xDown.Value - args.ClientX;
+        var yDiff = yDown.Value - args.ClientY;
+
+        if (Math.Abs(xDiff) < sensitivity && Math.Abs(yDiff) < sensitivity)
+        {
+            xDown = yDown = null;
+
+            following = false;
+            await ToggleNav();
+            return;
+        }
+
+        if (Math.Abs(xDiff) > Math.Abs(yDiff))
+        {
+            if (xDiff > 0)
+            {
+                await InvokeAsync(() => OnSwipe(SwipeDirection.RightToLeft));
+            }
+            else
+            {
+                await InvokeAsync(() => OnSwipe(SwipeDirection.LeftToRight));
+            }
+        }
+        else
+        {
+            if (yDiff > 0)
+            {
+                await InvokeAsync(() => OnSwipe(SwipeDirection.BottomToTop));
+            }
+            else
+            {
+                await InvokeAsync(() => OnSwipe(SwipeDirection.TopToBottom));
+            }
+        }
+        xDown = yDown = null;
+    }
+
+    private async Task OnTouchStart(TouchEventArgs args)
+    {
+        Console.WriteLine("TouchStart");
+        following = true;
+        xDown = args.Touches[0].ClientX;
+        yDown = args.Touches[0].ClientY;
+
+        await OnTouchMove(args);
+    }
+
+    private async Task OnTouchMove(TouchEventArgs args)
+    {
+        Console.WriteLine($"TouchMove: following {following}");
+        if (following)
+        {
+            await JSRuntime.UpdateNavDrag(toggle, args.ChangedTouches[0].ClientX, args.ChangedTouches[0].ClientY);
+        }
+    }
+
+    private async Task OnTouchEnd(TouchEventArgs args)
+    {
+        Console.WriteLine("TouchEnd");
+        following = false;
+
+        await JSRuntime.RemoveClass(toggleTracker, "active");
+        await JSRuntime.EndNavDrag(toggle);
+
+        if (xDown == null || yDown == null)
+        {
+            following = false;
+            return;
+        }
+
+        var xDiff = xDown.Value - args.ChangedTouches[0].ClientX;
+        var yDiff = yDown.Value - args.ChangedTouches[0].ClientY;
+
+        if (Math.Abs(xDiff) < sensitivity && Math.Abs(yDiff) < sensitivity)
+        {
+            xDown = yDown = null;
+
+            following = false;
+            await ToggleNav();
+            return;
+        }
+
+        if (Math.Abs(xDiff) > Math.Abs(yDiff))
+        {
+            if (xDiff > 0)
+            {
+                await InvokeAsync(() => OnSwipe(SwipeDirection.RightToLeft));
+            }
+            else
+            {
+                await InvokeAsync(() => OnSwipe(SwipeDirection.LeftToRight));
+            }
+        }
+        else
+        {
+            if (yDiff > 0)
+            {
+                await InvokeAsync(() => OnSwipe(SwipeDirection.BottomToTop));
+            }
+            else
+            {
+                await InvokeAsync(() => OnSwipe(SwipeDirection.TopToBottom));
+            }
+        }
+        xDown = yDown = null;
+    }
+
+    private async Task OnCancel()
+    {
+        following = false;
+        await JSRuntime.RemoveClass(toggleTracker, "active");
+        await JSRuntime.EndNavDrag(toggle);
+        xDown = yDown = null;
+    }
+
+    private async Task OnSwipe(SwipeDirection swipeDirection)
+    {
+        Console.WriteLine($"Swiped: {swipeDirection.ToString()}");
+        switch(swipeDirection)
+        {
+            case SwipeDirection.TopToBottom:
+                await ShowNav();
+                break;
+            case SwipeDirection.BottomToTop:
+                await HideNav();
+                break;
+        }
+
+    }
+
+    private enum SwipeDirection
+    {
+        RightToLeft,
+        LeftToRight,
+        BottomToTop,
+        TopToBottom
     }
 }
