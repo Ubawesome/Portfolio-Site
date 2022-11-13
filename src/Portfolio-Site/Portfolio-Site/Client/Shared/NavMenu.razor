@@ -42,12 +42,6 @@
     [Parameter]
     public RenderFragment? NavItems { get; set; }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-            await JSRuntime.InvokeVoidAsync("addNavMouseUpListener", toggle);
-    }
-
     public async Task ToggleNav()
     {
         if (!following)
