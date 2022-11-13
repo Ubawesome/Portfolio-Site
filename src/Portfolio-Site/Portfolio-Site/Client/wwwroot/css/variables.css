@@ -80,8 +80,8 @@
     --grey-700: hsl(0 0% 70%);
     --grey-900: hsl(0 0% 90%);
 
-    --fs-h-1: clamp(5rem, 8vw + 2rem, 10rem);
-    --fs-h-2: clamp(4rem, 5vw + 2rem, 8rem);
+    --fs-h-1: clamp(2rem, 8vw + 1rem, 10rem);
+    --fs-h-2: clamp(2rem, 5vw + 1rem, 8rem);
     --fs-h-3: clamp(2rem, 3vw + 1rem, 5rem);
     --fs-h-4: clamp(1.5rem, 2vw + 1rem, 3.5rem);
     --fs-h-5: clamp(1rem, 1vw + 1rem, 2rem);
