@@ -22,14 +22,7 @@ html, body {
 
 body {
     background-color: var(--primary-100);
-}
 
-button {
-    border: none;
-    background: none;
-}
-
-.page {
     --background-line-color-1: var(--primary-050);
     --background-line-color-2: var(--primary-050);
     --background-line-size-1: 0.2rem;
@@ -50,10 +43,28 @@ button {
                      var(--background-small-box-size) var(--background-small-box-size);
 
     animation: background-drift 120s linear -30s infinite;
-
 }
 
-.main {
+
+section {
+    position: relative;
+}
+
+section .section-bg-overlay {
+    position: absolute;
+    content: '';
+    inset: 0;
+    opacity: 0;
+    background-color: var(--section-bg-color, transparent);
+
+    mix-blend-mode: overlay;
+    
+    z-index: -1;
+}
+
+button {
+    border: none;
+    background: none;
 }
 
 h1, h2, h3, h4, h5 {

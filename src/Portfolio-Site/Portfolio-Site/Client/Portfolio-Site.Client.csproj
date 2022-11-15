@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="C:\Users\Caleb\.nuget\packages\blazortransitionableroute\4.0.0\contentFiles\any\net6.0\wwwroot\jsInterop.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Components\SectionHeader.razor.css" />
     <None Remove="Shared\Loading.razor.css" />
   </ItemGroup>

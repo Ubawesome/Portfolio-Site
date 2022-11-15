@@ -1,0 +1,13 @@
+﻿
+<section @attributes="@CustomAttributes">
+    <div class="section-bg-overlay"></div>
+    @ChildContent
+</section>
+
+@code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object> CustomAttributes { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

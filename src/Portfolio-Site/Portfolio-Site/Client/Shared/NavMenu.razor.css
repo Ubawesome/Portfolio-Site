@@ -347,14 +347,14 @@
         translateX: -50%;
     }
 
-    #toggle-capsule:not(.hide) {
+    #toggle-capsule:not(.locked) {
         animation: nav-toggle-bounce-out;
         animation-duration: 500ms;
         animation-timing-function: ease;
         animation-fill-mode: forwards;
     }
 
-    #toggle-capsule:not(.hide).active {
+    #toggle-capsule:not(.locked).active {
         transform: translate(-50%, 0rem);
 
         animation: nav-toggle-bounce-in;
@@ -364,7 +364,7 @@
         animation-fill-mode: forwards;
     }
 
-    #toggle-capsule:not(.hide).active .toggle-capsule-left, #toggle-capsule:not(.hide).active .toggle-capsule-right {
+    #toggle-capsule:not(.locked).active .toggle-capsule-left, #toggle-capsule:not(.locked).active .toggle-capsule-right {
         animation: nav-toggle-stretch;
         animation-duration: 1s;
         animation-delay: 250ms;
@@ -379,10 +379,9 @@
         animation-fill-mode: forwards;
     }
 
-    #toggle-capsule.hide {
+    #toggle-capsule.locked {
         animation: none;
         transform: translate(-50%, -200%);
-        transition: transform ease 250ms;
     }
 
     .nav-toggle {

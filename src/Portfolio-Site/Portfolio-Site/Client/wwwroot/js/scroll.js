@@ -50,13 +50,13 @@ function updateNavScroll() {
     if (isLargeScreen) {
         if (scroll < window.innerHeight) {
             primaryNav.classList.add('locked');
-            toggle.classList.add('hide');
+            toggle.classList.add('locked');
 
             primaryNav.classList.add('active');
             toggle.classList.add('active');
         } else {
             primaryNav.classList.remove('locked');
-            toggle.classList.remove('hide');
+            toggle.classList.remove('locked');
         }
     }
 
@@ -123,7 +123,7 @@ function updateScroll() {
     }
 }
 
-window.addEventListener('scroll', updateNavScroll);
-window.addEventListener('scroll', updateSectionScroll);
-window.addEventListener('scroll', updateScroll);
+//window.addEventListener('scroll', updateNavScroll);
+//window.addEventListener('scroll', updateSectionScroll);
+//window.addEventListener('scroll', updateScroll);
 

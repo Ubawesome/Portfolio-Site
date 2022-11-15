@@ -55,7 +55,6 @@ function navDrag(element, dragX, dragY) {
         }
     }
 
-
     const toggleButton = element.querySelector('.nav-toggle');
     let dragPosition = Number(dragY);
     dragPosition -= Number(offset);
