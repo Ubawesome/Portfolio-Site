@@ -13,8 +13,8 @@ function setUpNavTriggers() {
             end: () => {
                 return 'bottom+=' + (nav.offsetHeight * -1) + ' top';
             },
-            markers: true,
-            scrub: true
+            scrub: true,
+            invalidateOnRefresh: true
         },
         ease: 'linear',
         top: 0
@@ -24,8 +24,8 @@ function setUpNavTriggers() {
         trigger: '#home',
         start: '-1px top',
         end: 'bottom top',
-        markers: false,
         scrub: true,
+        invalidateOnRefresh: true,
         onEnter: () => {
             if (!window.matchMedia('(min-width: 1329px)').matches)
                 return;
@@ -67,6 +67,8 @@ function setUpSectionTriggers() {
     const sections = document.querySelectorAll('section');
 
     sections.forEach((section) => {
+
+        // Navbar updates
         const id = section.getAttribute('id');
         const item = document.querySelector("nav ul li a[data-scroll-to='" + id + "']")
 
@@ -78,6 +80,51 @@ function setUpSectionTriggers() {
                 toggleClass: { targets: item, className: 'active' }
             });
         }
+
+        // Background color effect
+
+        const bgOverlay = section.querySelector('.section-bg-overlay');
+
+        const sectionTimeline = gsap.timeline({
+            scrollTrigger: {
+                id: id,
+                trigger: section,
+                start: 'top top',
+                end: 'bottom top',
+                markers: true,
+                scrub: true,
+                toggleActions: "play none reverse none",
+                invalidateOnRefresh: true
+            },
+        });
+
+        sectionTimeline.to(bgOverlay, {
+            opacity: 0
+        }).to(bgOverlay, {
+            opacity: 1
+        }).to(bgOverlay, {
+            opacity: 1
+        }).to(bgOverlay, {
+            opacity: 0
+        });
+
+        //gsap.to(bgOverlay, {
+        //    scrollTrigger: {
+        //        id: id,
+        //        trigger: section,
+        //        start: 'top top',
+        //        end: 'top bottom',
+        //        markers: true,
+        //        scrub: true
+        //    },
+        //    ease: 'linear',
+        //    keyFrames: [
+        //        { opacity: 0 },
+        //        { opacity: 100 },
+        //        { opacity: 0 }
+
+        //    ]
+        //});
     });
 }
 
@@ -96,7 +143,8 @@ function setUpScrollableTriggers() {
                     trigger: scrollable,
                     start: 'top top',
                     end: 'bottom top',
-                    scrub: true
+                    scrub: true,
+                    invalidateOnRefresh: true
                 },
                 translateY: (index, target, targets) => {
                     let scrollSpeed = 1;
