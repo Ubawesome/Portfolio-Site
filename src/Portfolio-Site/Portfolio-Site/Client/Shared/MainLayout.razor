@@ -1,5 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
+@inject IJSRuntime JSRuntime
+
 <div class="page">
     <NavMenu>
         <NavItems>
@@ -29,3 +31,12 @@
 
     <Footer />
 </div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntime.InvokeVoidAsync("setUpNavTriggers");
+        await JSRuntime.InvokeVoidAsync("setUpSectionTriggers");
+        await JSRuntime.InvokeVoidAsync("setUpScrollableTriggers");
+    }
+}
