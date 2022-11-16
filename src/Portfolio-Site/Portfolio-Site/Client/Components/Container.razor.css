@@ -1,0 +1,27 @@
+﻿.container, .container-full {
+    box-shadow: 0.1rem 0.1rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
+    background-color: var(--primary-100);
+}
+
+.container {
+    width: clamp(20rem, 70vw, 2000px);
+    max-width: 100%;
+    margin-inline: auto;
+    margin-block: 2rem;
+    padding-inline: clamp(0.25rem, 4vw, 4rem);
+    padding-block: 2rem;
+}
+
+.container-full {
+    width: 100%;
+    margin-inline: auto;
+    margin-block: 2rem;
+    padding-inline: clamp(0.25rem, 15vw, 800px);
+    padding-block: 2rem;
+}
+
+.container.inline, .container-full.inline {
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}

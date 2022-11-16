@@ -38,8 +38,7 @@
         </Title>
     </Splash>
 
-
-    <div class="container inline">
+    <Container Inline="true">
         <Card Orientation="Orientation.Horizontal" Animated="true" Class="no-title" AnimatedImageSpeed="0.5" AnimatedBodySpeed="0.2">
 
             <CardBody>
@@ -53,7 +52,7 @@
                 <img src="imgs/IMG_20220924_201712_231.jpg" />
             </CardImage>
         </Card>
-    </div>
+    </Container>
 </Section>
 
 <Section id="what-have-i-done">
@@ -66,7 +65,7 @@
         </Title>
     </Splash>
 
-    <div class="container inline tile-grid">
+    <Container Inline="true" Class="tile-grid">
         <Tile style="--tile-body-bg-color: var(--accent-3-100);">
             <TileImage>
                 <img src="/css/img/dotnet-logo.png" />
@@ -122,10 +121,7 @@
                 Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
             </TileBody>
         </Tile>
-    </div>
-
-    <div class="container-full m-block-0">
-    </div>
+    </Container>
 </Section>
 
 <Section id="what-can-i-do">
@@ -138,60 +134,62 @@
         </Title>
     </Splash>
 
-    <div class="container-full m-block-0">
+    <Container Class="m-block-0">
         <blockquote>
             With half a decade of professional experience and an unending passion for learning, anything I can't do, I'm eager to learn.
         </blockquote>
-    </div>
+    </Container>
 
     <SectionHeader Title="Solutions" ContainerClass="bg-accent-1-7" TextClass="text-accent-1-1" />
 
-    <Tabs TabStyle="TabStyle.Card" Class="container">
-        <Tab Title="Front-End" Hoverable>
-            Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
-            <div class="flex row wrap">
-                <img src="/css/icons/html-5.svg" class="icon" />
-                <img src="/css/icons/css-3.svg" class="icon" />
-                <img src="/css/icons/less.svg" class="icon" />
-                <img src="/css/icons/sass.svg" class="icon" />
-                <img src="/css/icons/bootstrap.svg" class="icon" />
-                <img src="/css/icons/javascript.svg" class="icon" />
-                <img src="/css/icons/jquery-icon.svg" class="icon" />
-                <img src="/css/icons/express.svg" class="icon" />
-                <img src="/css/icons/react.svg" class="icon" />
-                <img src="/css/icons/xamarin.svg" class="icon" />
-                <img src="/css/icons/android-icon.svg" class="icon" />
-            </div>
-        </Tab>
-        <Tab Title="Back-End" Hoverable>
-            Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
-            <div class="flex row wrap">
-                <img src="/css/icons/c-sharp.svg" class="icon" />
-                <img src="/css/icons/dotnet.svg" class="icon" />
-                <img src="/css/icons/nodejs-icon.svg" class="icon" />
-                <img src="/css/icons/azure.svg" class="icon" />
-                <img src="/css/icons/swagger.svg" class="icon" />
-                <img src="/css/icons/gatsby.svg" class="icon" />
-                <img src="/css/icons/graphql.svg" class="icon" />
-                <img src="/css/icons/mongodb.svg" class="icon" />
-                <img src="/css/icons/mysql.svg" class="icon" />
-                <img src="/css/icons/oracle.svg" class="icon" />
-            </div>
-        </Tab>
-        <Tab Title=".NET" Hoverable>
-            Cross-platform solutions for both front-end and back-end with MVC or Blazor.
-        </Tab>
-        <Tab Title="Web Design" Hoverable>
-            Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
-        </Tab>
-        <Tab Title="Database Design" Hoverable>
-            Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
-        </Tab>
-    </Tabs>
+    <Container Inline="true">
+        <Tabs TabStyle="TabStyle.Card">
+            <Tab Title="Front-End" Hoverable>
+                Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
+                <div class="flex row wrap">
+                    <img src="/css/icons/html-5.svg" class="icon" />
+                    <img src="/css/icons/css-3.svg" class="icon" />
+                    <img src="/css/icons/less.svg" class="icon" />
+                    <img src="/css/icons/sass.svg" class="icon" />
+                    <img src="/css/icons/bootstrap.svg" class="icon" />
+                    <img src="/css/icons/javascript.svg" class="icon" />
+                    <img src="/css/icons/jquery-icon.svg" class="icon" />
+                    <img src="/css/icons/express.svg" class="icon" />
+                    <img src="/css/icons/react.svg" class="icon" />
+                    <img src="/css/icons/xamarin.svg" class="icon" />
+                    <img src="/css/icons/android-icon.svg" class="icon" />
+                </div>
+            </Tab>
+            <Tab Title="Back-End" Hoverable>
+                Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
+                <div class="flex row wrap">
+                    <img src="/css/icons/c-sharp.svg" class="icon" />
+                    <img src="/css/icons/dotnet.svg" class="icon" />
+                    <img src="/css/icons/nodejs-icon.svg" class="icon" />
+                    <img src="/css/icons/azure.svg" class="icon" />
+                    <img src="/css/icons/swagger.svg" class="icon" />
+                    <img src="/css/icons/gatsby.svg" class="icon" />
+                    <img src="/css/icons/graphql.svg" class="icon" />
+                    <img src="/css/icons/mongodb.svg" class="icon" />
+                    <img src="/css/icons/mysql.svg" class="icon" />
+                    <img src="/css/icons/oracle.svg" class="icon" />
+                </div>
+            </Tab>
+            <Tab Title=".NET" Hoverable>
+                Cross-platform solutions for both front-end and back-end with MVC or Blazor.
+            </Tab>
+            <Tab Title="Web Design" Hoverable>
+                Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
+            </Tab>
+            <Tab Title="Database Design" Hoverable>
+                Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
+            </Tab>
+        </Tabs>
+    </Container>
 
     <SectionHeader Title="Examples" ContainerClass="bg-accent-2-7" TextClass="text-accent-2-1" />
 
-    <div class="container">
+    <Container>
         <div class="flex row wrap">
             <Card>
                 <CardImage>
@@ -269,7 +267,7 @@
                 </CardBody>
             </Card>
         </div>
-    </div>
+    </Container>
 </Section>
 
 @code {
