@@ -12,12 +12,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Components\Card.razor.css" />
     <None Remove="Components\Container.razor.css" />
     <None Remove="Components\SectionHeader.razor.css" />
     <None Remove="Shared\Loading.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Components\Card.razor.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="Components\Container.razor.css">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
