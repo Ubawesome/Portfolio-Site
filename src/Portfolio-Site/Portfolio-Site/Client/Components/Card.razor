@@ -1,7 +1,9 @@
-﻿<div class=" card @(Size.EnumToClass()) @(Orientation.EnumToClass()) @Class" @attributes="@CustomAttributes">
+﻿@inject IJSRuntime JSRuntime
+
+<div @ref="card" class="card @(Size.EnumToClass()) @(Orientation.EnumToClass()) @Class" @attributes="@CustomAttributes">
     @if (CardImage != null)
     {
-        <div class="card-image">
+        <div @ref="cardImage" class="card-image">
             @CardImage
         </div>
     }
@@ -15,7 +17,7 @@
 
     @if (CardBody != null)
     {
-        <div class="card-body">
+        <div @ref="cardBody" class="card-body">
                 @CardBody
         </div>
     }
@@ -36,6 +38,21 @@
     public Orientation Orientation { get; set; }
 
     [Parameter]
+    public bool Animated { get; set; }
+
+    [Parameter]
+    public string TriggerStart { get; set; }
+
+    [Parameter]
+    public string TriggerEnd { get; set; }
+
+    [Parameter]
+    public double AnimatedImageSpeed { get; set; }
+
+    [Parameter]
+    public double AnimatedBodySpeed { get; set; }
+
+    [Parameter]
     public bool Collapseable { get; set; }
 
     [Parameter(CaptureUnmatchedValues = true)]
@@ -44,4 +61,17 @@
     [Parameter]
     public string Class { get; set; }
 
+
+    ElementReference card;
+    ElementReference cardImage;
+    ElementReference cardBody;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && Animated)
+        {
+            await JSRuntime.InvokeVoidAsync("setUpGlideTrigger", card, cardImage, AnimatedImageSpeed, TriggerStart, TriggerEnd);
+            await JSRuntime.InvokeVoidAsync("setUpGlideTrigger", card, cardBody, AnimatedBodySpeed, TriggerStart, TriggerEnd);
+        }
+    }
 }

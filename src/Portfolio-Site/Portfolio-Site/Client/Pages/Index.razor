@@ -8,7 +8,7 @@
 
 <PageTitle>Index</PageTitle>
 
-<Section id="home" style="--section-bg-color: var(--primary-100)">
+<Section id="home">
     <Splash ScrollSpeed="1" BackgroundScrollSpeed="-0.5" TitleScrollSpeed="0.25">
         <Background>
             <img src="/css/img/ocean-waves.jpg" class="filter-blur-2" />
@@ -28,10 +28,9 @@
 </Section>
 
 
-<Section id="who-am-i" style="--section-bg-color: var(--accent-1-300)">
+<Section id="who-am-i">
     <Splash ScrollSpeed="1" BackgroundScrollSpeed="-0.25" TitleScrollSpeed="0.5">
         <Background>
-            @*<img src="/css/img/paper-crease.jpg" />*@
             <img src="/css/img/clouds-sunset.jpg" class="filter-blur-1" />
         </Background>
         <Title>
@@ -40,16 +39,24 @@
     </Splash>
 
 
-    <div class="container-full m-block-0">
-        <blockquote>
-            Hi! Having grown up in the Pacific Northwest of the USA, I have naturally become used to a diverse environment with people of varying backgrounds and identities.
-            I attended <abbr title="Lane Community College">LCC</abbr> immediately after high school, staying for three years and earning two AAS degrees, one in each of Computer Programming and Computer Simulation & Game Design.
-            During my time at LCC, I started an internship at Dark Matter Consulting, which then transitioned into regular contract work. For the past several years I have worked on many projects through Dark Matter, focused mainly on Microsoft's .NET stack, as well as some React Native and NodeJS.
-        </blockquote>
+    <div class="container inline">
+        <Card Orientation="Orientation.Horizontal" Animated="true" Class="no-title" AnimatedImageSpeed="0.5" AnimatedBodySpeed="0.2">
+
+            <CardBody>
+                <blockquote>
+                    Hi! Having grown up in the Pacific Northwest of the USA, I have naturally become used to a diverse environment with people of varying backgrounds and identities.
+                    I attended <abbr title="Lane Community College">LCC</abbr> immediately after high school, staying for three years and earning two AAS degrees, one in each of Computer Programming and Computer Simulation & Game Design.
+                    During my time at LCC, I started an internship at Dark Matter Consulting, which then transitioned into regular contract work. For the past several years I have worked on many projects through Dark Matter, focused mainly on Microsoft's .NET stack, as well as some React Native and NodeJS.
+                </blockquote>
+            </CardBody>
+            <CardImage>
+                <img src="imgs/IMG_20220924_201712_231.jpg" />
+            </CardImage>
+        </Card>
     </div>
 </Section>
 
-<Section id="what-have-i-done" style="--section-bg-color: var(--accent-2-300)">
+<Section id="what-have-i-done">
     <Splash ScrollSpeed="1" BackgroundScrollSpeed="-0.25" TitleScrollSpeed="0.5">
         <Background>
             <img src="/css/img/feathers-blur.jpg" class="filter-blur-1" />
@@ -121,7 +128,7 @@
     </div>
 </Section>
 
-<Section id="what-can-i-do" style="--section-bg-color: var(--accent-3-500)">
+<Section id="what-can-i-do">
     <Splash ScrollSpeed="1" BackgroundScrollSpeed="-0.25" TitleScrollSpeed="0.5">
         <Background>
             <img src="/css/img/painted-canvas.jpg" class="filter-blur-2" />

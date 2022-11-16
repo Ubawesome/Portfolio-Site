@@ -45,23 +45,6 @@ body {
     animation: background-drift 120s linear -30s infinite;
 }
 
-
-section {
-    position: relative;
-}
-
-section .section-bg-overlay {
-    position: absolute;
-    content: '';
-    inset: 0;
-    opacity: 0;
-    background-color: var(--section-bg-color, transparent);
-
-    mix-blend-mode: overlay;
-    
-    z-index: -1;
-}
-
 button {
     border: none;
     background: none;
@@ -525,7 +508,7 @@ grid-column: 1;
     height: fit-content;
     border-radius: 0.25rem;
     color: var(--grey-700);
-    overflow: auto;
+    overflow: visible;
 }
 
 .card > * {
@@ -553,20 +536,12 @@ grid-column: 1;
     grid-row: 1 / span 2;
 }
 
+.card.horizontal.no-title > .card-body {
+    grid-row: span 2;
+}
+
 .card.horizontal > .card-title, .card.horizontal > .card-body {
     height: 100%;
-}
-
-
-.card.horizontal, .card.horizontal.md {
-}
-
-.card.horizontal > .card-image:first-child {
-    border-right: 0.35rem solid var(--primary-100);
-}
-
-.card.horizontal > .card-image:last-child {
-    border-left: 0.35rem solid var(--primary-100);
 }
 
 /* Card Sizing Styles */

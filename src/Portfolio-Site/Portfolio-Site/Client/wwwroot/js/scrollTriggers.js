@@ -80,51 +80,6 @@ function setUpSectionTriggers() {
                 toggleClass: { targets: item, className: 'active' }
             });
         }
-
-        // Background color effect
-
-        const bgOverlay = section.querySelector('.section-bg-overlay');
-
-        const sectionTimeline = gsap.timeline({
-            scrollTrigger: {
-                id: id,
-                trigger: section,
-                start: 'top top',
-                end: 'bottom top',
-                markers: true,
-                scrub: true,
-                toggleActions: "play none reverse none",
-                invalidateOnRefresh: true
-            },
-        });
-
-        sectionTimeline.to(bgOverlay, {
-            opacity: 0
-        }).to(bgOverlay, {
-            opacity: 1
-        }).to(bgOverlay, {
-            opacity: 1
-        }).to(bgOverlay, {
-            opacity: 0
-        });
-
-        //gsap.to(bgOverlay, {
-        //    scrollTrigger: {
-        //        id: id,
-        //        trigger: section,
-        //        start: 'top top',
-        //        end: 'top bottom',
-        //        markers: true,
-        //        scrub: true
-        //    },
-        //    ease: 'linear',
-        //    keyFrames: [
-        //        { opacity: 0 },
-        //        { opacity: 100 },
-        //        { opacity: 0 }
-
-        //    ]
-        //});
     });
 }
 
@@ -158,5 +113,46 @@ function setUpScrollableTriggers() {
             });
         });
     });
+}
+
+function setUpGlideTrigger(container, element, animationSpeed = 1, triggerStart = 'top bottom', triggerEnd = 'bottom top') {
+
+    const glideTimeline = gsap.timeline({
+        scrollTrigger: {
+            trigger: (container !== null) ? container : element,
+            start: triggerStart,
+            end: triggerEnd,
+            scrub: true,
+            toggleActions: 'play none reverse none',
+            invalidateOnRefresh: true
+        },
+    });
+
+    glideTimeline.from(element, {
+            duration: 5,
+            y: () => (100 * animationSpeed) + '%',
+            opacity: 0,
+            ease: 'linear'
+    })
+        .fromTo(element, {
+            y: () => (10 * animationSpeed) + '%',
+            opacity: 1,
+        }, {
+            y: 0,
+            duration: 1,
+            ease: 'linear'
+        })
+        .to(element, {
+            duration: 1,
+            y: () => (-20 * animationSpeed) + '%',
+            opacity: 1,
+            ease: 'linear'
+        })
+        .to(element, {
+            duration: 5,
+            y: () => (-100 * animationSpeed) + '%',
+            opacity: 0,
+            ease: 'linear'
+        });
 }
 
