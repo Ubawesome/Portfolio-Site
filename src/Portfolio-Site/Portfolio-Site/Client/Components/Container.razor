@@ -1,0 +1,50 @@
+﻿<div class="@GetContainerClass() @Class" @attributes="@CustomAttributes">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object> CustomAttributes { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    [Parameter]
+    public Style ContainerStyle { get; set; } = Style.Default;
+
+    [Parameter]
+    public bool Inline { get; set; } = false;
+
+    public enum Style
+    {
+        Default,
+        Full
+    }
+
+    private string GetContainerClass()
+    {
+        string containerClass = "";
+        switch (ContainerStyle)
+        {
+            case Style.Default:
+                containerClass = "container";
+                break;
+            case Style.Full:
+                containerClass = "container-full";
+                break;
+            default:
+                containerClass = "container";
+                break;
+        }
+
+        if (Inline)
+        {
+            containerClass = string.Join(' ', containerClass, "inline");
+        }
+
+        return containerClass;
+    }
+}

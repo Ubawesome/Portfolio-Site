@@ -26,6 +26,7 @@
     --nav-items-gap: clamp(0.5rem, 1vw, 1.5rem);
 }
 
+
 #toggle-tracker {
     opacity: 0;
     pointer-events: none;
@@ -146,7 +147,6 @@
     left: 0;
     box-shadow: calc(var(--toggle-capsule-leg-shadow-width) * -1) calc(var(--toggle-capsule-leg-shadow-height) * -1) 0 0 var(--toggle-capsule-bg-color);
 }
-
 
 .nav-toggle {
     position: absolute;
