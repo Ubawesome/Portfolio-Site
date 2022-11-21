@@ -15,7 +15,7 @@
     color: var(--grey-700);
     border-radius: 0.25rem;
     background-color: var(--primary-900);
-    box-shadow: 0.15rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
+    box-shadow: 0.15rem 0.15rem 0.15rem var(--primary-000);
 }
 
 .tile-button {
@@ -131,7 +131,7 @@
 }
 
 .tile-body {
-    padding-inline: max(2rem, 4vw);
+    padding-inline: max(2rem, 2vw);
     padding-block: max(2rem, 2vw);
 
     font-size: var(--fs-p-3);

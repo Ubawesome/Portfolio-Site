@@ -15,14 +15,14 @@
 
 .card > * {
     height: fit-content;
-    background-color: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 2%));
-    box-shadow: 0.15rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
+    background-color: var(--primary-050);
+    box-shadow: 0.15rem 0.15rem 0.15rem var(--primary-000);
 }
 
 .card-image, .card-image ::deep img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     overflow: hidden;
 }
 
@@ -52,12 +52,13 @@
         height: max-content;
     }
 
-    .card.horizontal > .card-image:first-child {
+    .card.horizontal > .card-image,
+    .card.horizontal.image-left > .card-image {
         grid-column: 1 / span 1;
         grid-row: 1 / span 2;
     }
 
-    .card.horizontal > .card-image:last-child {
+    .card.horizontal.image-right > .card-image {
         grid-column: 2 / span 1;
         grid-row: 1 / span 2;
     }
@@ -103,6 +104,11 @@
 .card.horizontal.lg {
     min-width: clamp(6em, 12vw, 12em);
     max-width: clamp(32em, 35vw, 64em);
+}
+
+.card.full {
+    width: 100%;
+    max-width: 100%;
 }
 
 .card > *:first-child,

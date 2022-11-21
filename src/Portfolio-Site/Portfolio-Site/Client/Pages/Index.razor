@@ -39,7 +39,7 @@
     </Splash>
 
     <Container Inline="true">
-        <Card Orientation="Orientation.Horizontal" Animated="true" Class="no-title" AnimatedImageSpeed="0.5" AnimatedBodySpeed="0.2">
+        <Card Orientation="Orientation.Horizontal" ImagePosition="ImagePosition.Right" Animated="true" Class="no-title" AnimatedImageSpeed="0.5" AnimatedBodySpeed="0.2">
             <CardBody>
                 <blockquote>
                     Hi! Having grown up in the Pacific Northwest of the USA, I have naturally become used to a diverse environment with people of varying backgrounds and identities.
@@ -142,7 +142,91 @@
     <SectionHeader Title="Solutions" ContainerClass="bg-accent-1-7" TextClass="text-accent-1-1" />
 
     <Container Inline="true">
-        <Tabs TabStyle="TabStyle.Card">
+        <Tabs TabStyle="TabStyle.Card" Orientation="Orientation.Vertical">
+            <Tab Title="Front-End" Hoverable>
+                Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
+                <div class="flex row wrap">
+                    <img src="/css/icons/html-5.svg" class="icon" />
+                    <img src="/css/icons/css-3.svg" class="icon" />
+                    <img src="/css/icons/less.svg" class="icon" />
+                    <img src="/css/icons/sass.svg" class="icon" />
+                    <img src="/css/icons/bootstrap.svg" class="icon" />
+                    <img src="/css/icons/javascript.svg" class="icon" />
+                    <img src="/css/icons/jquery-icon.svg" class="icon" />
+                    <img src="/css/icons/express.svg" class="icon" />
+                    <img src="/css/icons/react.svg" class="icon" />
+                    <img src="/css/icons/xamarin.svg" class="icon" />
+                    <img src="/css/icons/android-icon.svg" class="icon" />
+                </div>
+            </Tab>
+            <Tab Title="Back-End" Hoverable>
+                Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
+                <div class="flex row wrap">
+                    <img src="/css/icons/c-sharp.svg" class="icon" />
+                    <img src="/css/icons/dotnet.svg" class="icon" />
+                    <img src="/css/icons/nodejs-icon.svg" class="icon" />
+                    <img src="/css/icons/azure.svg" class="icon" />
+                    <img src="/css/icons/swagger.svg" class="icon" />
+                    <img src="/css/icons/gatsby.svg" class="icon" />
+                    <img src="/css/icons/graphql.svg" class="icon" />
+                    <img src="/css/icons/mongodb.svg" class="icon" />
+                    <img src="/css/icons/mysql.svg" class="icon" />
+                    <img src="/css/icons/oracle.svg" class="icon" />
+                </div>
+            </Tab>
+            <Tab Title=".NET" Hoverable>
+                Cross-platform solutions for both front-end and back-end with MVC or Blazor.
+            </Tab>
+            <Tab Title="Web Design" Hoverable>
+                Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
+            </Tab>
+            <Tab Title="Database Design" Hoverable>
+                Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
+            </Tab>
+        </Tabs>
+        <Tabs TabStyle="TabStyle.Card" Orientation="Orientation.Horizontal">
+            <Tab Title="Front-End" Hoverable>
+                Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
+                <div class="flex row wrap">
+                    <img src="/css/icons/html-5.svg" class="icon" />
+                    <img src="/css/icons/css-3.svg" class="icon" />
+                    <img src="/css/icons/less.svg" class="icon" />
+                    <img src="/css/icons/sass.svg" class="icon" />
+                    <img src="/css/icons/bootstrap.svg" class="icon" />
+                    <img src="/css/icons/javascript.svg" class="icon" />
+                    <img src="/css/icons/jquery-icon.svg" class="icon" />
+                    <img src="/css/icons/express.svg" class="icon" />
+                    <img src="/css/icons/react.svg" class="icon" />
+                    <img src="/css/icons/xamarin.svg" class="icon" />
+                    <img src="/css/icons/android-icon.svg" class="icon" />
+                </div>
+            </Tab>
+            <Tab Title="Back-End" Hoverable>
+                Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
+                <div class="flex row wrap">
+                    <img src="/css/icons/c-sharp.svg" class="icon" />
+                    <img src="/css/icons/dotnet.svg" class="icon" />
+                    <img src="/css/icons/nodejs-icon.svg" class="icon" />
+                    <img src="/css/icons/azure.svg" class="icon" />
+                    <img src="/css/icons/swagger.svg" class="icon" />
+                    <img src="/css/icons/gatsby.svg" class="icon" />
+                    <img src="/css/icons/graphql.svg" class="icon" />
+                    <img src="/css/icons/mongodb.svg" class="icon" />
+                    <img src="/css/icons/mysql.svg" class="icon" />
+                    <img src="/css/icons/oracle.svg" class="icon" />
+                </div>
+            </Tab>
+            <Tab Title=".NET" Hoverable>
+                Cross-platform solutions for both front-end and back-end with MVC or Blazor.
+            </Tab>
+            <Tab Title="Web Design" Hoverable>
+                Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
+            </Tab>
+            <Tab Title="Database Design" Hoverable>
+                Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
+            </Tab>
+        </Tabs>
+        <Tabs TabStyle="TabStyle.Container" Orientation="Orientation.Horizontal">
             <Tab Title="Front-End" Hoverable>
                 Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
                 <div class="flex row wrap">
@@ -190,17 +274,15 @@
 
     <Container>
         <div class="flex row wrap">
-            <Card>
-                <CardImage>
+            <Card Orientation="Orientation.Vertical" Size="Size.Full">
+@*                <CardImage>
                     <img src="https://loremflickr.com/1280/720" />
-                </CardImage>
+                </CardImage>*@
                 <CardTitle>
-                    <h5>Regular buttons</h5>
+                    <h5>Buttons</h5>
                 </CardTitle>
                 <CardBody>
-                    <p>
-                        The default appearance of buttons.
-                    </p>
+                    <p>Normal:</p>
                     <div class="flex row wrap">
                         <button class="btn primary">Primary</button>
                         <button class="btn accent-1">Accent 1</button>
@@ -209,20 +291,7 @@
                         <button class="btn success">Success</button>
                         <button class="btn danger">Danger</button>
                     </div>
-                </CardBody>
-            </Card>
-
-            <Card>
-                <CardImage>
-                    <img src="https://loremflickr.com/1280/1280" />
-                </CardImage>
-                <CardTitle>
-                    Outline buttons
-                </CardTitle>
-                <CardBody>
-                    <p>
-                        The outline variant of buttons. Also, title above the card.
-                    </p>
+                    <p>Outline:</p>
                     <div class="flex row wrap">
                         <button class="btn primary outline">Primary</button>
                         <button class="btn accent-1 outline">Accent 1</button>
@@ -231,22 +300,7 @@
                         <button class="btn success outline">Success</button>
                         <button class="btn danger outline">Danger</button>
                     </div>
-                </CardBody>
-            </Card>
-        </div>
-
-        <div class="flex row wrap">
-            <Card Orientation="Orientation.Horizontal">
-                <CardImage>
-                    <img src="https://loremflickr.com/1000/1600" />
-                </CardImage>
-                <CardTitle>
-                    Sized buttons
-                </CardTitle>
-                <CardBody>
-                    <p>
-                        Small and large buttons! And no image, title on the bottom.
-                    </p>
+                    <p>Large:</p>
                     <div class="flex row wrap">
                         <button class="btn primary large">Primary</button>
                         <button class="btn accent-1 large">Accent 1</button>
@@ -255,6 +309,7 @@
                         <button class="btn success large">Success</button>
                         <button class="btn danger large">Danger</button>
                     </div>
+                    <p>Small:</p>
                     <div class="flex row wrap">
                         <button class="btn primary small">Primary</button>
                         <button class="btn accent-1 small">Accent 1</button>
@@ -262,6 +317,42 @@
                         <button class="btn accent-3 small">Accent 3</button>
                         <button class="btn success small">Success</button>
                         <button class="btn danger small">Danger</button>
+                    </div>
+                </CardBody>
+            </Card>
+
+            <Card Size="Size.Full">
+                <CardTitle>
+                    Form Controls
+                </CardTitle>
+                <CardBody>
+                    <p>
+                    </p>
+                    <div class="flex row wrap">
+                    </div>
+                </CardBody>
+            </Card>
+
+            <Card Size="Size.Full">
+                <CardTitle>
+                    Collapseables
+                </CardTitle>
+                <CardBody>
+                    <p>
+                    </p>
+                    <div class="flex row wrap">
+                    </div>
+                </CardBody>
+            </Card>
+
+            <Card Size="Size.Full">
+                <CardTitle>
+                    Carousel
+                </CardTitle>
+                <CardBody>
+                    <p>
+                    </p>
+                    <div class="flex row wrap">
                     </div>
                 </CardBody>
             </Card>

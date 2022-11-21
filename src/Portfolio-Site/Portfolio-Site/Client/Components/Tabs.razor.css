@@ -1,142 +1,201 @@
 ﻿/* Tab Styles */
 
-.tabs-container {
-    box-shadow: 0.1rem 0.1rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
-    background-color: var(--primary-100);
-    width: clamp(20rem, 70vw, 2000px);
+.tabs {
+    display: grid;
     max-width: 100%;
+}
+
+.tabs-container {
+    box-shadow: 0.1rem 0.1rem 0.15rem 0.15rem var(--primary-000);
+    background-color: var(--primary-100);
+
+    width: clamp(20rem, 70vw, 2000px);
+
     margin-inline: auto;
     overflow: hidden;
 }
 
+.tabs-container.vertical {
+    grid-auto-rows: auto 1fr;
+    grid-auto-flow: row;
+}
+
+.tabs-container.horizontal {
+    grid-auto-columns: auto 1fr;
+    grid-auto-flow: column;
+}
+
+
+
+
+.tabs-card {
+    position: relative;
+
+    gap: 0.35rem;
+
+    margin-block: 0rem;
+    padding-inline: 0rem;
+    padding-block: 0rem;
+
+    background: none;
+    height: fit-content;
+
+    border-radius: 0.25rem;
+    color: var(--grey-700);
+
+    overflow: auto;
+}
+
+.tabs-card.vertical {
+    grid-auto-rows: auto 1fr;
+    grid-auto-flow: row;
+}
+
+.tabs-card.horizontal {
+    grid-auto-columns: auto 1fr;
+    grid-auto-flow: column;
+}
+
+
+
 .tabs-headers {
     display: flex;
     flex-direction: row;
+
     justify-content: flex-start;
     width: 100%;
     background: none;
 }
 
-.tabs-container-headers {
+.tabs-container .tabs-headers {
     flex-wrap: wrap;
     gap: 1rem;
     margin-block: 0;
     margin-inline: 1rem;
 }
 
-.tabs-container-header {
+.tabs-container.vertical .tabs-headers {
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tabs-container.horizontal .tabs-headers {
+    flex-direction: column;
+    width: max-content;
+    overflow-y: auto;
+}
+
+.tabs-card .tabs-headers {
+    flex-wrap: nowrap;
+    background-color: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 2%));
+    box-shadow: 0.15rem 0.15rem 0.15rem var(--primary-000);
+}
+
+.tabs-card.vertical .tabs-headers {
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tabs-card.horizontal .tabs-headers {
+    flex-direction: column;
+    width: max-content;
+    overflow-y: auto;
+}
+
+.tabs-header {
     position: relative;
-    width: fit-content;
-    font-size: var(--fs-p-1);
+    font-size: var(--fs-p-2);
+    line-height: 1.5em;
+    color: var(--grey-900);
+    text-decoration: none;
     text-align: center;
     cursor: pointer;
-    text-decoration: none;
-    color: var(--grey-900);
-    padding-inline: clamp(1rem, 1vw, 2rem);
-    padding-block: 0.5rem;
+
+    width: max-content;
+
     transition: background-color ease-out 0.15s, color ease-out 0.15s;
 }
 
-.tabs-container-header::after {
+.tabs.horizontal .tabs-header {
+    width: 100%;
+}
+
+.tabs-container .tabs-header {
+    padding-inline: clamp(1rem, 1vw, 2rem);
+    padding-block: 0.5rem;
+}
+
+.tabs-card .tabs-header {
+    padding-inline: clamp(0.5rem, 2.5vw, 6rem);
+    padding-block: clamp(0.25rem, 1.5vh, 2rem);
+}
+
+
+
+.tabs-header::after {
     position: absolute;
     content: '';
+
     left: 0.15rem;
     right: 0.15rem;
     bottom: 0.1rem;
     height: 0.1rem;
+
     border-radius: 0.5rem;
+
     z-index: 1;
+
     background-color: var(--primary-900);
     transform: translateY(100%);
     opacity: 0;
     transition: transform ease-out 0.15s;
 }
 
-.tabs-container-header:hover, .tabs-container-header:focus-visible {
+.tabs-header:hover, .tabs-header:focus-visible {
     background-color: var(--accent-1-500);
     color: var(--grey-900);
 }
 
-.tabs-container-header.selected::after,
-.tabs-container-header:hover::after,
-.tabs-container-header:focus::after {
+.tabs-header.selected::after,
+.tabs-header:hover::after,
+.tabs-header:focus::after {
     transform: translateY(0%);
     opacity: 1;
 }
 
-.tabs-container-content {
+.tabs-content {
+
+}
+
+.tabs-container .tabs-content {
     width: 100%;
     margin-inline: auto;
     padding-inline: 4rem;
     padding-block: 2rem;
 }
 
-.tabs-card {
-    display: grid;
-    grid-auto-columns: auto 1fr;
-    gap: 0.35rem;
-    margin-block: 0rem;
-    padding-inline: 0rem;
-    padding-block: 0rem;
-    background: none;
-    max-width: 100%;
-    height: max-content;
-    position: relative;
-    border-radius: 0.25rem;
-    color: var(--grey-700);
-    overflow: auto;
-}
-
-.tabs-card-headers {
-    grid-column: 1;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    width: max-content;
-    background-color: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 2%));
-    box-shadow: 0.15rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
-}
-
-.tabs-card-header {
-    position: relative;
-    font-size: 1.25rem;
-    line-height: 1.5em;
-    color: var(--grey-900);
-    padding-inline: clamp(2rem, 2vw, 6rem);
-    padding-block: clamp(1rem, 1vh, 2rem);
-}
-
-.tabs-card-header::after {
-    position: absolute;
-    content: '';
-    left: 0.15rem;
-    right: 0.15rem;
-    bottom: 0.1rem;
-    height: 0.1rem;
-    border-radius: 0.5rem;
-    z-index: 1;
-    background-color: var(--primary-900);
-    transform: translateY(100%);
-    opacity: 0;
-    transition: transform ease-out 0.15s;
-}
-
-.tabs-card-header:hover, .tabs-card-header:focus-visible {
-    background-color: var(--accent-1-500);
-    color: var(--grey-900);
-}
-
-.tabs-card-header.selected::after,
-.tabs-card-header:hover::after,
-.tabs-card-header:focus-visible::after {
-    transform: translateY(0%);
-    opacity: 1;
-}
-
-
-.tabs-card-content {
-    grid-column: 2;
+.tabs-card .tabs-content {
     padding-block: clamp(2rem, 2vh, 6rem);
     padding-inline: clamp(2rem, 2vw, 6rem);
-    background-color: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 2%));
-    box-shadow: 0.15rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
+
+    background-color: var(--primary-050);
+    box-shadow: 0.15rem 0.15rem 0.15rem var(--primary-000);
 }
+
+@media (max-width: 1328px) {
+    .tabs-container.horizontal,
+    .tabs-card.horizontal {
+        grid-auto-rows: auto 1fr;
+        grid-auto-flow: row;
+    }
+
+    .tabs-container.horizontal .tabs-headers,
+    .tabs-card.horizontal .tabs-headers {
+        flex-direction: row;
+        width: 100%;
+        overflow-x: auto;
+    }
+}
+

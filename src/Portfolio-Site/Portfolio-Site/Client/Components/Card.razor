@@ -1,6 +1,6 @@
 ﻿@inject IJSRuntime JSRuntime
 
-<div @ref="card" class="card @(Size.EnumToClass()) @(Orientation.EnumToClass()) @Class" @attributes="@CustomAttributes">
+<div @ref="card" class="card @(Size.EnumToClass()) @(Orientation.EnumToClass()) @((ImagePosition.EnumToClass())) @Class" @attributes="@CustomAttributes">
     @if (CardImage != null)
     {
         <div @ref="cardImage" class="card-image">
@@ -36,6 +36,9 @@
 
     [Parameter]
     public Orientation Orientation { get; set; }
+
+    [Parameter]
+    public ImagePosition ImagePosition { get; set; } = ImagePosition.Left;
 
     [Parameter]
     public bool Animated { get; set; }

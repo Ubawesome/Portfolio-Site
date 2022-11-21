@@ -90,7 +90,8 @@
     --fs-p-2: clamp(0.7rem, 0.5vw + 0.75rem, 2rem);
     --fs-p-3: clamp(0.9rem, 5vw, 2rem);
 
-    --box-shadow-primary:  0.1rem 0.1rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
+
+    --box-shadow-primary:  0.1rem 0.1rem 0.15rem 0.15rem var(--primary-000);
 }
 
 @keyframes background-drift {
