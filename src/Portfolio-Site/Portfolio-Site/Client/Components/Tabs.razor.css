@@ -119,11 +119,11 @@
 
 .tabs-card-header {
     position: relative;
-    font-size: 1.25rem;
+    font-size: var(--fs-p-2);
     line-height: 1.5em;
     color: var(--grey-900);
-    padding-inline: clamp(2rem, 2vw, 6rem);
-    padding-block: clamp(1rem, 1vh, 2rem);
+    padding-inline: clamp(0.5rem, 2.5vw, 6rem);
+    padding-block: clamp(0.25rem, 1.5vh, 2rem);
 }
 
 .tabs-card-header::after {
