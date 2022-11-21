@@ -1,4 +1,4 @@
-﻿<div class="tile @(Expanded ? "expanded" : "")" @attributes="@AdditionalAttributes" @onmousemove="@OnMouseMove" style="--bg-glow-x: @mousePosX; --bg-glow-y: @mousePosY">
+﻿<div class="tile @(Expanded ? "expanded" : "")" @attributes="@AdditionalAttributes" @onmousemove="@OnMouseMove" style="--bg-glow-x: @mousePosX; --bg-glow-y: @mousePosY; @(BackgroundColor != null ? $"--tile-body-bg-color: {BackgroundColor}" : "" )">
     <img class="tile-button tile-open-button" src="/css/icons/fi-xwsrxl-arrow-corner-solid.svg" />
     <img class="tile-button tile-close-button" src="/css/icons/fi-xwslxl-arrow-corner-solid.svg" />
 
@@ -38,6 +38,9 @@
 
     [Parameter]
     public bool Expanded { get; set; }
+
+    [Parameter]
+    public string BackgroundColor { get; set; }
 
     string mousePosX;
     string mousePosY;
