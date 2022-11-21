@@ -107,27 +107,31 @@
 .tabs-header {
     position: relative;
     font-size: var(--fs-p-2);
+    line-height: 1.5em;
     color: var(--grey-900);
     text-decoration: none;
     text-align: center;
     cursor: pointer;
-    width: fit-content;
+
+    width: max-content;
 
     transition: background-color ease-out 0.15s, color ease-out 0.15s;
+}
+
+.tabs.horizontal .tabs-header {
+    width: 100%;
 }
 
 .tabs-container .tabs-header {
     padding-inline: clamp(1rem, 1vw, 2rem);
     padding-block: 0.5rem;
-
 }
 
 .tabs-card .tabs-header {
-    line-height: 1.5em;
-
     padding-inline: clamp(0.5rem, 2.5vw, 6rem);
     padding-block: clamp(0.25rem, 1.5vh, 2rem);
 }
+
 
 
 .tabs-header::after {
