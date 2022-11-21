@@ -1,5 +1,5 @@
 ﻿<CascadingValue Value="this">
-    <div class="@GetContainerClass() @Class" @attributes="@AdditionalAttributes">
+    <div class="@GetContainerClass() @(Orientation.EnumToClass()) @Class" @attributes="@AdditionalAttributes">
         <div class="tabs-headers @GetHeaderGroupClass()">
             @foreach (var tab in TabList)
             {
@@ -32,6 +32,9 @@
 
     [Parameter]
     public string Class { get; set; }
+
+    [Parameter]
+    public Orientation Orientation { get; set; } = Orientation.Vertical;
 
     [Parameter(CaptureUnmatchedValues = true)]
     public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }

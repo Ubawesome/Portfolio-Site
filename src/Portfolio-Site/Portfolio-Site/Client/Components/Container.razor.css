@@ -1,5 +1,5 @@
 ﻿.container, .container-full {
-    box-shadow: 0.1rem 0.1rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
+    box-shadow: 0.1rem 0.1rem 0.15rem 0.15rem var(--primary-000);
     background-color: var(--primary-100);
 }
 

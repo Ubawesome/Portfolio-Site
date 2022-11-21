@@ -15,8 +15,8 @@
 
 .card > * {
     height: fit-content;
-    background-color: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 2%));
-    box-shadow: 0.15rem 0.15rem 0.15rem hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 4%));
+    background-color: var(--primary-050);
+    box-shadow: 0.15rem 0.15rem 0.15rem var(--primary-000);
 }
 
 .card-image, .card-image ::deep img {
