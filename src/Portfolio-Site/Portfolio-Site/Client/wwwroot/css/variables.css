@@ -90,6 +90,8 @@
     --fs-p-2: clamp(0.8rem, 0.5vw + 0.75rem, 2rem);
     --fs-p-3: clamp(0.9rem, 5vw, 2rem);
 
+    --fs-form: clamp(0.7rem, 0.3vw + 0.6rem, 1.25rem);
+
 
     --box-shadow-primary:  0.1rem 0.1rem 0.15rem 0.15rem var(--primary-000);
 
@@ -98,6 +100,13 @@
     --input-bg-color: var(--grey-900);
     --input-border-color: var(--accent-1-500);
     --input-border-color-hover: var(--accent-1-700);
+
+    --input-valid-color: var(--success-500);
+    --input-valid-color-hover: var(--success-700);
+    --input-invalid-color: var(--danger-500);
+    --input-invalid-color-hover: var(--danger-700);
+
+
 }
 
 @keyframes background-drift {

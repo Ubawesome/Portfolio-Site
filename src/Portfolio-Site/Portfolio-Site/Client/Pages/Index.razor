@@ -3,6 +3,7 @@
 
 @using PortfolioSite.Client.Helpers
 @using Portfolio_Site.Components
+@using Portfolio_Site.Shared.Models
 
 @inject IJSRuntime JSRuntime
 
@@ -245,10 +246,35 @@
                     <p>
                     </p>
                     <div class="flex row wrap">
-                        <Checkbox Label="Test" />
-                        <TextInput Label="Username" />
+                        <EditForm Model="@formModel" OnValidSubmit="OnValidSudmit">
+                            <DataAnnotationsValidator />
+                            <ValidationSummary />
+
+                            <FormField For="@(() => formModel.Email)" Context="fieldId">
+                                <InputText id="@fieldId" @bind-Value="@formModel.Email" />
+                            </FormField>
+
+                            <FormField For="@(() => formModel.Password)" Context="fieldId">
+                                <InputText id="@fieldId" @bind-Value="@formModel.Password" typeof="password" />
+                            </FormField>
+
+                            <FormField For="@(() => formModel.DateOfBirth)" Context="fieldId">
+                                <InputDate id="@fieldId" @bind-Value="@formModel.DateOfBirth" TValue="DateOnly" />
+                            </FormField>
+
+                            <FormField For="@(() => formModel.PhoneNumber)" Context="fieldId">
+                                <InputText id="@fieldId" @bind-Value="@formModel.PhoneNumber" />
+                            </FormField>
+
+                            <FormField For="@(() => formModel.RememberMe)" Context="fieldId" Inline="true">
+                                <Checkbox id="fieldId" @bind-Value="@formModel.RememberMe" />
+                            </FormField>
+
+                            <button class="btn accent-1 small" type="submit">Submit</button>
+                            <button class="btn primary small" type="reset">Clear</button>
+                        </EditForm>
                     </div>
-                </CardBody>
+            </CardBody>
             </Card>
 
             <Card Size="Size.Full">
@@ -279,11 +305,18 @@
 </Section>
 
 @code {
+    User formModel = new();
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             await JSRuntime.UpdateScroll();
         }
+    }
+
+    private void OnValidSudmit()
+    {
+        Console.WriteLine("Valid form submitted!");
     }
 }
