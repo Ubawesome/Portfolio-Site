@@ -1,5 +1,6 @@
 ﻿
 .form-field {
+    position: relative;
     margin-block: 1rem;
 }
 

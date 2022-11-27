@@ -262,22 +262,35 @@ label {
 }
 
 input {
+    position: relative;
+
     border-radius: 0.25rem;
     background-color: var(--input-bg-color);
     border: 0.15rem solid var(--input-border-color);
 
-    padding-block: 0.5rem;
-    padding-inline: 0.5rem;
-    box-sizing: content-box;
+    padding-block: var(--input-padding);
+    padding-inline: var(--input-padding);
+    padding-right: calc(var(--input-size) + var(--input-padding));
 
     height: var(--input-size);
     width: 100%;
+    height: auto;
 
     font-family: var(--font-body);
     font-size: var(--fs-form);
 
     transition: border-color ease 150ms,
                 background-color ease 150ms;
+
+    /*mask-image: none;
+    mask-repeat: no-repeat;
+    mask-position: right calc(var(--input-padding) / 2) center;
+    mask-size: var(--input-size);*/
+
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position: right calc(var(--input-padding) / 2) center;
+    background-size: var(--input-size);
 }
 
 input:focus-visible {
@@ -290,6 +303,8 @@ input:hover {
 
 .validated input.valid {
     --input-border-color: var(--input-valid-color);
+
+    background-image: url("icons/fi-xwsuxl-check.svg");
 }
 
 .validated input.valid:hover {
@@ -298,13 +313,30 @@ input:hover {
 
 .validated input.invalid {
     --input-border-color: var(--input-invalid-color);
+
+    background-image: url("icons/fi-xnsuxl-times-solid.svg");
 }
 
 .validated input.invalid:hover {
     --input-border-color: var(--input-invalid-color-hover);
 }
 
+div.validation-message {
+    position: absolute;
+    top: 100%;
+    left: var(--input-padding);
+    width: fit-content;
 
+    padding: calc(var(--input-padding) / 2);
+    margin-top: calc(var(--input-padding) / 4);
+
+    background-color: var(--danger-500);
+    border-radius: 0.25rem;
+    color: var(--grey-900);
+    font-size: var(--fs-st-1);
+
+    z-index: 10;
+}
 
 /* Scrollable Classes */
 .scrollable {

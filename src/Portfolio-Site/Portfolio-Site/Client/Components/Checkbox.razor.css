@@ -31,6 +31,7 @@
 .checkbox > .checkmark {
     position: absolute;
     inset: 0;
+    padding: 0;
 
     width: var(--input-size);
     height: var(--input-size);
