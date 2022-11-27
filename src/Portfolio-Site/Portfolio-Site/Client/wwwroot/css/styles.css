@@ -266,8 +266,9 @@ input {
     background-color: var(--input-bg-color);
     border: 0.15rem solid var(--input-border-color);
 
-    padding-block: 1rem;
+    padding-block: 0.5rem;
     padding-inline: 0.5rem;
+    box-sizing: content-box;
 
     height: var(--input-size);
     width: 100%;
