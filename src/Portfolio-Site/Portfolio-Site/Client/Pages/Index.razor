@@ -2,6 +2,7 @@
 @page "/home"
 
 @using PortfolioSite.Client.Helpers
+@using Portfolio_Site.Client.Helpers
 @using Portfolio_Site.Components
 @using Portfolio_Site.Shared.Models
 
@@ -246,7 +247,7 @@
                     <p>
                     </p>
                     <div class="flex row wrap">
-                        <EditForm Model="@formModel" OnValidSubmit="OnValidSudmit">
+                        <EditForm EditContext="editContext" OnValidSubmit="OnValidSudmit" OnInvalidSubmit="OnInvalidSubmit" class="@((isValidated ? "validated" : ""))">
                             <DataAnnotationsValidator />
                             <ValidationSummary />
 
@@ -271,7 +272,7 @@
                             </FormField>
 
                             <button class="btn accent-1 small" type="submit">Submit</button>
-                            <button class="btn primary small" type="reset">Clear</button>
+                            <button class="btn primary small" type="reset" @onclick="OnClear">Clear</button>
                         </EditForm>
                     </div>
             </CardBody>
@@ -306,6 +307,14 @@
 
 @code {
     User formModel = new();
+    EditContext? editContext;
+    bool isValidated = false;
+
+    protected override void OnInitialized()
+    {
+        editContext = new(formModel);
+        editContext.SetFieldCssClassProvider(new FormClassProvider());
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -315,8 +324,25 @@
         }
     }
 
+    private void OnSubmit()
+    {
+
+    }
+
     private void OnValidSudmit()
     {
+        isValidated = true;
         Console.WriteLine("Valid form submitted!");
+    }
+
+    private void OnInvalidSubmit()
+    {
+        isValidated = true;
+        Console.WriteLine("Invalid form submitted!");
+    }
+
+    private void OnClear()
+    {
+        isValidated = false;
     }
 }
