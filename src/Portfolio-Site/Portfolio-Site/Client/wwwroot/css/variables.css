@@ -96,7 +96,7 @@
     --box-shadow-primary:  0.1rem 0.1rem 0.15rem 0.15rem var(--primary-000);
 
 
-    --input-size: clamp(0.75rem, 0.3vw + 1rem, 2rem);
+    --input-size: clamp(0.75em, 0.3vw + 1em, 2em);
     --input-bg-color: var(--grey-900);
     --input-border-color: var(--accent-1-500);
     --input-border-color-hover: var(--accent-1-700);

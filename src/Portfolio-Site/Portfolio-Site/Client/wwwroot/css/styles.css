@@ -288,19 +288,19 @@ input:hover {
     --input-border-color: var(--input-border-color-hover);
 }
 
-.validated input:valid {
+.validated input.valid {
     --input-border-color: var(--input-valid-color);
 }
 
-.validated input:valid:hover {
+.validated input.valid:hover {
     --input-border-color: var(--input-valid-color-hover);
 }
 
-.validated input:invalid {
+.validated input.invalid {
     --input-border-color: var(--input-invalid-color);
 }
 
-.validated input:invalid:hover {
+.validated input.invalid:hover {
     --input-border-color: var(--input-invalid-color-hover);
 }
 
