@@ -1,8 +1,9 @@
-﻿@page "/"
+@page "/"
 @page "/home"
 
 @using PortfolioSite.Client.Helpers
 @using Portfolio_Site.Components
+@using Portfolio_Site.Shared.Models
 
 @inject IJSRuntime JSRuntime
 
@@ -65,18 +66,18 @@
     </Splash>
 
     <Container Inline="true" Class="tile-grid">
-        <Tile style="--tile-body-bg-color: var(--accent-3-100);">
+        <Tile BackgroundColor="var(--accent-3-100);">
             <TileImage>
                 <img src="/css/img/dotnet-logo.png" />
             </TileImage>
             <TileHeader>
-                Project 1
+                This Website
             </TileHeader>
             <TileBody>
-                Cross-platform solutions for both front-end and back-end with MVC or Blazor.
+                This entire website was built from scratch using Blazor WASM, C#, HTML, CSS, and vanilla JavaScript.
             </TileBody>
         </Tile>
-        <Tile style="--tile-body-bg-color: var(--accent-3-100);">
+        <Tile BackgroundColor="var(--accent-3-100);">
             <TileImage>
                 <img src="/css/img/blueprints-curve.jpg" />
             </TileImage>
@@ -87,7 +88,7 @@
                 Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
             </TileBody>
         </Tile>
-        <Tile style="--tile-body-bg-color: var(--accent-3-100);">
+        <Tile BackgroundColor="var(--accent-3-100);">
             <TileImage>
                 <img src="/css/img/concrete-tree-shadow.jpg" />
             </TileImage>
@@ -98,7 +99,7 @@
                 Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
             </TileBody>
         </Tile>
-        <Tile style="--tile-body-bg-color: var(--accent-2-100);">
+        <Tile BackgroundColor="var(--accent-2-100);">
             <TileImage>
                 <img src="/css/img/Responsive_Website_Design.jpg" />
             </TileImage>
@@ -109,7 +110,7 @@
                 Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
             </TileBody>
         </Tile>
-        <Tile style="--tile-body-bg-color: var(--accent-1-100);">
+        <Tile BackgroundColor="var(--accent-1-100);">
             <TileImage>
                 <img src="/css/img/server-racks.jpg" />
             </TileImage>
@@ -142,91 +143,7 @@
     <SectionHeader Title="Solutions" ContainerClass="bg-accent-1-7" TextClass="text-accent-1-1" />
 
     <Container Inline="true">
-        <Tabs TabStyle="TabStyle.Card" Orientation="Orientation.Vertical">
-            <Tab Title="Front-End" Hoverable>
-                Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
-                <div class="flex row wrap">
-                    <img src="/css/icons/html-5.svg" class="icon" />
-                    <img src="/css/icons/css-3.svg" class="icon" />
-                    <img src="/css/icons/less.svg" class="icon" />
-                    <img src="/css/icons/sass.svg" class="icon" />
-                    <img src="/css/icons/bootstrap.svg" class="icon" />
-                    <img src="/css/icons/javascript.svg" class="icon" />
-                    <img src="/css/icons/jquery-icon.svg" class="icon" />
-                    <img src="/css/icons/express.svg" class="icon" />
-                    <img src="/css/icons/react.svg" class="icon" />
-                    <img src="/css/icons/xamarin.svg" class="icon" />
-                    <img src="/css/icons/android-icon.svg" class="icon" />
-                </div>
-            </Tab>
-            <Tab Title="Back-End" Hoverable>
-                Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
-                <div class="flex row wrap">
-                    <img src="/css/icons/c-sharp.svg" class="icon" />
-                    <img src="/css/icons/dotnet.svg" class="icon" />
-                    <img src="/css/icons/nodejs-icon.svg" class="icon" />
-                    <img src="/css/icons/azure.svg" class="icon" />
-                    <img src="/css/icons/swagger.svg" class="icon" />
-                    <img src="/css/icons/gatsby.svg" class="icon" />
-                    <img src="/css/icons/graphql.svg" class="icon" />
-                    <img src="/css/icons/mongodb.svg" class="icon" />
-                    <img src="/css/icons/mysql.svg" class="icon" />
-                    <img src="/css/icons/oracle.svg" class="icon" />
-                </div>
-            </Tab>
-            <Tab Title=".NET" Hoverable>
-                Cross-platform solutions for both front-end and back-end with MVC or Blazor.
-            </Tab>
-            <Tab Title="Web Design" Hoverable>
-                Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
-            </Tab>
-            <Tab Title="Database Design" Hoverable>
-                Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
-            </Tab>
-        </Tabs>
         <Tabs TabStyle="TabStyle.Card" Orientation="Orientation.Horizontal">
-            <Tab Title="Front-End" Hoverable>
-                Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
-                <div class="flex row wrap">
-                    <img src="/css/icons/html-5.svg" class="icon" />
-                    <img src="/css/icons/css-3.svg" class="icon" />
-                    <img src="/css/icons/less.svg" class="icon" />
-                    <img src="/css/icons/sass.svg" class="icon" />
-                    <img src="/css/icons/bootstrap.svg" class="icon" />
-                    <img src="/css/icons/javascript.svg" class="icon" />
-                    <img src="/css/icons/jquery-icon.svg" class="icon" />
-                    <img src="/css/icons/express.svg" class="icon" />
-                    <img src="/css/icons/react.svg" class="icon" />
-                    <img src="/css/icons/xamarin.svg" class="icon" />
-                    <img src="/css/icons/android-icon.svg" class="icon" />
-                </div>
-            </Tab>
-            <Tab Title="Back-End" Hoverable>
-                Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
-                <div class="flex row wrap">
-                    <img src="/css/icons/c-sharp.svg" class="icon" />
-                    <img src="/css/icons/dotnet.svg" class="icon" />
-                    <img src="/css/icons/nodejs-icon.svg" class="icon" />
-                    <img src="/css/icons/azure.svg" class="icon" />
-                    <img src="/css/icons/swagger.svg" class="icon" />
-                    <img src="/css/icons/gatsby.svg" class="icon" />
-                    <img src="/css/icons/graphql.svg" class="icon" />
-                    <img src="/css/icons/mongodb.svg" class="icon" />
-                    <img src="/css/icons/mysql.svg" class="icon" />
-                    <img src="/css/icons/oracle.svg" class="icon" />
-                </div>
-            </Tab>
-            <Tab Title=".NET" Hoverable>
-                Cross-platform solutions for both front-end and back-end with MVC or Blazor.
-            </Tab>
-            <Tab Title="Web Design" Hoverable>
-                Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
-            </Tab>
-            <Tab Title="Database Design" Hoverable>
-                Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
-            </Tab>
-        </Tabs>
-        <Tabs TabStyle="TabStyle.Container" Orientation="Orientation.Horizontal">
             <Tab Title="Front-End" Hoverable>
                 Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
                 <div class="flex row wrap">
@@ -329,8 +246,35 @@
                     <p>
                     </p>
                     <div class="flex row wrap">
+                        <EditForm Model="@formModel" OnValidSubmit="OnValidSudmit">
+                            <DataAnnotationsValidator />
+                            <ValidationSummary />
+
+                            <FormField For="@(() => formModel.Email)" Context="fieldId">
+                                <InputText id="@fieldId" @bind-Value="@formModel.Email" />
+                            </FormField>
+
+                            <FormField For="@(() => formModel.Password)" Context="fieldId">
+                                <InputText id="@fieldId" @bind-Value="@formModel.Password" type="password" />
+                            </FormField>
+
+                            <FormField For="@(() => formModel.DateOfBirth)" Context="fieldId">
+                                <InputDate id="@fieldId" @bind-Value="@formModel.DateOfBirth" TValue="DateOnly" />
+                            </FormField>
+
+                            <FormField For="@(() => formModel.PhoneNumber)" Context="fieldId">
+                                <InputText id="@fieldId" @bind-Value="@formModel.PhoneNumber" />
+                            </FormField>
+
+                            <FormField For="@(() => formModel.RememberMe)" Context="fieldId" Inline="true">
+                                <Checkbox id="fieldId" @bind-Value="@formModel.RememberMe" />
+                            </FormField>
+
+                            <button class="btn accent-1 small" type="submit">Submit</button>
+                            <button class="btn primary small" type="reset">Clear</button>
+                        </EditForm>
                     </div>
-                </CardBody>
+            </CardBody>
             </Card>
 
             <Card Size="Size.Full">
@@ -361,11 +305,18 @@
 </Section>
 
 @code {
+    User formModel = new();
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             await JSRuntime.UpdateScroll();
         }
+    }
+
+    private void OnValidSudmit()
+    {
+        Console.WriteLine("Valid form submitted!");
     }
 }

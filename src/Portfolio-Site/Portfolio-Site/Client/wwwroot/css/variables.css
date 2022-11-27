@@ -86,12 +86,27 @@
     --fs-h-4: clamp(1.5rem, 2vw + 1rem, 3.5rem);
     --fs-h-5: clamp(1rem, 1vw + 1rem, 2rem);
 
-    --fs-p-1: clamp(0.5rem, 0.5vw + 0.5rem, 1.5rem);
-    --fs-p-2: clamp(0.7rem, 0.5vw + 0.75rem, 2rem);
+    --fs-p-1: clamp(0.75rem, 0.3vw + 0.8rem, 1.5rem);
+    --fs-p-2: clamp(0.8rem, 0.5vw + 0.75rem, 2rem);
     --fs-p-3: clamp(0.9rem, 5vw, 2rem);
+
+    --fs-form: clamp(0.7rem, 0.3vw + 0.6rem, 1.25rem);
 
 
     --box-shadow-primary:  0.1rem 0.1rem 0.15rem 0.15rem var(--primary-000);
+
+
+    --input-size: clamp(0.75rem, 0.3vw + 1rem, 2rem);
+    --input-bg-color: var(--grey-900);
+    --input-border-color: var(--accent-1-500);
+    --input-border-color-hover: var(--accent-1-700);
+
+    --input-valid-color: var(--success-500);
+    --input-valid-color-hover: var(--success-700);
+    --input-invalid-color: var(--danger-500);
+    --input-invalid-color-hover: var(--danger-700);
+
+
 }
 
 @keyframes background-drift {

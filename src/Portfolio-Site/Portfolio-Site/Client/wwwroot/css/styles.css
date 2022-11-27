@@ -239,6 +239,72 @@ blockquote {
     --button-hover-bottom-border: var(--danger-100);
 }
 
+/* Form Base Styles */
+
+form {
+    width: 100%;
+}
+
+.form-field:hover,
+label:hover,
+input:hover {
+    --input-border-color: var(--input-border-color-hover);
+}
+
+label,
+input {
+    margin: 0;
+    padding: 0;
+}
+
+label {
+    font-size: var(--fs-p-1);
+}
+
+input {
+    border-radius: 0.25rem;
+    background-color: var(--input-bg-color);
+    border: 0.15rem solid var(--input-border-color);
+
+    padding-block: 0.5rem;
+    padding-inline: 0.5rem;
+    box-sizing: content-box;
+
+    height: var(--input-size);
+    width: 100%;
+
+    font-family: var(--font-body);
+    font-size: var(--fs-form);
+
+    transition: border-color ease 150ms,
+                background-color ease 150ms;
+}
+
+input:focus-visible {
+    outline: 0.25rem solid transparent;
+}
+
+input:hover {
+    --input-border-color: var(--input-border-color-hover);
+}
+
+.validated input:valid {
+    --input-border-color: var(--input-valid-color);
+}
+
+.validated input:valid:hover {
+    --input-border-color: var(--input-valid-color-hover);
+}
+
+.validated input:invalid {
+    --input-border-color: var(--input-invalid-color);
+}
+
+.validated input:invalid:hover {
+    --input-border-color: var(--input-invalid-color-hover);
+}
+
+
 
 /* Scrollable Classes */
 .scrollable {

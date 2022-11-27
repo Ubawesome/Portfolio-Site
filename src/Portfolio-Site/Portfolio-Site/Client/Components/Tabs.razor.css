@@ -61,6 +61,7 @@
 .tabs-headers {
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
 
     justify-content: flex-start;
     width: 100%;
@@ -68,7 +69,6 @@
 }
 
 .tabs-container .tabs-headers {
-    flex-wrap: wrap;
     gap: 1rem;
     margin-block: 0;
     margin-inline: 1rem;
@@ -87,7 +87,6 @@
 }
 
 .tabs-card .tabs-headers {
-    flex-wrap: nowrap;
     background-color: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 2%));
     box-shadow: 0.15rem 0.15rem 0.15rem var(--primary-000);
 }

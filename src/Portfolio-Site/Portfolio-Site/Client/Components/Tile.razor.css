@@ -69,7 +69,6 @@
 
 .tile:hover .tile-image {
     scale: 105%;
-    transition: scale ease-out 250ms;
 }
 
 
@@ -105,17 +104,22 @@
 .tile-header {
     display: grid;
     align-items: flex-end;
-    padding-inline: max(2rem, 4vw);
-    padding-block-end: max(2rem, 4vw);
+
+    padding-inline: max(2rem, 2vw);
+    padding-block-end: max(2rem, 3vw);
+
     font-size: var(--fs-h-3);
     font-weight: 500;
     color: var(--grey-900);
     text-align: right;
     background-image: linear-gradient(hsl(var(--primary) / 40%) 0%, var(--primary-000) 80%);
     mix-blend-mode: hard-light;
+
+    filter: brightness(1)
+
     -webkit-clip-path: polygon(100% -100%, -100% 100%, 100% 100%);
     clip-path: polygon(100% -100%, -100% 100%, 100% 100%);
-    transition: clip-path ease 600ms;
+    transition: clip-path ease 600ms, filter ease 500ms;
 }
 
 .tile.expanded > .tile-header {
@@ -123,6 +127,10 @@
     cursor: pointer;
     -webkit-clip-path: polygon(100% 80%, 80% 100%, 100% 100%);
     clip-path: polygon(100% 80%, 80% 100%, 100% 100%);
+}
+
+.tile.expanded > .tile-header:hover {
+    filter: brightness(2);
 }
 
 .tile.expanded:hover > .tile-header {
@@ -143,14 +151,20 @@
     background: var(--tile-body-bg-color);
     mix-blend-mode: hard-light;
 
+    filter: brightness(1)
+
     -webkit-clip-path: polygon(0 0, 0 20%, 20% 0);
     clip-path: polygon(0 0, 0 20%, 20% 0);
-    transition: clip-path ease 600ms;
+    transition: clip-path ease 600ms, filter ease 500ms;
 }
 
 .tile:not(.expanded) > .tile-body {
     z-index: 1;
     cursor: pointer;
+}
+
+.tile:not(.expanded) > .tile-body:hover {
+    filter: brightness(2);
 }
 
 .tile:not(.expanded):hover > .tile-body {
