@@ -21,6 +21,8 @@
     padding: 0;
 
     cursor: pointer;
+
+    background-image: none;
 }
 
 
@@ -31,6 +33,7 @@
 .checkbox > .checkmark {
     position: absolute;
     inset: 0;
+    padding: 0;
 
     width: var(--input-size);
     height: var(--input-size);
@@ -43,4 +46,3 @@
 .checkbox > input:checked ~ .checkmark {
     display: block;
 }
-

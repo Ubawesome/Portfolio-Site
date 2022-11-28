@@ -249,7 +249,6 @@
                     <div class="flex row wrap">
                         <EditForm EditContext="editContext" OnValidSubmit="OnValidSudmit" OnInvalidSubmit="OnInvalidSubmit" class="@((isValidated ? "validated" : ""))">
                             <DataAnnotationsValidator />
-                            <ValidationSummary />
 
                             <FormField For="@(() => formModel.Email)" Context="fieldId">
                                 <InputText id="@fieldId" @bind-Value="@formModel.Email" />
@@ -269,6 +268,14 @@
 
                             <FormField For="@(() => formModel.RememberMe)" Context="fieldId" Inline="true">
                                 <Checkbox id="fieldId" @bind-Value="@formModel.RememberMe" />
+                            </FormField>
+
+                            <FormField TItem="string" Context="fieldId">
+                                <InputSelect TValue="string" @bind-Value="@selectValue">
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                </InputSelect>
                             </FormField>
 
                             <button class="btn accent-1 small" type="submit">Submit</button>
@@ -310,6 +317,8 @@
     EditContext? editContext;
     bool isValidated = false;
 
+    string selectValue;
+
     protected override void OnInitialized()
     {
         editContext = new(formModel);
@@ -322,11 +331,6 @@
         {
             await JSRuntime.UpdateScroll();
         }
-    }
-
-    private void OnSubmit()
-    {
-
     }
 
     private void OnValidSudmit()
@@ -344,5 +348,8 @@
     private void OnClear()
     {
         isValidated = false;
+        editContext = new(formModel);
+        editContext.SetFieldCssClassProvider(new FormClassProvider());
+        StateHasChanged();
     }
 }
