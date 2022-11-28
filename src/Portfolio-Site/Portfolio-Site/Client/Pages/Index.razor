@@ -270,6 +270,14 @@
                                 <Checkbox id="fieldId" @bind-Value="@formModel.RememberMe" />
                             </FormField>
 
+                            <FormField TItem="string" Context="fieldId">
+                                <InputSelect TValue="string" @bind-Value="@selectValue">
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                </InputSelect>
+                            </FormField>
+
                             <button class="btn accent-1 small" type="submit">Submit</button>
                             <button class="btn primary small" type="reset" @onclick="OnClear">Clear</button>
                         </EditForm>
@@ -308,6 +316,8 @@
     User formModel = new();
     EditContext? editContext;
     bool isValidated = false;
+
+    string selectValue;
 
     protected override void OnInitialized()
     {

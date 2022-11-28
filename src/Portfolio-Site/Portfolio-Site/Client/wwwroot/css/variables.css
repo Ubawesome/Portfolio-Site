@@ -108,8 +108,6 @@
     --input-valid-color-hover: var(--success-700);
     --input-invalid-color: var(--danger-500);
     --input-invalid-color-hover: var(--danger-700);
-
-
 }
 
 @keyframes background-drift {

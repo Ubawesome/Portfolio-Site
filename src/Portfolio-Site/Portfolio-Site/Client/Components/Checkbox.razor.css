@@ -21,6 +21,8 @@
     padding: 0;
 
     cursor: pointer;
+
+    background-image: none;
 }
 
 
@@ -44,4 +46,3 @@
 .checkbox > input:checked ~ .checkmark {
     display: block;
 }
-

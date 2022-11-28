@@ -9,30 +9,30 @@ namespace Portfolio_Site.Shared.Models
 {
     public class User
     {
+        [Display(Name = "Email")]
         [EmailAddress]
         [Required(ErrorMessage = "Email is required.")]
         [DataType(DataType.EmailAddress)]
-        [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [Display(Name = "Password")]
         [Required(ErrorMessage = "Password is required.")]
         [DataType(DataType.Password)]
         [StringLength(Int16.MaxValue, MinimumLength = 6, ErrorMessage = "Password must be at least 6 characters long.")]
-        [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Display(Name = "Date of Birth")]
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "Date of Birth")]
         public DateOnly DateOfBirth { get; set; }
 
+        [Display(Name = "Phone Number")]
         [Phone]
         [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
-        [Required]
         [Display(Name = "Remember me")]
+        [Required]
         public bool RememberMe { get; set; }
 
     }

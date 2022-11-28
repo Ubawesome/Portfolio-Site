@@ -261,7 +261,7 @@ label {
     font-size: var(--fs-p-1);
 }
 
-input {
+input, select {
     position: relative;
 
     border-radius: 0.25rem;
@@ -270,7 +270,7 @@ input {
 
     padding-block: var(--input-padding);
     padding-inline: var(--input-padding);
-    padding-right: calc(var(--input-size) + var(--input-padding));
+    padding-left: var(--input-padding);
 
     height: var(--input-size);
     width: 100%;
@@ -279,45 +279,48 @@ input {
     font-family: var(--font-body);
     font-size: var(--fs-form);
 
-    transition: border-color ease 150ms,
-                background-color ease 150ms;
-
-    /*mask-image: none;
-    mask-repeat: no-repeat;
-    mask-position: right calc(var(--input-padding) / 2) center;
-    mask-size: var(--input-size);*/
-
     background-image: none;
     background-repeat: no-repeat;
-    background-position: right calc(var(--input-padding) / 2) center;
+    background-position: left calc(var(--input-size) * -1) center;
     background-size: var(--input-size);
+
+    transition: border-color ease 150ms,
+                background-color ease 150ms,
+                padding-left ease 500ms,
+                background-position ease 500ms;
 }
 
-input:focus-visible {
+input:focus-visible, select:focus-visible {
     outline: 0.25rem solid transparent;
 }
 
-input:hover {
+input:hover, select:hover {
     --input-border-color: var(--input-border-color-hover);
 }
 
-.validated input.valid {
+.validated input, .validated select {
+    padding-left: calc(var(--input-size) + var(--input-padding));
+
+    background-position: left calc(var(--input-padding) / 2) center;
+}
+
+.validated input.valid, .validated select.valid {
     --input-border-color: var(--input-valid-color);
 
     background-image: url("icons/fi-xwsuxl-check.svg");
 }
 
-.validated input.valid:hover {
+.validated input.valid:hover, .validated select.valid:hover {
     --input-border-color: var(--input-valid-color-hover);
 }
 
-.validated input.invalid {
+.validated input.invalid, .validated select.invalid {
     --input-border-color: var(--input-invalid-color);
 
     background-image: url("icons/fi-xnsuxl-times-solid.svg");
 }
 
-.validated input.invalid:hover {
+.validated input.invalid:hover, .validated select.invalid:hover {
     --input-border-color: var(--input-invalid-color-hover);
 }
 
@@ -336,6 +339,10 @@ div.validation-message {
     font-size: var(--fs-st-1);
 
     z-index: 10;
+}
+
+select {
+
 }
 
 /* Scrollable Classes */

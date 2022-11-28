@@ -10,7 +10,10 @@
     {
         @ChildContent(Id)
     }
-    <ValidationMessage For="@For" />
+    @if (For != null)
+    {
+        <ValidationMessage For="@For" />
+    }
 </div>
 
 
