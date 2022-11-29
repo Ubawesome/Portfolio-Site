@@ -16,7 +16,22 @@
     overflow: hidden;
 }
 
-.carousel > .controls {
+.carousel .carousel-progress,
+.carousel .controls {
+    opacity: 0;
+
+    transition: opacity ease-out 250ms 350ms,
+                background-color ease 250ms;
+}
+
+.carousel:hover .carousel-progress,
+.carousel:hover .controls {
+    opacity: 1;
+    transition: opacity ease-in 250ms 50ms,
+                background-color ease 250ms;
+}
+
+.controls {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -34,17 +49,54 @@
     transition: background-color ease 250ms;
 }
 
-.carousel > .controls:focus,
-.carousel > .controls:hover {
+.controls:focus,
+.controls:hover {
     background-color: hsl(0 0% 0% / 0.15);
 }
 
-.carousel > .controls.left {
+.controls.left {
     left: 0;
 }
 
-.carousel > .controls.right {
+.controls.right {
     right: 0;
+}
+
+.carousel-progress {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(50%);
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+
+    max-width: 35%;
+    height: 0.35em;
+}
+
+.carousel-progress span {
+    display: block;
+    height: 100%;
+    width: 2em;
+
+    background-color: var(--primary-900);
+    border-bottom: solid 0.25em var(--accent-1-100);
+
+    opacity: 0.25;
+    transition: opacity ease 250ms 250ms;
+}
+
+.carousel-progress span.previous, .carousel span.next {
+    opacity: 0.35;
+    transition: opacity ease 250ms 150ms;
+}
+
+.carousel-progress span.current {
+    opacity: 1;
+    box-shadow: 0em 0em 1em var(--primary-900);
+
+    transition: opacity ease 250ms;
 }
 
 .carousel-slide {

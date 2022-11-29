@@ -13,6 +13,15 @@
                 @ItemTemplate(item)
             </div>
         }
+        @if (ShowProgress)
+        {
+            <div class="carousel-progress">
+                @foreach (TItem item in Items)
+                {
+                    <span class="@GetSlideClass(item)"></span>
+                }
+            </div>
+        }
     </div>
     @if (FooterTemplate != null) {
         @FooterTemplate(Items.ElementAtOrDefault(CurrentSlide))
@@ -34,6 +43,9 @@
 
     [Parameter]
     public bool ShowControls { get; set; } = true;
+
+    [Parameter]
+    public bool ShowProgress { get; set; } = true;
 
     [Parameter]
     public int CurrentSlide { get; set; } = 0;
