@@ -305,6 +305,11 @@
                     <p>
                     </p>
                     <div class="flex row wrap">
+                        <Carousel Items="slides" ShowControls Wrap>
+                            <ItemTemplate>
+                                <img src="@context.ImageUrl" />
+                            </ItemTemplate>
+                        </Carousel>
                     </div>
                 </CardBody>
             </Card>
@@ -319,10 +324,14 @@
 
     string selectValue;
 
+    List<Slide> slides;
+
     protected override void OnInitialized()
     {
         editContext = new(formModel);
         editContext.SetFieldCssClassProvider(new FormClassProvider());
+
+        slides = Slide.GetSlides();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
