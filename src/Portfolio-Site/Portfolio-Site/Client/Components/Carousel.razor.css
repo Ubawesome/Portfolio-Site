@@ -1,0 +1,136 @@
+﻿
+.carousel-wrapper {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.carousel {
+    position: relative;
+    display: block;
+
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-bottom: 0.25em solid var(--primary-500);
+
+    overflow: hidden;
+}
+
+.carousel .carousel-progress,
+.carousel .controls {
+    opacity: 0;
+
+    transition: opacity ease-out 250ms 350ms,
+                background-color ease 250ms;
+}
+
+.carousel:hover .carousel-progress,
+.carousel:hover .controls {
+    opacity: 1;
+    transition: opacity ease-in 250ms 50ms,
+                background-color ease 250ms;
+}
+
+.controls {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+
+    width: 10%;
+    height: 100%;
+    border: none;
+
+    z-index: 10;
+
+    cursor: pointer;
+
+    background-color: hsl(0 0% 0% / 0);
+
+    transition: background-color ease 250ms;
+}
+
+.controls:focus,
+.controls:hover {
+    background-color: hsl(0 0% 0% / 0.15);
+}
+
+.controls.left {
+    left: 0;
+}
+
+.controls.right {
+    right: 0;
+}
+
+.carousel-progress {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(50%);
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+
+    max-width: 35%;
+    height: 0.35em;
+}
+
+.carousel-progress span {
+    display: block;
+    height: 100%;
+    width: 2em;
+
+    background-color: var(--accent-2-900);
+    border-bottom: solid 0.25em var(--accent-1-100);
+
+    opacity: 0.25;
+    transition: opacity ease 250ms 250ms;
+}
+
+.carousel-progress span.previous, .carousel span.next {
+    opacity: 0.35;
+    transition: opacity ease 250ms 150ms;
+}
+
+.carousel-progress span.current {
+    opacity: 1;
+    box-shadow: 0em 0em 1em var(--primary-900);
+
+    transition: opacity ease 250ms;
+}
+
+.carousel-slide {
+    position: absolute;
+    inset: 0;
+
+    transform: translateX(0%);
+    opacity: 0;
+}
+
+.carousel-slide ::deep > * {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+.carousel-slide.current {
+    opacity: 1;
+
+    transition: transform 0.5s ease-out 0.1s,
+                opacity 0.25s ease-out 0s;
+}
+
+.carousel-slide.previous,
+.carousel-slide.next {
+    transition: transform 0.5s ease-in-out 0.1s,
+                opacity 0.25s ease-out 0.1s;
+}
+
+.carousel-slide.previous {
+    transform: translateX(-100%);
+}
+
+.carousel-slide.next {
+    transform: translate(100%);
+}

@@ -13,9 +13,11 @@
 
   <ItemGroup>
     <None Remove="Components\Card.razor.css" />
+    <None Remove="Components\Carousel.razor.css" />
     <None Remove="Components\Checkbox.razor.css" />
     <None Remove="Components\Container.razor.css" />
     <None Remove="Components\FormField.razor.css" />
+    <None Remove="Components\Gallery.razor.css" />
     <None Remove="Components\SectionHeader.razor.css" />
     <None Remove="Components\Tabs.razor.css" />
     <None Remove="Components\Tile.razor.css" />
@@ -23,11 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Components\Carousel.razor.css" />
     <Content Include="Components\Checkbox.razor.css">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Include="Components\FormField.razor.css" />
+    <Content Include="Components\Gallery.razor.css" />
     <Content Include="Components\Tabs.razor.css">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
