@@ -24,7 +24,7 @@
         }
     </div>
     @if (FooterTemplate != null) {
-        @FooterTemplate(Items.ElementAtOrDefault(CurrentSlide))
+        @FooterTemplate(CurrentSlide)
     }
 </div>
 
@@ -48,12 +48,12 @@
     public bool ShowProgress { get; set; } = true;
 
     [Parameter]
-    public int CurrentSlide { get; set; } = 0;
+    public TItem CurrentSlide { get; set; }
 
     [Parameter]
-    public EventCallback<int> CurrentSlideChanged { get; set; }
+    public EventCallback<TItem> CurrentSlideChanged { get; set; }
 
-    private int _currentSlide;
+    private int currentSlideIndex => Items.IndexOf(CurrentSlide);
 
     public async Task SelectSlide(int slide)
     {
@@ -63,30 +63,54 @@
 
     public async Task PreviousSlide()
     {
-        await SetCurrentSlide(CurrentSlide - 1);
+        await SetCurrentSlide(currentSlideIndex - 1);
     }
 
     public async Task NextSlide()
     {
-        await SetCurrentSlide(CurrentSlide + 1);
+        await SetCurrentSlide(currentSlideIndex + 1);
     }
 
-    private async Task SetCurrentSlide(int slide)
+    private async Task SetCurrentSlide(TItem slide)
     {
-        _currentSlide = slide;
+        if (!Items.Contains(slide))
+            return;
+
+        int slideIndex = Items.IndexOf(slide);
 
         // If going outside of bounds, either wraps or clamps.
-        if (_currentSlide >= Items.Count())
+        if (slideIndex >= Items.Count())
         {
-            _currentSlide = (Wrap) ? 0 : Items.Count() - 1;
+
+            slide = (Wrap) ? Items.First() : CurrentSlide;
         }
 
-        if (_currentSlide < 0)
+        if (slideIndex < 0)
         {
-            _currentSlide = (Wrap) ? Items.Count() - 1 : 0;
+            slide = (Wrap) ? Items.Last() : CurrentSlide;
         }
 
-        CurrentSlide = _currentSlide;
+        CurrentSlide = slide;
+        await CurrentSlideChanged.InvokeAsync(CurrentSlide);
+    }
+
+    private async Task SetCurrentSlide(int slideIndex)
+    {
+        TItem newSlide = Items.ElementAtOrDefault(slideIndex);
+
+        // If going outside of bounds, either wraps or clamps.
+        if (slideIndex >= Items.Count())
+        {
+
+            newSlide = (Wrap) ? Items.First() : CurrentSlide;
+        }
+
+        if (slideIndex < 0)
+        {
+            newSlide = (Wrap) ? Items.Last() : CurrentSlide;
+        }
+
+        CurrentSlide = newSlide;
         await CurrentSlideChanged.InvokeAsync(CurrentSlide);
     }
 
@@ -105,7 +129,7 @@
         return "";
     }
 
-    private bool IsPrevious(TItem item) => Items.IndexOf(item) == CurrentSlide - 1;
-    private bool IsCurrent(TItem item) => Items.IndexOf(item) == CurrentSlide;
-    private bool IsNext(TItem item) => Items.IndexOf(item) == CurrentSlide + 1;
+    private bool IsPrevious(TItem item) => Items.IndexOf(item) == currentSlideIndex - 1;
+    private bool IsCurrent(TItem item) => Items.IndexOf(item) == currentSlideIndex;
+    private bool IsNext(TItem item) => Items.IndexOf(item) == currentSlideIndex + 1;
 }

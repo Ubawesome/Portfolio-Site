@@ -11,7 +11,7 @@
 
     width: 100%;
     aspect-ratio: 16 / 9;
-    /*height: clamp(15rem, 20vw, 35rem);*/
+    border-bottom: 0.25em solid var(--primary-500);
 
     overflow: hidden;
 }
@@ -80,7 +80,7 @@
     height: 100%;
     width: 2em;
 
-    background-color: var(--primary-900);
+    background-color: var(--accent-2-900);
     border-bottom: solid 0.25em var(--accent-1-100);
 
     opacity: 0.25;

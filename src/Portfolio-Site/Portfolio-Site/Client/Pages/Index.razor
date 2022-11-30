@@ -299,17 +299,23 @@
 
             <Card Size="Size.Full">
                 <CardTitle>
-                    Carousel
+                    Carousel + Gallery
                 </CardTitle>
                 <CardBody>
                     <p>
+                        A lovely carousel component along with an image gallery. Each reacts to the other's state, with selection and drag-and-drop reordering included in the gallery!
                     </p>
                     <div class="flex row wrap">
-                        <Carousel Items="slides" ShowControls Wrap>
+                        <Carousel Items="slides" @bind-CurrentSlide="selectedSlide" ShowControls Wrap>
                             <ItemTemplate>
                                 <img src="@context.ImageUrl" />
                             </ItemTemplate>
                         </Carousel>
+                        <Gallery Items="slides" @bind-SelectedItem="selectedSlide">
+                            <ItemTemplate>
+                                <img src="@context.ImageUrl" draggable="false" />
+                            </ItemTemplate>
+                        </Gallery>
                     </div>
                 </CardBody>
             </Card>
@@ -325,6 +331,7 @@
     string selectValue;
 
     List<Slide> slides;
+    Slide selectedSlide;
 
     protected override void OnInitialized()
     {
@@ -332,6 +339,7 @@
         editContext.SetFieldCssClassProvider(new FormClassProvider());
 
         slides = Slide.GetSlides();
+        selectedSlide = slides.FirstOrDefault();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

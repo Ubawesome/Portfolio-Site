@@ -18,7 +18,11 @@ namespace Portfolio_Site.Shared.Models
                 new() { ImageUrl = "https://loremflickr.com/1000/1000" },
                 new() { ImageUrl = "https://loremflickr.com/800/1200" },
                 new() { ImageUrl = "https://loremflickr.com/720/1280" },
+                new() { ImageUrl = "https://loremflickr.com/1600/900" },
+                new() { ImageUrl = "https://loremflickr.com/1680/1080" },
                 new() { ImageUrl = "https://loremflickr.com/1920/1080" },
+                new() { ImageUrl = "https://loremflickr.com/1090/1800" },
+                new() { ImageUrl = "https://loremflickr.com/1290/1200" },
 
             };
         }

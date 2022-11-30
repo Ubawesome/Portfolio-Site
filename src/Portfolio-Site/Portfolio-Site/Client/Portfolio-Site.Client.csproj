@@ -17,6 +17,7 @@
     <None Remove="Components\Checkbox.razor.css" />
     <None Remove="Components\Container.razor.css" />
     <None Remove="Components\FormField.razor.css" />
+    <None Remove="Components\Gallery.razor.css" />
     <None Remove="Components\SectionHeader.razor.css" />
     <None Remove="Components\Tabs.razor.css" />
     <None Remove="Components\Tile.razor.css" />
@@ -30,6 +31,7 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Include="Components\FormField.razor.css" />
+    <Content Include="Components\Gallery.razor.css" />
     <Content Include="Components\Tabs.razor.css">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

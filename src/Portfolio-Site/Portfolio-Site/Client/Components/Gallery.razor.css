@@ -1,0 +1,48 @@
+﻿.gallery {
+    --gallery-item-size: clamp(5em, 18vw, 25em);
+
+    position: relative;
+    width: 100%;
+    height: auto;
+
+    display: grid;
+    grid-auto-flow: dense;
+    place-items: center;
+    grid-template-columns: repeat(auto-fit, var(--gallery-item-size));
+
+    justify-content: center;
+
+    gap: var(--gap, 1em);
+}
+
+.gallery-item {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+
+    background-color: hsl(0 0% 0% / 0.1);
+    border: 0.15em dashed transparent;
+    border-bottom: 0.15em solid var(--accent-1-500);
+
+    cursor: pointer;
+
+    transition: border ease 150ms;
+}
+
+.gallery-item ::deep * {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.selected-item {
+    border-bottom: 0.15em solid var(--accent-2-900);
+}
+
+.gallery.dragging .gallery-item:not(.hovered-item) {
+    border: 0.15em dashed var(--accent-1-500);
+}
+
+.hovered-item {
+    border: 0.15em dashed var(--accent-2-500);
+}
+
