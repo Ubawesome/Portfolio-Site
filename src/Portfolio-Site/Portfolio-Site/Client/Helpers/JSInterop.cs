@@ -2,7 +2,7 @@
 using Microsoft.JSInterop;
 using System.Threading.Tasks;
 
-namespace PortfolioSite.Client.Helpers
+namespace Portfolio_Site.Client.Helpers
 {
     public static class JSInterop
     {
