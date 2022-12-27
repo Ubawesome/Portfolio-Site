@@ -1,21 +1,24 @@
 ﻿
-@if (Parent.ActiveTab == this)
+@if (Parent != null && Parent.ActiveTab == this)
 {
-    @ChildContent
+    if (ChildContent != null)
+    {
+        @ChildContent
+    }
 }
 
 @code {
     [CascadingParameter]
-    private Tabs Parent { get; set; }
+    private Tabs? Parent { get; set; }
 
     [Parameter]
-    public string Title { get; set; }
+    public string? Title { get; set; }
 
     [Parameter]
     public RenderFragment? HeaderTemplate { get; set; }
 
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    public RenderFragment? ChildContent { get; set; }
 
     [Parameter]
     public bool Clickable { get; set; } = true;

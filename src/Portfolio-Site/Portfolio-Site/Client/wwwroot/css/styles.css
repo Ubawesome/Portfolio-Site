@@ -127,7 +127,7 @@ blockquote {
 
     cursor: pointer;
     transition: background-color ease-out 0.15s,
-                border-color: ease-out 0.15s,
+                border-color ease-out 0.15s,
                 color ease-out 0.15s;
 }
 
