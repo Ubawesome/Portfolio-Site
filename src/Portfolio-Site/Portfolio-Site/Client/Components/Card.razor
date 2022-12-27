@@ -1,6 +1,6 @@
 ﻿@inject IJSRuntime JSRuntime
 
-<div @ref="card" class="card @(Size.EnumToClass()) @(Orientation.EnumToClass()) @((ImagePosition.EnumToClass())) @Class" @attributes="@CustomAttributes">
+<div @ref="card" class="card @(Size.EnumToClass()) @(Orientation.EnumToClass()) @((ImagePosition.EnumToClass())) @Class" @attributes="@AdditionalAttributes">
     @if (CardImage != null)
     {
         <div @ref="cardImage" class="card-image">
@@ -59,7 +59,7 @@
     public bool Collapseable { get; set; }
 
     [Parameter(CaptureUnmatchedValues = true)]
-    public IReadOnlyDictionary<string, object> CustomAttributes { get; set; }
+    public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
     [Parameter]
     public string Class { get; set; }

@@ -6,6 +6,16 @@ using System.Threading.Tasks;
 
 namespace Portfolio_Site.Shared.Helpers
 {
+    public enum Color
+    {
+        Primary,
+        Accent1,
+        Accent2,
+        Accent3,
+        Success,
+        Danger
+    }
+
     public enum Size
     {
         None,
@@ -26,6 +36,12 @@ namespace Portfolio_Site.Shared.Helpers
     {
         Left,
         Right
+    }
+
+    public enum ButtonStyle
+    {
+        Filled,
+        Outline
     }
     
     public enum TabStyle
@@ -64,6 +80,29 @@ namespace Portfolio_Site.Shared.Helpers
             {
                 case ImagePosition.Left: return "image-left";
                 case ImagePosition.Right: return "image-right";
+                default: return "";
+            }
+        }
+
+        public static string EnumToClass(this Color color)
+        {
+            switch (color)
+            {
+                case Color.Primary: return "primary";
+                case Color.Accent1: return "accent-1";
+                case Color.Accent2: return "accent-2";
+                case Color.Accent3: return "accent-3";
+                case Color.Success: return "success";
+                case Color.Danger: return "danger";
+                default: return "";
+            }
+        }
+        public static string EnumToClass(this ButtonStyle buttonStyle)
+        {
+            switch (buttonStyle)
+            {
+                case ButtonStyle.Filled: return "filled";
+                case ButtonStyle.Outline: return "outline";
                 default: return "";
             }
         }
