@@ -3,29 +3,39 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio-Site</title>
     <base href="/" />
-    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Karla">
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto">
-    <link href="css/animations.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Karla">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto">-->
     <link href="css/variables.css" rel="stylesheet" />
     <link href="css/reset.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <link href="Portfolio-Site.Client.styles.css" rel="stylesheet" />
+
+    <link rel="preload" href="css/animations.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="css/animations.css" rel="stylesheet"></noscript>
+
     <script defer src="https://friconix.com/cdn/friconix.js"></script>
     <script defer src="/js/friconix.js"></script>
 </head>
 
 <body>
-    <div id="app">Loading...</div>
+    <div id="app">
+        <div class="spinner">
+            <div class="spinner-arm"></div>
+            <div class="spinner-arm"></div>
+            <div class="spinner-arm"></div>
+            <div class="spinner-arm"></div>
+            <div class="spinner-arm"></div>
+            <h1>Loading Page..</h1>
+        </div>
+    </div>
 
     <script src="_framework/blazor.webassembly.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/Flip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
-    <script src="js/scroll.js"></script>
     <script src="js/scrollTriggers.js"></script>
     <script src="js/interop.js"></script>
 </body>

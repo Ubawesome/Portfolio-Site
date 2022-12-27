@@ -22,7 +22,7 @@
     public RenderFragment<string>? ChildContent { get; set; }
 
     [Parameter]
-    public string Id { get; set; } = new Guid().ToString();
+    public string Id { get; set; } = Guid.NewGuid().ToString();
 
     [Parameter]
     public string? Label { get; set; }

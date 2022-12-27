@@ -1,13 +1,105 @@
-﻿div {
-    position: fixed;
-    inset: 0;
+﻿#app > .spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -75%;
+}
+
+.spinner {
+    --spinner-height: 20rem;
+    --spinner-width: 1rem;
+    --spinner-animation-duration: 5000ms;
+
+    position: relative;
+
+    width: calc(var(--spinner-height) * 2);
+    aspect-ratio: 1 / 1;
+
+    background: none;
+}
+
+.spinner::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+    width: calc(var(--spinner-width) * 2);
+    aspect-ratio: 1 / 1;
 
     background: var(--primary-100);
 }
 
-div > h1 {
+.spinner > h1 {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+
     color: var(--accent-1-900);
-    width: fit-content;
-    margin-inline: auto;
-    margin-block: max(4rem, 10vw);
+    width: max-content;
+}
+
+.spinner > .spinner-arm {
+    position: absolute;
+
+    left: 50%;
+
+    height: var(--spinner-height);
+    width: var(--spinner-width);
+
+    border-radius: 2rem;
+
+    translate: -50% 0%;
+
+    animation: spinner var(--spinner-animation-duration) ease infinite;
+
+    transform-origin: 50% 100%;
+}
+
+.spinner > .spinner-arm:nth-child(1) {
+
+    background-color: var(--accent-1-700);
+
+    animation-delay: calc(var(--spinner-animation-duration) / 7 * 0);
+}
+
+.spinner > .spinner-arm:nth-child(2) {
+    background-color: var(--accent-2-700);
+    animation-delay: calc(var(--spinner-animation-duration) / 7 * 1);
+}
+
+.spinner > .spinner-arm:nth-child(3) {
+    background-color: var(--accent-3-700);
+
+    animation-delay: calc(var(--spinner-animation-duration) / 7 * 2);
+}
+
+.spinner > .spinner-arm:nth-child(4) {
+    background-color: var(--success-700);
+
+    animation-delay: calc(var(--spinner-animation-duration) / 7 * 3);
+}
+
+.spinner > .spinner-arm:nth-child(5) {
+    background-color: var(--danger-700);
+
+    animation-delay: calc(var(--spinner-animation-duration) / 7 * 4);
+}
+
+
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg) scale(0, 0.5);
+    }
+    50% {
+        transform: rotate(180deg) scale(1);
+    }
+    100% {
+        transform: rotate(360deg) scale(0, 0.5);
+    }
 }
