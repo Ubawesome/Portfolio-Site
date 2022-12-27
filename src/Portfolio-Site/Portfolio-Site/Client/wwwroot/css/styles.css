@@ -338,7 +338,11 @@ div.validation-message {
     font-size: var(--fs-st-1);
 
     z-index: 10;
+
+    animation: fade-in 250ms ease normal,
+               slide-in-down 250ms ease normal;
 }
+
 
 select {
 

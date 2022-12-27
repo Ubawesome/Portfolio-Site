@@ -217,14 +217,6 @@
         selectedSlide = slides.FirstOrDefault();
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            //await JSRuntime.UpdateScroll();
-        }
-    }
-
     private void OnValidSudmit()
     {
         isValidated = true;
