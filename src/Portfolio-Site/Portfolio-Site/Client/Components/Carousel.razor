@@ -10,7 +10,10 @@
         @foreach (TItem item in Items)
         {
             <div class="carousel-slide @GetSlideClass(item)">
-                @ItemTemplate(item)
+                @if (ItemTemplate != null)
+                {
+                    @ItemTemplate(item)
+                }
             </div>
         }
         @if (ShowProgress)
@@ -30,10 +33,10 @@
 
 @code {
     [Parameter]
-    public RenderFragment<TItem> ItemTemplate { get; set; } = null;
+    public RenderFragment<TItem>? ItemTemplate { get; set; }
 
     [Parameter]
-    public RenderFragment<TItem>? FooterTemplate { get; set; } = null;
+    public RenderFragment<TItem>? FooterTemplate { get; set; }
 
     [Parameter]
     public List<TItem> Items { get; set; } = new List<TItem>();
@@ -48,7 +51,7 @@
     public bool ShowProgress { get; set; } = true;
 
     [Parameter]
-    public TItem CurrentSlide { get; set; }
+    public TItem CurrentSlide { get; set; } = default(TItem);
 
     [Parameter]
     public EventCallback<TItem> CurrentSlideChanged { get; set; }

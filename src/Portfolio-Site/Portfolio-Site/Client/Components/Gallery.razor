@@ -10,7 +10,10 @@
                     @ondragend="@((args) => OnDragEnd(args, item))"
                     @ondragenter="@((args) => OnDragEnter(args, item))"
                     @ondragleave="@((args) => OnDragLeave(args, item))">
-            @ItemTemplate(item)
+            @if (ItemTemplate != null)
+            {
+                @ItemTemplate(item)
+            }
         </div>
     }
 
@@ -18,7 +21,7 @@
 
 @code {
     [Parameter]
-    public RenderFragment<TItem> ItemTemplate { get; set; } = null;
+    public RenderFragment<TItem>? ItemTemplate { get; set; } = null;
 
     [Parameter]
     public List<TItem> Items { get; set; } = new List<TItem>();
