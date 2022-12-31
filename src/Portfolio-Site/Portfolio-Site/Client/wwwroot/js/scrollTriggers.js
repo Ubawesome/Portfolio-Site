@@ -92,7 +92,6 @@ function setUpScrollableTriggers() {
 
         let children = scrollable.childNodes;
         children.forEach((child) => {
-
             gsap.to(child, {
                 scrollTrigger: {
                     trigger: scrollable,

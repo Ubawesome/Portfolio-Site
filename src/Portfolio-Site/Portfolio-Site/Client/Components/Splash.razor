@@ -1,9 +1,9 @@
 ﻿@namespace Portfolio_Site.Components
 
-<div class="scrollable" data-scroll-speed="@ScrollSpeed" @attributes="@AdditionalAttributes">
+<div class="scrollable" data-scroll-speed="@ScrollSpeed" data-scroll-offset="@ScrollOffset" @attributes="@AdditionalAttributes">
     @if (Background != null)
     {
-        <div class="scrollable-background" data-scroll-speed="@BackgroundScrollSpeed">
+        <div class="scrollable-background" data-scroll-speed="@BackgroundScrollSpeed" data-scroll-offset="@BackgroundScrollOffset">
             @Background
         </div>
     }
@@ -14,7 +14,7 @@
     }
 
     @if (Title != null) {
-        <div class="scrollable-title" data-scroll-speed="@TitleScrollSpeed">@Title</div>
+        <div class="scrollable-title" data-scroll-speed="@TitleScrollSpeed" data-scroll-offset="@TitleScrollOffset">@Title</div>
 
     }
 </div>
@@ -34,8 +34,17 @@
     public double ScrollSpeed { get; set; } = 1;
 
     [Parameter]
+    public double ScrollOffset { get; set; } = 0;
+
+    [Parameter]
     public double BackgroundScrollSpeed { get; set; } = 1;
 
     [Parameter]
+    public double BackgroundScrollOffset { get; set; } = 0;
+
+    [Parameter]
     public double TitleScrollSpeed { get; set; } = 1;
+
+    [Parameter]
+    public double TitleScrollOffset { get; set; } = 0;
 }
