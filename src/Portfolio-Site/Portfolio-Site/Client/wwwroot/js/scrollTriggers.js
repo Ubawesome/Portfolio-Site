@@ -92,7 +92,22 @@ function setUpScrollableTriggers() {
 
         let children = scrollable.childNodes;
         children.forEach((child) => {
-            gsap.to(child, {
+            let scrollSpeed = 1;
+            if (child.hasAttribute('data-scroll-speed')) {
+                scrollSpeed = child.getAttribute('data-scroll-speed');
+            }
+            let scrollOffset = 0;
+            if (child.hasAttribute('data-scroll-offset')) {
+                scrollOffset = child.getAttribute('data-scroll-offset');
+            }
+
+            gsap.set(child, {
+                translateY: (index, target, targets) => String(height * scrollOffset) + 'px',
+            })
+
+            gsap.fromTo(child, {
+                translateY: (index, target, targets) => String(height * scrollOffset) + 'px',
+            }, {
                 scrollTrigger: {
                     trigger: scrollable,
                     start: 'top top',
@@ -100,16 +115,31 @@ function setUpScrollableTriggers() {
                     scrub: true,
                     invalidateOnRefresh: true
                 },
-                translateY: (index, target, targets) => {
-                    let scrollSpeed = 1;
-                    if (target.hasAttribute('data-scroll-speed')) {
-                        scrollSpeed = target.getAttribute('data-scroll-speed');
-                    }
-
-                    return String(height * scrollSpeed) + 'px';
-                },
+                translateY: (index, target, targets) => String((height * scrollOffset) + (height * scrollSpeed)) + 'px',
                 ease: 'linear'
-            });
+            }
+            );
+
+
+
+        //    gsap.to(child, {
+        //        scrollTrigger: {
+        //            trigger: scrollable,
+        //            start: 'top top',
+        //            end: 'bottom top',
+        //            scrub: true,
+        //            invalidateOnRefresh: true
+        //        },
+        //        translateY: (index, target, targets) => {
+        //            let scrollSpeed = 1;
+        //            if (target.hasAttribute('data-scroll-speed')) {
+        //                scrollSpeed = target.getAttribute('data-scroll-speed');
+        //            }
+
+        //            return String(height * scrollSpeed) + 'px';
+        //        },
+        //        ease: 'linear'
+        //    });
         });
     });
 }
