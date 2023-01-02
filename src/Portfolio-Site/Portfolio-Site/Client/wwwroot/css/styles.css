@@ -357,11 +357,6 @@ select {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    perspective: 10px;
-    transform-style: preserve-3d;
-/*    box-shadow: 0 0 5rem var(--grey-100);
-*/
-
 }
 
 .scrollable-background, .scrollable-foreground {
@@ -369,14 +364,12 @@ select {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    object-position: center;
+
     z-index: -1;
     inset: 0;
 
     pointer-events: none;
-}
-
-.scrollable-background {
-    transform: translateZ(-10px) scale(2);
 }
 
 .scrollable-background > *,
@@ -417,14 +410,21 @@ select {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    background-image: linear-gradient(to top, hsl(0 0% 0% / 0.5) 50%, hsl(0 0% 0% / 0) 100%),
-                      url("img/nature-waterfall.jpg");
+    background-image: linear-gradient(to top, hsl(0 0% 0% / 0.5) 50%, hsl(0 0% 0% / 0) 100%);
     background-color: var(--primary-000);
 
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat, no-repeat;
 
+    z-index: -1;
+}
+
+.splash-block::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to top, hsl(0 0% 0% / 0.5) 25%, hsl(0 0% 0% / 0) 100%);
     z-index: -1;
 }
 
@@ -437,7 +437,7 @@ select {
 
     font-size: clamp(2rem, 10vmin, 8rem);
     font-weight: 500;
-    letter-spacing: clamp(0.25rem, 1vw, 1rem);
+    letter-spacing: clamp(0.25rem, 0.75vw, 1rem);
 
     color: var(--primary-900);
     text-shadow: none;
