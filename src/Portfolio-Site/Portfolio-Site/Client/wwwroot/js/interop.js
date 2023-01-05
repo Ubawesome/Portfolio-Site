@@ -20,6 +20,27 @@ function removeElementClass(element, className) {
     }
 }
 
+function restartAnimation(element, className) {
+    if (element instanceof HTMLElement && (typeof className === 'string' || className instanceof String)) {
+        element.classList.remove(className);
+        element.offsetHeight;
+        element.classList.add(className);
+    }
+}
+
+function executeAnimationOnce(element, className) {
+    if (element instanceof HTMLElement && (typeof className === 'string' || className instanceof String)) {
+
+        const callback = () => {
+            element.removeEventListener("animationend", callback, false);
+            element.classList.remove(className);
+        };
+
+        element.addEventListener("animationend", callback, false);
+        element.classList.add(className);
+    }
+}
+
 function setFocus(element) {
     if (element instanceof HTMLElement) {
         element.focus();

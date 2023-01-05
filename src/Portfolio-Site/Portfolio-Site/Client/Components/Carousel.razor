@@ -1,5 +1,7 @@
 ﻿@typeparam TItem
 
+@inject IJSRuntime JSRuntime
+
 <div class="carousel-wrapper">
     <div class="carousel">
         @if (ShowControls)
@@ -7,7 +9,24 @@
             <img src="/css/icons/fi-xnslxl-chevron-solid.svg" class="controls left" @onclick="PreviousSlide" />
             <img src="/css/icons/fi-xnsrxl-chevron-solid.svg" class="controls right" @onclick="NextSlide" />
         }
-        @foreach (TItem item in Items)
+
+        <div @ref="previousSlideElement" class="carousel-slide previous">
+            @if (ItemTemplate != null && previousSlide != null)
+            {
+                @ItemTemplate(previousSlide)
+            }
+        </div>
+
+        <div @ref="currentSlideElement" class="carousel-slide current">
+            @if (ItemTemplate != null)
+            {
+                @ItemTemplate(CurrentSlide)
+            }
+        </div>
+
+
+
+@*        @foreach (TItem item in Items)
         {
             <div class="carousel-slide @GetSlideClass(item)">
                 @if (ItemTemplate != null)
@@ -16,6 +35,7 @@
                 }
             </div>
         }
+*@
         @if (ShowProgress)
         {
             <div class="carousel-progress">
@@ -58,6 +78,11 @@
 
     private int currentSlideIndex => Items.IndexOf(CurrentSlide);
 
+    private TItem? previousSlide;
+
+    private ElementReference previousSlideElement;
+    private ElementReference currentSlideElement;
+
     public async Task SelectSlide(int slide)
     {
         await SetCurrentSlide(slide);
@@ -66,55 +91,84 @@
 
     public async Task PreviousSlide()
     {
-        await SetCurrentSlide(currentSlideIndex - 1);
+        await SetCurrentSlide(GetPreviousIndex());
     }
 
     public async Task NextSlide()
     {
-        await SetCurrentSlide(currentSlideIndex + 1);
-    }
-
-    private async Task SetCurrentSlide(TItem slide)
-    {
-        if (!Items.Contains(slide))
-            return;
-
-        int slideIndex = Items.IndexOf(slide);
-
-        // If going outside of bounds, either wraps or clamps.
-        if (slideIndex >= Items.Count())
-        {
-
-            slide = (Wrap) ? Items.First() : CurrentSlide;
-        }
-
-        if (slideIndex < 0)
-        {
-            slide = (Wrap) ? Items.Last() : CurrentSlide;
-        }
-
-        CurrentSlide = slide;
-        await CurrentSlideChanged.InvokeAsync(CurrentSlide);
+        await SetCurrentSlide(GetNextIndex());
     }
 
     private async Task SetCurrentSlide(int slideIndex)
     {
-        TItem newSlide = Items.ElementAtOrDefault(slideIndex);
+        TItem? newSlide = Items.ElementAtOrDefault(slideIndex);
 
-        // If going outside of bounds, either wraps or clamps.
-        if (slideIndex >= Items.Count())
+        if (newSlide == null)
         {
+            // If going outside of bounds, either wraps or clamps.
+            if (slideIndex >= Items.Count)
+            {
 
-            newSlide = (Wrap) ? Items.First() : CurrentSlide;
+                newSlide = (Wrap) ? Items.First() : CurrentSlide;
+            }
+
+            if (slideIndex < 0)
+            {
+                newSlide = (Wrap) ? Items.Last() : CurrentSlide;
+            }
         }
 
-        if (slideIndex < 0)
-        {
-            newSlide = (Wrap) ? Items.Last() : CurrentSlide;
-        }
+        await SetCurrentSlide(newSlide);
+    }
 
-        CurrentSlide = newSlide;
+    private async Task SetCurrentSlide(TItem slide)
+    {
+        if (!Items.Contains(slide) || IsCurrent(slide))
+            return;
+
+        // Set current slide to slide out, left or right depending on if the new slide is before or after.
+
+        previousSlide = CurrentSlide;
+        CurrentSlide = slide;
+
+        await JSRuntime.ExecuteAnimationOnce(previousSlideElement, GetOutAnim());
+        await JSRuntime.ExecuteAnimationOnce(currentSlideElement, GetInAnim());
+
         await CurrentSlideChanged.InvokeAsync(CurrentSlide);
+
+        StateHasChanged();
+    }
+
+    private string GetInAnim()
+    {
+        int previousSlideIndex = Items.IndexOf(previousSlide);
+
+        if (previousSlideIndex < currentSlideIndex)
+        {
+            return "slide-in-right";
+        }
+        if (previousSlideIndex > currentSlideIndex)
+        {
+            return "slide-in-left";
+        }
+
+        return "";
+    }
+
+    private string GetOutAnim()
+    {
+        int previousSlideIndex = Items.IndexOf(previousSlide);
+
+        if (previousSlideIndex < currentSlideIndex)
+        {
+            return "slide-out-left";
+        }
+        if (previousSlideIndex > currentSlideIndex)
+        {
+            return "slide-out-right";
+        }
+
+        return "";
     }
 
     private string GetSlideClass(TItem item)
@@ -132,7 +186,31 @@
         return "";
     }
 
-    private bool IsPrevious(TItem item) => Items.IndexOf(item) == currentSlideIndex - 1;
+    private int GetPreviousIndex()
+    {
+        int prevIndex = currentSlideIndex - 1;
+
+        if (prevIndex < 0)
+            prevIndex = Items.Count - 1;
+
+        return prevIndex;
+    }
+
+    private int GetNextIndex()
+    {
+        int nextIndex = currentSlideIndex + 1;
+
+        if (nextIndex >= Items.Count)
+            nextIndex = 0;
+
+        return nextIndex;
+    }
+
+    private TItem GetPrevious() => Items.ElementAt(GetPreviousIndex());
+    private TItem GetNext() => Items.ElementAt(GetNextIndex());
+
+    private bool IsPrevious(TItem item) => Items.IndexOf(item) == GetPreviousIndex();
     private bool IsCurrent(TItem item) => Items.IndexOf(item) == currentSlideIndex;
-    private bool IsNext(TItem item) => Items.IndexOf(item) == currentSlideIndex + 1;
+    private bool IsNext(TItem item) => Items.IndexOf(item) == GetNextIndex();
+
 }
