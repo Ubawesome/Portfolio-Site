@@ -10,7 +10,7 @@
             <img src="/css/icons/fi-xnsrxl-chevron-solid.svg" class="controls right" @onclick="NextSlide" />
         }
 
-        <div @ref="previousSlideElement" class="carousel-slide previous">
+@*        <div @ref="previousSlideElement" class="carousel-slide previous">
             @if (ItemTemplate != null && previousSlide != null)
             {
                 @ItemTemplate(previousSlide)
@@ -23,19 +23,19 @@
                 @ItemTemplate(CurrentSlide)
             }
         </div>
+*@
 
 
-
-@*        @foreach (TItem item in Items)
+        @foreach (TItem item in Items)
         {
-            <div class="carousel-slide @GetSlideClass(item)">
+            <div @ref="itemElements[item]" class="carousel-slide @GetSlideClass(item)">
                 @if (ItemTemplate != null)
                 {
                     @ItemTemplate(item)
                 }
             </div>
         }
-*@
+
         @if (ShowProgress)
         {
             <div class="carousel-progress">
@@ -76,12 +76,42 @@
     [Parameter]
     public EventCallback<TItem> CurrentSlideChanged { get; set; }
 
-    private int currentSlideIndex => Items.IndexOf(CurrentSlide);
-
     private TItem? previousSlide;
 
-    private ElementReference previousSlideElement;
-    private ElementReference currentSlideElement;
+    private int currentSlideIndex => Items.IndexOf(CurrentSlide);
+    private int previousSlideIndex => Items.IndexOf(previousSlide);
+
+    private Dictionary<TItem, ElementReference> itemElements = new();
+
+    bool slideChanged = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (slideChanged)
+        {
+            slideChanged = false;
+
+            ElementReference[] animatingElements = new ElementReference[2];
+            string[] animatingClasses = new string[2];
+
+            if (itemElements.TryGetValue(previousSlide, out var previousSlideElement))
+            {
+                animatingElements[0] = previousSlideElement;
+                animatingClasses[0] = GetOutAnim();
+                //await JSRuntime.ExecuteAnimationOnce(previousSlideElement, GetOutAnim());
+            }
+
+            if (itemElements.TryGetValue(CurrentSlide, out var currentSlideElement))
+            {
+                animatingElements[1] = currentSlideElement;
+                animatingClasses[1] = GetInAnim();
+                //await JSRuntime.ExecuteAnimationOnce(currentSlideElement, GetInAnim());
+            }
+
+            await JSRuntime.ExecuteAnimationOnce(animatingElements, animatingClasses);
+        }
+    }
+
 
     public async Task SelectSlide(int slide)
     {
@@ -131,9 +161,7 @@
         previousSlide = CurrentSlide;
         CurrentSlide = slide;
 
-        await JSRuntime.ExecuteAnimationOnce(previousSlideElement, GetOutAnim());
-        await JSRuntime.ExecuteAnimationOnce(currentSlideElement, GetInAnim());
-
+        slideChanged = true;
         await CurrentSlideChanged.InvokeAsync(CurrentSlide);
 
         StateHasChanged();
@@ -141,8 +169,6 @@
 
     private string GetInAnim()
     {
-        int previousSlideIndex = Items.IndexOf(previousSlide);
-
         if (previousSlideIndex < currentSlideIndex)
         {
             return "slide-in-right";
@@ -157,8 +183,6 @@
 
     private string GetOutAnim()
     {
-        int previousSlideIndex = Items.IndexOf(previousSlide);
-
         if (previousSlideIndex < currentSlideIndex)
         {
             return "slide-out-left";

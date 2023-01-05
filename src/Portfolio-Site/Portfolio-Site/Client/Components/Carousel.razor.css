@@ -148,8 +148,7 @@
                 opacity 0.25s ease-out 0s;
 */}
 
-.carousel-slide.previous,
-.carousel-slide.next {
+.carousel-slide.previous {
 /*    transition: transform 0.5s ease-in-out 0.1s,
                 opacity 0.25s ease-out 0.1s;
 */
@@ -174,9 +173,3 @@
     transform: translateX(-100%);
 
 }
-
-.carousel-slide.next {
-    /*transform: translate(100%);*/
-
-}
-

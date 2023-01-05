@@ -28,16 +28,32 @@ function restartAnimation(element, className) {
     }
 }
 
-function executeAnimationOnce(element, className) {
-    if (element instanceof HTMLElement && (typeof className === 'string' || className instanceof String)) {
+function executeAnimationOnce(elementInput, classInput) {
+
+    if (elementInput instanceof HTMLElement && (typeof classInput === 'string' || classInput instanceof String)) {
 
         const callback = () => {
-            element.removeEventListener("animationend", callback, false);
-            element.classList.remove(className);
+            elementInput.removeEventListener("animationend", callback, false);
+            elementInput.classList.remove(classInput);
         };
 
-        element.addEventListener("animationend", callback, false);
-        element.classList.add(className);
+        elementInput.addEventListener("animationend", callback, false);
+        elementInput.classList.add(classInput);
+
+    } else if (elementInput instanceof Array && classInput instanceof Array) {
+
+        for (let i = 0; i < elementInput.length; i++) {
+            const el = elementInput[i];
+            const cl = classInput[i];
+
+            const callback = () => {
+                el.removeEventListener("animationend", callback, false);
+                el.classList.remove(cl);
+            };
+
+            el.addEventListener("animationend", callback, false);
+            el.classList.add(cl);
+        }
     }
 }
 
