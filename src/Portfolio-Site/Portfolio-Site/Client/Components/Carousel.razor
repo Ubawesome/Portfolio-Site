@@ -10,22 +10,6 @@
             <img src="/css/icons/fi-xnsrxl-chevron-solid.svg" class="controls right" @onclick="NextSlide" />
         }
 
-@*        <div @ref="previousSlideElement" class="carousel-slide previous">
-            @if (ItemTemplate != null && previousSlide != null)
-            {
-                @ItemTemplate(previousSlide)
-            }
-        </div>
-
-        <div @ref="currentSlideElement" class="carousel-slide current">
-            @if (ItemTemplate != null)
-            {
-                @ItemTemplate(CurrentSlide)
-            }
-        </div>
-*@
-
-
         @foreach (TItem item in Items)
         {
             <div @ref="itemElements[item]" class="carousel-slide @GetSlideClass(item)">
@@ -71,11 +55,20 @@
     public bool ShowProgress { get; set; } = true;
 
     [Parameter]
-    public TItem CurrentSlide { get; set; } = default(TItem);
+    public TItem CurrentSlide {
+        get
+        {
+            return currentSlide;
+        }
+        set {
+            SetCurrentSlide(value);
+        }
+    }
 
     [Parameter]
     public EventCallback<TItem> CurrentSlideChanged { get; set; }
 
+    private TItem? currentSlide;
     private TItem? previousSlide;
 
     private int currentSlideIndex => Items.IndexOf(CurrentSlide);
@@ -91,24 +84,7 @@
         {
             slideChanged = false;
 
-            ElementReference[] animatingElements = new ElementReference[2];
-            string[] animatingClasses = new string[2];
-
-            if (itemElements.TryGetValue(previousSlide, out var previousSlideElement))
-            {
-                animatingElements[0] = previousSlideElement;
-                animatingClasses[0] = GetOutAnim();
-                //await JSRuntime.ExecuteAnimationOnce(previousSlideElement, GetOutAnim());
-            }
-
-            if (itemElements.TryGetValue(CurrentSlide, out var currentSlideElement))
-            {
-                animatingElements[1] = currentSlideElement;
-                animatingClasses[1] = GetInAnim();
-                //await JSRuntime.ExecuteAnimationOnce(currentSlideElement, GetInAnim());
-            }
-
-            await JSRuntime.ExecuteAnimationOnce(animatingElements, animatingClasses);
+            await UpdateSlideAnimations();
         }
     }
 
@@ -159,7 +135,7 @@
         // Set current slide to slide out, left or right depending on if the new slide is before or after.
 
         previousSlide = CurrentSlide;
-        CurrentSlide = slide;
+        currentSlide = slide;
 
         slideChanged = true;
         await CurrentSlideChanged.InvokeAsync(CurrentSlide);
@@ -167,12 +143,38 @@
         StateHasChanged();
     }
 
+    private async Task UpdateSlideAnimations()
+    {
+        ElementReference[] animatingElements = new ElementReference[2];
+        string[] animatingClasses = new string[2];
+
+        if (previousSlide != null && itemElements.TryGetValue(previousSlide, out var previousSlideElement))
+        {
+            animatingElements[0] = previousSlideElement;
+            animatingClasses[0] = GetOutAnim();
+        }
+
+        if (itemElements.TryGetValue(CurrentSlide, out var currentSlideElement))
+        {
+            animatingElements[1] = currentSlideElement;
+            animatingClasses[1] = GetInAnim();
+        }
+
+        await JSRuntime.ExecuteAnimationOnce(animatingElements, animatingClasses);
+    }
+
     private string GetInAnim()
     {
+        if (MathF.Abs(currentSlideIndex - previousSlideIndex) > 1)
+        {
+            return "slide-in-down";
+        }
+
         if (previousSlideIndex < currentSlideIndex)
         {
             return "slide-in-right";
         }
+
         if (previousSlideIndex > currentSlideIndex)
         {
             return "slide-in-left";
@@ -183,10 +185,16 @@
 
     private string GetOutAnim()
     {
+        if (MathF.Abs(currentSlideIndex - previousSlideIndex) > 1)
+        {
+            return "slide-out-down";
+        }
+
         if (previousSlideIndex < currentSlideIndex)
         {
             return "slide-out-left";
         }
+
         if (previousSlideIndex > currentSlideIndex)
         {
             return "slide-out-right";
@@ -229,9 +237,6 @@
 
         return nextIndex;
     }
-
-    private TItem GetPrevious() => Items.ElementAt(GetPreviousIndex());
-    private TItem GetNext() => Items.ElementAt(GetNextIndex());
 
     private bool IsPrevious(TItem item) => Items.IndexOf(item) == GetPreviousIndex();
     private bool IsCurrent(TItem item) => Items.IndexOf(item) == currentSlideIndex;

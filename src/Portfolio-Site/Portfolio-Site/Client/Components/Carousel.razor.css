@@ -130,8 +130,8 @@
     position: absolute;
     inset: 0;
 
-    transform: translateX(0%);
     opacity: 0;
+    transform: translateX(0%);
 }
 
 .carousel-slide ::deep > * {
@@ -141,26 +141,13 @@
     object-fit: contain;
 }
 
-.carousel-slide.current {
-    opacity: 1;
-
-/*    transition: transform 0.5s ease-out 0.1s,
-                opacity 0.25s ease-out 0s;
-*/}
-
-.carousel-slide.previous {
-/*    transition: transform 0.5s ease-in-out 0.1s,
-                opacity 0.25s ease-out 0.1s;
-*/
-    opacity: 1;
-}
-
 .carousel-slide.slide-in-left {
     animation: slide-in-left 0.5s ease forwards;
 }
 .carousel-slide.slide-in-right {
     animation: slide-in-right 0.5s ease forwards;
 }
+
 .carousel-slide.slide-out-left {
     animation: slide-out-left 0.5s ease forwards;
 }
@@ -168,8 +155,14 @@
     animation: slide-out-right 0.5s ease forwards;
 }
 
-.carousel-slide:not(.slide-in-left, .slide-in-right, .slide-out-left, .slide-out-right).previous
-{
-    transform: translateX(-100%);
+.carousel-slide.slide-in-down {
+    animation: slide-in-down 0.5s ease forwards;
+}
+.carousel-slide.slide-out-down {
+    animation: slide-out-down 0.5s ease forwards;
+}
 
+.carousel-slide:is(.slide-in-left, .slide-in-right, .slide-out-left, .slide-out-right, .slide-in-down, .slide-out-down),
+.carousel-slide.current {
+    opacity: 1;
 }
