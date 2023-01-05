@@ -113,7 +113,7 @@ function setUpScrollableTriggers() {
                     start: 'top top',
                     end: 'bottom top',
                     scrub: true,
-                    invalidateOnRefresh: true
+                    invalidateOnRefresh: true,
                 },
                 translateY: (index, target, targets) => String((height * scrollOffset) + (height * scrollSpeed)) + 'px',
                 ease: 'linear'
