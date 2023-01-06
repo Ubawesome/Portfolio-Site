@@ -23,26 +23,26 @@
                 background-color ease 250ms;
 }
 
-.carousel:hover .controls {
+.carousel:is(:hover, :focus-within) .controls {
     opacity: 1;
     transition: opacity ease-in 250ms 50ms,
                 background-color ease 250ms;
 }
 
-.carousel:hover .carousel-progress span {
+.carousel:is(:hover, :focus-within) .carousel-progress span {
     transform: translateY(0%);
 
     transition: opacity ease-out 250ms 250ms,
                 transform ease-out 250ms 150ms;
 }
 
-.carousel:hover .carousel-progress span.previous,
-.carousel:hover .carousel-progress span.next {
+.carousel:is(:hover, :focus-within) .carousel-progress span.previous,
+.carousel:is(:hover, :focus-within) .carousel-progress span.next {
     transition: opacity ease-out 250ms 250ms,
                 transform ease-out 250ms 100ms;
 }
 
-.carousel:hover .carousel-progress span.current {
+.carousel:is(:hover, :focus-within) .carousel-progress span.current {
     transition: opacity ease-out 250ms 250ms,
                 transform ease-out 250ms 50ms;
 }
@@ -51,6 +51,9 @@
     position: absolute;
     top: 0;
     bottom: 0;
+
+    display: grid;
+    place-items: center;
 
     width: 10%;
     height: 100%;
@@ -65,8 +68,7 @@
     transition: background-color ease 250ms;
 }
 
-.controls:focus,
-.controls:hover {
+.controls:is(:hover, :focus-within) {
     background-color: hsl(0 0% 0% / 0.15);
 }
 
@@ -76,6 +78,10 @@
 
 .controls.right {
     right: 0;
+}
+
+.controls > * {
+    max-width: 100%;
 }
 
 .carousel-progress {

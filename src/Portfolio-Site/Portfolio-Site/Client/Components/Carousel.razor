@@ -2,17 +2,21 @@
 
 @inject IJSRuntime JSRuntime
 
-<div class="carousel-wrapper">
+<div class="carousel-wrapper" aria-label="Carousel Example">
     <div class="carousel">
         @if (ShowControls)
         {
-            <img src="/css/icons/fi-xnslxl-chevron-solid.svg" class="controls left" @onclick="PreviousSlide" />
-            <img src="/css/icons/fi-xnsrxl-chevron-solid.svg" class="controls right" @onclick="NextSlide" />
+            <button type="button" class="controls left" @onclick="PreviousSlide">
+                <img src="/css/icons/fi-xnslxl-chevron-solid.svg" alt="Previous Slide" />
+            </button>
+            <button type="button" class="controls right" @onclick="NextSlide">
+                <img src="/css/icons/fi-xnsrxl-chevron-solid.svg" alt="Next Slide" />
+            </button>
         }
 
         @foreach (TItem item in Items)
         {
-            <div @ref="itemElements[item]" class="carousel-slide @GetSlideClass(item)">
+            <div @ref="itemElements[item]" class="carousel-slide @GetSlideClass(item)" aria-label="@GetSlideAriaLabel(item)" aria-hidden="@GetSlideAriaHidden(item)">
                 @if (ItemTemplate != null)
                 {
                     @ItemTemplate(item)
@@ -216,6 +220,16 @@
             return "next";
         }
         return "";
+    }
+
+    private string GetSlideAriaLabel(TItem item)
+    {
+        return $"Slide {Items.IndexOf(item)} of {Items.Count}";
+    }
+
+    private bool GetSlideAriaHidden(TItem item)
+    {
+        return !IsCurrent(item);
     }
 
     private int GetPreviousIndex()

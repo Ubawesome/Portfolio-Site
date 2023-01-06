@@ -588,6 +588,11 @@ select {
 
 /* Utility Classes */
 
+.hidden {
+    visibility: hidden;
+    height: 0;
+}
+
 .flex {
     display: flex;
     margin-block: 1rem;
