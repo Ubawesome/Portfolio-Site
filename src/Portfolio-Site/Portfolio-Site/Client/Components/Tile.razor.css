@@ -6,6 +6,7 @@
     --tile-body-bg-blur: 0.35rem;
     --tile-body-bg-brightness: 0.75;
     --tile-header-bg-opacity: 1;
+
     position: relative;
     width: 100%;
     max-width: 100%;
@@ -139,6 +140,10 @@
 }
 
 .tile-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     padding-inline: max(2rem, 2vw);
     padding-block: max(2rem, 2vw);
 
