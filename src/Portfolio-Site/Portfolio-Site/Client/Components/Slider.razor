@@ -1,18 +1,17 @@
 ﻿@inject IJSRuntime JSRuntime
 
 <CascadingValue Value="this">
-    <div class="slider" @attributes="@AdditionalAttributes">
-        <ul @ref="@sliderContent" class="slider-content">
+    <div @ref="@sliderElement" class="slider" @attributes="@AdditionalAttributes">
+        <ul class="slider-content">
             @ChildContent
         </ul>
+        <div class="slider-controls">
+            @foreach (var item in Items)
+            {
+                <a data-item="@item.Id" href="#@item.Id"></a>
+            }
+        </div>
     </div>
-@*    <div class="slider-controls">
-        @foreach (var item in Items)
-        {
-            <button type="button" @onclick="@(() => SelectItem(item))" class="@GetItemClass(item)"></button>
-        }
-    </div>
-*@
 </CascadingValue>
 
 
@@ -45,13 +44,13 @@
 
     bool itemChanged = false;
 
-    ElementReference sliderContent;
+    ElementReference sliderElement;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("setUpSliderTrigger", sliderContent);
+            await JSRuntime.InvokeVoidAsync("setUpSliderTrigger", sliderElement);
         }
     }
 
@@ -103,15 +102,5 @@
         await CurrentItemChanged.InvokeAsync(CurrentItem);
 
         StateHasChanged();
-    }
-
-    private string GetItemClass(SliderItem item)
-    {
-        if (CurrentItem == item)
-        {
-            return "current";
-        }
-
-        return "";
     }
 }

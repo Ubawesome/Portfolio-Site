@@ -1,6 +1,6 @@
 ﻿@if (Parent != null && ChildContent != null)
 {
-    <li @ref="@Reference" class="slider-item @GetItemClass()">
+    <li @ref="@Reference" id="@Id" class="slider-item">
         @ChildContent
     </li>
 }
@@ -8,6 +8,9 @@
 @code {
     [CascadingParameter]
     private Slider? Parent { get; set; }
+
+    [Parameter]
+    public string Id { get; set; } = Guid.NewGuid().ToString();
 
     [Parameter]
     public string? Title { get; set; }
@@ -35,15 +38,5 @@
         {
             Parent.Add(this);
         }
-    }
-
-    private string GetItemClass()
-    {
-        if (Parent.CurrentItem == this)
-        {
-            return "current";
-        }
-
-        return "";
     }
 }

@@ -164,7 +164,12 @@ function setUpGlideTrigger(container, element, animationSpeed = 1, triggerStart 
         });
 }
 
-function setUpSliderTrigger(sliderContent) {
+function setUpSliderTrigger(slider) {
+    const sliderContent = slider.querySelector('.slider-content');
+    const sliderControls = slider.querySelector('.slider-controls');
+
+    if (sliderContent == null)
+        return;
 
     const children = sliderContent.children;
 
@@ -185,33 +190,25 @@ function setUpSliderTrigger(sliderContent) {
             scale: 0.5,
         });
 
-    //    let scrollSpeed = 1;
-    //    if (child.hasAttribute('data-scroll-speed')) {
-    //        scrollSpeed = child.getAttribute('data-scroll-speed');
-    //    }
-    //    let scrollOffset = 0;
-    //    if (child.hasAttribute('data-scroll-offset')) {
-    //        scrollOffset = child.getAttribute('data-scroll-offset');
-    //    }
+        const id = child.getAttribute('id');
+        const itemButton = sliderControls.querySelector("[data-item='" + id + "']")
 
-    //    gsap.set(child, {
-    //        translateY: (index, target, targets) => String(height * scrollOffset) + 'px',
-    //    })
+        let classTargets = [];
 
-    //    gsap.fromTo(child, {
-    //        translateY: (index, target, targets) => String(height * scrollOffset) + 'px',
-    //    }, {
-    //        scrollTrigger: {
-    //            trigger: slider,
-    //            start: 'top top',
-    //            end: 'bottom top',
-    //            scrub: true,
-    //            invalidateOnRefresh: true,
-    //        },
-    //        translateY: (index, target, targets) => String((height * scrollOffset) + (height * scrollSpeed)) + 'px',
-    //        ease: 'linear'
-    //    }
-    //    );
+        if (itemButton !== null) {
+            classTargets = [child, itemButton];
+        } else {
+            classTargets = [child];
+        }
+
+        ScrollTrigger.create({
+            scroller: sliderContent,
+            horizontal: true,
+            trigger: child,
+            start: 'center right',
+            end: 'center left',
+            toggleClass: { targets: classTargets, className: 'active' }
+        });
     });
 
 
