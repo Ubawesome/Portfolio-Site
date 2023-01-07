@@ -1,0 +1,30 @@
+﻿
+
+
+.floating-circle {
+    $items: 6;
+    $angle: 360deg / $items;
+    $radius: 200px;
+
+    position: relative;
+    width: auto;
+    aspect-ratio: 1 / 1;
+
+    ::deep > * {
+        position: absolute;
+        content: '';
+
+        @for $i from 1 through $items {
+            $alpha: ($i * $angle);
+            $xAngle: sin(($angle * $i) - $angle - 90);
+            $yAngle: cos(($angle * $i) - $angle - 90);
+/*            $x: ($xAngle * $radius);
+            $y: ($yAngle * $radius);
+*/
+            &:nth-child(#{$i}) {
+
+                transform: translate(calc(#{$xAngle} * #{$radius}), calc(#{$yAngle} * #{$radius}));
+            }
+        }
+    }
+}
