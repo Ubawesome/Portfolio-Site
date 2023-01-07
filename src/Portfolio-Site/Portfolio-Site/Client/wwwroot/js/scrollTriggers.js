@@ -185,9 +185,11 @@ function setUpSliderTrigger(slider) {
                 scrub: true,
             }
         }).from(child, {
-            scale: 0.5,
+            scale: 0.75,
+            opacity: 0.5
         }).to(child, {
-            scale: 0.5,
+            scale: 0.75,
+            opacity: 0.5
         });
 
         const id = child.getAttribute('id');

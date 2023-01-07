@@ -15,7 +15,7 @@
 .slider-content {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: 90%;
+    grid-auto-columns: 80%;
 
     overflow-x: auto;
     overscroll-behavior-inline: contain;
@@ -40,6 +40,22 @@
     overflow: hidden;
 
     scroll-snap-align: center;
+
+    pointer-events: none !important;
+}
+
+::deep .slider-item:first-child {
+    margin-inline-start: 20%;
+}
+
+::deep .slider-item:last-child {
+    margin-inline-end: 20%;
+    margin-inline-start: -20%;
+}
+
+::deep .slider-item.active { 
+    z-index: 10;
+    pointer-events: auto !important;
 }
 
 .slider-controls {
