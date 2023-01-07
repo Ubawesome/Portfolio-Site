@@ -1,10 +1,22 @@
 ﻿.floating-circle {
     $maxLayerItems: 12;
-    --layer-radius: 100%;
+
+    --layer-radius-sm: clamp(4rem, 4vw + 2rem, 12rem);
+    --layer-radius-md: clamp(8rem, 8vw + 6rem, 24rem);
+    --layer-radius-lg: clamp(16rem, 14vw + 8rem, 36rem);
+
+    --circle-size-sm: calc(var(--layer-radius-sm) * 2);
+    --circle-size-md: calc(var(--layer-radius-md) * 2);
+    --circle-size-lg: calc(var(--layer-radius-lg) * 2);
+
+    --layer-radius: var(--layer-radius-sm);
     --layer-animation-speed: 50s;
 
+    --circle-padding: clamp(2rem, 2vw, 6rem);
+    --circle-size: var(--circle-size-sm);
+
     position: relative;
-    width: auto;
+    width: calc(var(--circle-size) + (var(--circle-padding) * 2));
     aspect-ratio: 1 / 1;
 
     ::deep > .floating-circle-layer {
@@ -14,12 +26,16 @@
 
         z-index: 0;
 
+        pointer-events: none;
+
         display: grid;
         place-items: center;
 
         > * {
             position: absolute;
             content: '';
+
+            pointer-events: auto;
 
             z-index: 1;
         }
