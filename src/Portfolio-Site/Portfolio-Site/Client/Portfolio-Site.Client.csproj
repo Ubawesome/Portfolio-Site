@@ -27,11 +27,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <SassFile Remove="Components\FloatingCircleLayer.razor.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Components\Carousel.razor.css" />
     <Content Include="Components\Checkbox.razor.css">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Include="Components\FloatingCircleLayer.razor.scss" />
     <Content Include="Components\FloatingCircle.razor.scss" />
     <Content Include="Components\FormField.razor.css" />
     <Content Include="Components\Gallery.razor.css" />

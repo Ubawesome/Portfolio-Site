@@ -1,29 +1,62 @@
-﻿
-
-
-.floating-circle {
-    $items: 6;
-    $angle: 360deg / $items;
-    $radius: 200px;
+﻿.floating-circle {
+    $maxLayerItems: 12;
+    --layer-radius: 100%;
+    --layer-animation-speed: 50s;
 
     position: relative;
     width: auto;
     aspect-ratio: 1 / 1;
 
-    ::deep > * {
+    ::deep > .floating-circle-layer {
         position: absolute;
         content: '';
+        inset: 0;
 
-        @for $i from 1 through $items {
-            $alpha: ($i * $angle);
-            $xAngle: sin(($angle * $i) - $angle - 90);
-            $yAngle: cos(($angle * $i) - $angle - 90);
-/*            $x: ($xAngle * $radius);
-            $y: ($yAngle * $radius);
-*/
-            &:nth-child(#{$i}) {
+        z-index: 0;
 
-                transform: translate(calc(#{$xAngle} * #{$radius}), calc(#{$yAngle} * #{$radius}));
+        display: grid;
+        place-items: center;
+
+        > * {
+            position: absolute;
+            content: '';
+
+            z-index: 1;
+        }
+
+        &[data-animation="SpinClockwise"] {
+            animation: rotate-clockwise var(--layer-animation-speed) linear infinite;
+
+            > * {
+                animation: rotate-counterclockwise var(--layer-animation-speed) linear infinite;
+            }
+        }
+
+        &[data-animation="SpinCounterclockwise"] {
+            animation: rotate-counterclockwise var(--layer-animation-speed) linear infinite;
+
+            > * {
+                animation: rotate-clockwise var(--layer-animation-speed) linear infinite;
+            }
+        }
+    }
+
+    @for $layerItemCount from 1 through $maxLayerItems {
+        ::deep > .floating-circle-layer[data-count="#{$layerItemCount}"] {
+
+            $angle: 360deg / $layerItemCount;
+
+            @for $i from 1 through $layerItemCount {
+
+                $alpha: ($i * $angle);
+                $xAngle: sin(($angle * $i) - $angle - 90);
+                $yAngle: cos(($angle * $i) - $angle - 90);
+
+                :nth-child(#{$i}) {
+
+                    transform: translate(calc(#{$xAngle} * var(--layer-radius)), calc(#{$yAngle} * var(--layer-radius)));
+                    transform-origin: calc(#{$xAngle} * var(--layer-radius) + 50%) calc(#{$yAngle} * var(--layer-radius) + 50%);
+                }
             }
         }
     }
