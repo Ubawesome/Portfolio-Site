@@ -119,27 +119,6 @@ function setUpScrollableTriggers() {
                 ease: 'linear'
             }
             );
-
-
-
-        //    gsap.to(child, {
-        //        scrollTrigger: {
-        //            trigger: scrollable,
-        //            start: 'top top',
-        //            end: 'bottom top',
-        //            scrub: true,
-        //            invalidateOnRefresh: true
-        //        },
-        //        translateY: (index, target, targets) => {
-        //            let scrollSpeed = 1;
-        //            if (target.hasAttribute('data-scroll-speed')) {
-        //                scrollSpeed = target.getAttribute('data-scroll-speed');
-        //            }
-
-        //            return String(height * scrollSpeed) + 'px';
-        //        },
-        //        ease: 'linear'
-        //    });
         });
     });
 }
@@ -183,5 +162,58 @@ function setUpGlideTrigger(container, element, animationSpeed = 1, triggerStart 
             opacity: 0,
             ease: 'linear'
         });
+}
+
+function setUpSliderTrigger(sliderContent) {
+
+    const children = sliderContent.children;
+
+    Array.from(children).forEach((child) => {
+        gsap.timeline({
+            defaults: { ease: "none" },
+            scrollTrigger: {
+                scroller: sliderContent,
+                horizontal: true,
+                trigger: child,
+                start: "left right",
+                end: "right left",
+                scrub: true,
+            }
+        }).from(child, {
+            scale: 0.5,
+        }).to(child, {
+            scale: 0.5,
+        });
+
+    //    let scrollSpeed = 1;
+    //    if (child.hasAttribute('data-scroll-speed')) {
+    //        scrollSpeed = child.getAttribute('data-scroll-speed');
+    //    }
+    //    let scrollOffset = 0;
+    //    if (child.hasAttribute('data-scroll-offset')) {
+    //        scrollOffset = child.getAttribute('data-scroll-offset');
+    //    }
+
+    //    gsap.set(child, {
+    //        translateY: (index, target, targets) => String(height * scrollOffset) + 'px',
+    //    })
+
+    //    gsap.fromTo(child, {
+    //        translateY: (index, target, targets) => String(height * scrollOffset) + 'px',
+    //    }, {
+    //        scrollTrigger: {
+    //            trigger: slider,
+    //            start: 'top top',
+    //            end: 'bottom top',
+    //            scrub: true,
+    //            invalidateOnRefresh: true,
+    //        },
+    //        translateY: (index, target, targets) => String((height * scrollOffset) + (height * scrollSpeed)) + 'px',
+    //        ease: 'linear'
+    //    }
+    //    );
+    });
+
+
 }
 

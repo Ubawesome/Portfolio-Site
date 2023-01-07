@@ -66,6 +66,114 @@
     <SectionHeader Title="Examples" ContainerClass="bg-accent-2-7" TextClass="text-accent-2-1" />
 
     <Container>
+        <Slider>
+            <SliderItem>
+                <Card Orientation="Orientation.Vertical" Size="Size.Full">
+                    <CardTitle>
+                        <h5>Buttons</h5>
+                    </CardTitle>
+                    <CardBody>
+                        <p>Normal:</p>
+                        <div class="flex row wrap">
+                            <Button Color="Color.Primary">Primary</Button>
+                            <Button Color="Color.Accent1">Accent 1</Button>
+                            <Button Color="Color.Accent2">Accent 2</Button>
+                            <Button Color="Color.Accent3">Accent 3</Button>
+                            <Button Color="Color.Success">Success</Button>
+                            <Button Color="Color.Danger">Danger</Button>
+                        </div>
+                        <p>Outline:</p>
+                        <div class="flex row wrap">
+                            <Button Color="Color.Primary" ButtonStyle="ButtonStyle.Outline">Primary</Button>
+                            <Button Color="Color.Accent1" ButtonStyle="ButtonStyle.Outline">Accent 1</Button>
+                            <Button Color="Color.Accent2" ButtonStyle="ButtonStyle.Outline">Accent 2</Button>
+                            <Button Color="Color.Accent3" ButtonStyle="ButtonStyle.Outline">Accent 3</Button>
+                            <Button Color="Color.Success" ButtonStyle="ButtonStyle.Outline">Success</Button>
+                            <Button Color="Color.Danger" ButtonStyle="ButtonStyle.Outline">Danger</Button>
+                        </div>
+                        <p>Large:</p>
+                        <div class="flex row wrap">
+                            <Button Color="Color.Primary" Size="Size.Large">Primary</Button>
+                            <Button Color="Color.Accent1" Size="Size.Large">Accent 1</Button>
+                            <Button Color="Color.Accent2" Size="Size.Large">Accent 2</Button>
+                            <Button Color="Color.Accent3" Size="Size.Large">Accent 3</Button>
+                            <Button Color="Color.Success" Size="Size.Large">Success</Button>
+                            <Button Color="Color.Danger" Size="Size.Large">Danger</Button>
+                        </div>
+                        <p>Small:</p>
+                        <div class="flex row wrap">
+                            <Button Color="Color.Primary" Size="Size.Small">Primary</Button>
+                            <Button Color="Color.Accent1" Size="Size.Small">Accent 1</Button>
+                            <Button Color="Color.Accent2" Size="Size.Small">Accent 2</Button>
+                            <Button Color="Color.Accent3" Size="Size.Small">Accent 3</Button>
+                            <Button Color="Color.Success" Size="Size.Small">Success</Button>
+                            <Button Color="Color.Danger" Size="Size.Small">Danger</Button>
+                        </div>
+                    </CardBody>
+                </Card>
+            </SliderItem>
+            <SliderItem>
+                <Card Size="Size.Full">
+                    <CardTitle>
+                        Form Controls
+                    </CardTitle>
+                    <CardBody>
+                        <p>
+                        </p>
+                        <div class="flex row wrap">
+                            <EditForm EditContext="editContext" OnValidSubmit="OnValidSudmit" OnInvalidSubmit="OnInvalidSubmit" class="@((isValidated ? "validated" : ""))">
+                                <DataAnnotationsValidator />
+
+                                <FormField For="@(() => formModel.Email)" Context="fieldId">
+                                    <InputText id="@fieldId" @bind-Value="@formModel.Email" />
+                                </FormField>
+
+                                <FormField For="@(() => formModel.Password)" Context="fieldId">
+                                    <InputText id="@fieldId" @bind-Value="@formModel.Password" type="password" />
+                                </FormField>
+
+                                <FormField For="@(() => formModel.DateOfBirth)" Context="fieldId">
+                                    <InputDate id="@fieldId" @bind-Value="@formModel.DateOfBirth" TValue="DateOnly" />
+                                </FormField>
+
+                                <FormField For="@(() => formModel.PhoneNumber)" Context="fieldId">
+                                    <InputText id="@fieldId" @bind-Value="@formModel.PhoneNumber" />
+                                </FormField>
+
+                                <FormField For="@(() => formModel.RememberMe)" Context="fieldId" Inline="true">
+                                    <Checkbox id="fieldId" @bind-Value="@formModel.RememberMe" />
+                                </FormField>
+
+                                <FormField TItem="string" Context="fieldId">
+                                    <InputSelect TValue="string" @bind-Value="@selectValue">
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                    </InputSelect>
+                                </FormField>
+
+                                <Button Color="Color.Accent1" Size="Size.Small" type="submit">Submit</Button>
+                                <Button Color="Color.Primary" Size="Size.Small" type="reset" @onclick="OnClear">Clear</Button>
+                            </EditForm>
+                        </div>
+                </CardBody>
+                </Card>
+            </SliderItem>
+            <SliderItem>
+                <Card Size="Size.Full">
+                    <CardTitle>
+                        Collapseables
+                    </CardTitle>
+                    <CardBody>
+                        <p>
+                        </p>
+                        <div class="flex row wrap">
+                        </div>
+                    </CardBody>
+                </Card>
+            </SliderItem>
+        </Slider>
+
         <div class="flex row wrap">
             <Card Orientation="Orientation.Vertical" Size="Size.Full">
                 <CardTitle>
