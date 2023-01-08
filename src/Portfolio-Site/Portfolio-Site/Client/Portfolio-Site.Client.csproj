@@ -62,6 +62,7 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Include="Shared\Loading.razor.css" />
+    <Content Include="Shared\SCSS\trig.css" />
   </ItemGroup>
 
   <ItemGroup>

@@ -27,7 +27,7 @@
     scrollbar-width: none; /* Firefox */
 }
 
-/* Chrome */
+/* Chrome */ 
 .slider-content::-webkit-scrollbar {
     display: none;
 }
