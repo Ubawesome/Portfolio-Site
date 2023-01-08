@@ -249,3 +249,22 @@
     }
 }
 
+
+@keyframes rotate-clockwise {
+    0% {
+        rotate: 0deg;
+    }
+    100% {
+        rotate: 360deg;
+    }
+}
+
+@keyframes rotate-counterclockwise {
+    0% {
+        rotate: 360deg;
+    }
+    100% {
+        rotate: 0deg;
+    }
+}
+

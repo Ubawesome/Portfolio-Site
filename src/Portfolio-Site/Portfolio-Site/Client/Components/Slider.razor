@@ -1,0 +1,106 @@
+﻿@inject IJSRuntime JSRuntime
+
+<CascadingValue Value="this">
+    <div @ref="@sliderElement" class="slider" @attributes="@AdditionalAttributes">
+        <ul class="slider-content">
+            @ChildContent
+        </ul>
+        <div class="slider-controls">
+            @foreach (var item in Items)
+            {
+                <a data-item="@item.Id" href="#@item.Id"></a>
+            }
+        </div>
+    </div>
+</CascadingValue>
+
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public bool Wrap { get; set; } = false;
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+
+    public List<SliderItem> Items { get; set; } = new();
+    public SliderItem? CurrentItem {
+        get
+        {
+            return currentItem;
+        }
+        set {
+            SelectItem(value);
+        }
+    }
+
+    [Parameter]
+    public EventCallback<SliderItem> CurrentItemChanged { get; set; }
+
+    private SliderItem? currentItem;
+    private SliderItem? previousItem;
+
+    bool itemChanged = false;
+
+    ElementReference sliderElement;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("setUpSliderTrigger", sliderElement);
+        }
+    }
+
+    public void Add(SliderItem item)
+    {
+        if (Items != null && !Items.Contains(item))
+        {
+            Items.Add(item);
+            if (Items.Count == 1)
+            {
+                CurrentItem = item;
+            }
+
+            StateHasChanged();
+        }
+    }
+
+    public async Task SelectItem(int itemIndex)
+    {
+        SliderItem? newSlide = Items.ElementAtOrDefault(itemIndex);
+
+        if (newSlide == null)
+        {
+            // If going outside of bounds, either wraps or clamps.
+            if (itemIndex >= Items.Count)
+            {
+
+                newSlide = (Wrap) ? Items.First() : CurrentItem;
+            }
+
+            if (itemIndex < 0)
+            {
+                newSlide = (Wrap) ? Items.Last() : CurrentItem;
+            }
+        }
+
+        await SelectItem(newSlide);
+    }
+
+    public async Task SelectItem(SliderItem item)
+    {
+        if (item == null || item.Disabled)
+            return;
+
+        previousItem = CurrentItem;
+        currentItem = item;
+
+        itemChanged = true;
+        await CurrentItemChanged.InvokeAsync(CurrentItem);
+
+        StateHasChanged();
+    }
+}

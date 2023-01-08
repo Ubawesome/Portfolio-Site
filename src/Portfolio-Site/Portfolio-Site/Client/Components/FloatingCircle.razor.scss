@@ -1,0 +1,79 @@
+﻿.floating-circle {
+    $maxLayerItems: 12;
+
+    --layer-radius-sm: clamp(4rem, 4vw + 2rem, 12rem);
+    --layer-radius-md: clamp(8rem, 8vw + 6rem, 24rem);
+    --layer-radius-lg: clamp(16rem, 14vw + 8rem, 36rem);
+
+    --circle-size-sm: calc(var(--layer-radius-sm) * 2);
+    --circle-size-md: calc(var(--layer-radius-md) * 2);
+    --circle-size-lg: calc(var(--layer-radius-lg) * 2);
+
+    --layer-radius: var(--layer-radius-sm);
+    --layer-animation-speed: 50s;
+
+    --circle-padding: clamp(2rem, 2vw, 6rem);
+    --circle-size: var(--circle-size-sm);
+
+    position: relative;
+    width: calc(var(--circle-size) + (var(--circle-padding) * 2));
+    aspect-ratio: 1 / 1;
+
+    ::deep > .floating-circle-layer {
+        position: absolute;
+        content: '';
+        inset: 0;
+
+        z-index: 0;
+
+        pointer-events: none;
+
+        display: grid;
+        place-items: center;
+
+        > * {
+            position: absolute;
+            content: '';
+
+            pointer-events: auto;
+
+            z-index: 1;
+        }
+
+        &[data-animation="SpinClockwise"] {
+            animation: rotate-clockwise var(--layer-animation-speed) linear infinite;
+
+            > * {
+                animation: rotate-counterclockwise var(--layer-animation-speed) linear infinite;
+            }
+        }
+
+        &[data-animation="SpinCounterclockwise"] {
+            animation: rotate-counterclockwise var(--layer-animation-speed) linear infinite;
+
+            > * {
+                animation: rotate-clockwise var(--layer-animation-speed) linear infinite;
+            }
+        }
+    }
+
+    @for $layerItemCount from 1 through $maxLayerItems {
+        ::deep > .floating-circle-layer[data-count="#{$layerItemCount}"] {
+
+            $angle: 360deg / $layerItemCount;
+
+            @for $i from 1 through $layerItemCount {
+
+                $alpha: ($i * $angle);
+                $xAngle: sin(($angle * $i) - $angle - 90);
+                $yAngle: cos(($angle * $i) - $angle - 90);
+
+                :nth-child(#{$i}) {
+
+                    transform: translate(calc(#{$xAngle} * var(--layer-radius)), calc(#{$yAngle} * var(--layer-radius)));
+                    transform-origin: calc(#{$xAngle} * var(--layer-radius) + 50%) calc(#{$yAngle} * var(--layer-radius) + 50%);
+                }
+            }
+        }
+    }
+}

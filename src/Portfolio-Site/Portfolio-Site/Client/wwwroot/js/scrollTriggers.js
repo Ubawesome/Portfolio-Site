@@ -119,27 +119,6 @@ function setUpScrollableTriggers() {
                 ease: 'linear'
             }
             );
-
-
-
-        //    gsap.to(child, {
-        //        scrollTrigger: {
-        //            trigger: scrollable,
-        //            start: 'top top',
-        //            end: 'bottom top',
-        //            scrub: true,
-        //            invalidateOnRefresh: true
-        //        },
-        //        translateY: (index, target, targets) => {
-        //            let scrollSpeed = 1;
-        //            if (target.hasAttribute('data-scroll-speed')) {
-        //                scrollSpeed = target.getAttribute('data-scroll-speed');
-        //            }
-
-        //            return String(height * scrollSpeed) + 'px';
-        //        },
-        //        ease: 'linear'
-        //    });
         });
     });
 }
@@ -183,5 +162,57 @@ function setUpGlideTrigger(container, element, animationSpeed = 1, triggerStart 
             opacity: 0,
             ease: 'linear'
         });
+}
+
+function setUpSliderTrigger(slider) {
+    const sliderContent = slider.querySelector('.slider-content');
+    const sliderControls = slider.querySelector('.slider-controls');
+
+    if (sliderContent == null)
+        return;
+
+    const children = sliderContent.children;
+
+    Array.from(children).forEach((child) => {
+        gsap.timeline({
+            defaults: { ease: "none" },
+            scrollTrigger: {
+                scroller: sliderContent,
+                horizontal: true,
+                trigger: child,
+                start: "left right",
+                end: "right left",
+                scrub: true,
+            }
+        }).from(child, {
+            scale: 0.75,
+            opacity: 0.5
+        }).to(child, {
+            scale: 0.75,
+            opacity: 0.5
+        });
+
+        const id = child.getAttribute('id');
+        const itemButton = sliderControls.querySelector("[data-item='" + id + "']")
+
+        let classTargets = [];
+
+        if (itemButton !== null) {
+            classTargets = [child, itemButton];
+        } else {
+            classTargets = [child];
+        }
+
+        ScrollTrigger.create({
+            scroller: sliderContent,
+            horizontal: true,
+            trigger: child,
+            start: 'center right',
+            end: 'center left',
+            toggleClass: { targets: classTargets, className: 'active' }
+        });
+    });
+
+
 }
 

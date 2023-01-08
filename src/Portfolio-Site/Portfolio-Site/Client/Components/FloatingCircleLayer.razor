@@ -1,0 +1,35 @@
+﻿<div class="floating-circle-layer"
+     style="--layer-radius: @GetRadiusProp(); --layer-animation-speed: @AnimationSpeed;"
+     data-count="@ItemCount"
+     data-animation="@Animation.ToString()"
+     @attributes="@AdditionalAttributes">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter]
+    public int ItemCount { get; set; } = 12;
+    [Parameter]
+    public Size LayerSize { get; set; } = Size.Small;
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public AnimationType Animation { get; set; } = AnimationType.None;
+
+    [Parameter]
+    public string AnimationSpeed { get; set; } = "50s";
+
+    public enum AnimationType
+    {
+        None,
+        SpinClockwise,
+        SpinCounterclockwise
+    }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+
+    private string GetRadiusProp() => $"var(--layer-radius-{LayerSize.EnumToClass()})";
+}

@@ -1,0 +1,16 @@
+﻿<div class="floating-circle" style="--circle-size: @GetRadiusProp();" @attributes="@AdditionalAttributes">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter]
+    public Size CircleSize { get; set; } = Size.Small;
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+
+    private string GetRadiusProp() => $"var(--circle-size-{CircleSize.EnumToClass()})";
+}
