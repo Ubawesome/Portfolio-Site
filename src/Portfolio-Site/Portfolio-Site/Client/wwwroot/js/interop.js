@@ -72,6 +72,20 @@ function scrollToElement(elementId) {
     }
 };
 
+function scrollToElementInContainer(element, container, direction) {
+    if (element instanceof HTMLElement && container instanceof HTMLElement) {
+
+        let elementPos = 0;
+        if (direction === 'x') {
+            elementPos = element.offsetLeft;
+            container.scrollTo(elementPos, 0);
+        } else if (direction === 'y') {
+            elementPos = element.offsetTop;
+            container.scrollTo(0, elementPos);
+        }
+    }
+}
+
 function getTransformValues(element) {
     const transform = window.getComputedStyle(element).getPropertyValue('transform');
     if (transform != 'none') {

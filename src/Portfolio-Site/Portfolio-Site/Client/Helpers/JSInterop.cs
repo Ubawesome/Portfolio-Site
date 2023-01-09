@@ -14,6 +14,7 @@ namespace Portfolio_Site.Client.Helpers
         public static Task ExecuteAnimationOnce(this IJSRuntime js, ElementReference[] elements, string[] classes) => js.InvokeVoidAsync("executeAnimationOnce", elements, classes).AsTask();
         public static Task SetFocus(this IJSRuntime js, ElementReference element) => js.InvokeVoidAsync("setFocus", element).AsTask();
         public static Task ScrollToElement(this IJSRuntime js, string elementId) => js.InvokeVoidAsync("scrollToElement", elementId).AsTask();
+        public static Task ScrollToElementInContainer(this IJSRuntime js, ElementReference element, ElementReference container, string direction = "y") => js.InvokeVoidAsync("scrollToElementInContainer", element, container, direction).AsTask();
 
         public static async Task UpdateScroll(this IJSRuntime js)
         {
