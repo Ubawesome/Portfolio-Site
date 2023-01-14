@@ -22,7 +22,6 @@
     <None Remove="Components\SectionHeader.razor.css" />
     <None Remove="Components\Slider.razor.css" />
     <None Remove="Components\Tabs.razor.css" />
-    <None Remove="Components\Tile.razor.css" />
     <None Remove="Shared\Loading.razor.css" />
   </ItemGroup>
 
@@ -42,10 +41,6 @@
     <Content Include="Components\Gallery.razor.css" />
     <Content Include="Components\Slider.razor.css" />
     <Content Include="Components\Tabs.razor.css">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Components\Tile.razor.css">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
