@@ -27,7 +27,7 @@
     scrollbar-width: none; /* Firefox */
 }
 
-/* Chrome */
+/* Chrome */ 
 .slider-content::-webkit-scrollbar {
     display: none;
 }
@@ -42,9 +42,10 @@
     scroll-snap-align: center;
 
     pointer-events: none !important;
+    margin-inline: 20%;
 }
 
-::deep .slider-item:first-child {
+/*::deep .slider-item:first-child {
     margin-inline-start: 20%;
 }
 
@@ -52,6 +53,7 @@
     margin-inline-end: 20%;
     margin-inline-start: -20%;
 }
+*/
 
 ::deep .slider-item.active { 
     z-index: 10;
@@ -74,6 +76,7 @@
 
 .slider-controls > [data-item] {
     display: block;
+    cursor: pointer;
 
     height: var(--slider-controls-height);
     width: var(--slider-controls-height);

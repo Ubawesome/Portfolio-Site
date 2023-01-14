@@ -1,7 +1,8 @@
 ﻿<div class="floating-circle-layer"
-     style="--layer-radius: @GetRadiusProp(); --layer-animation-speed: @AnimationSpeed;"
+     style="--layer-radius: @GetRadiusProp(); --layer-animation-speed: @AnimationSpeed; --orbit-thickness: @OrbitThickness; --orbit-color: @OrbitColor;"
      data-count="@ItemCount"
      data-animation="@Animation.ToString()"
+     data-orbit="@Orbit.ToString().ToLowerInvariant()"
      @attributes="@AdditionalAttributes">
     @ChildContent
 </div>
@@ -14,6 +15,15 @@
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public bool Orbit { get; set; } = true;
+
+    [Parameter]
+    public string OrbitThickness { get; set; } = "0.5rem";
+
+    [Parameter]
+    public string OrbitColor { get; set; } = "var(--primary-900)";
 
     [Parameter]
     public AnimationType Animation { get; set; } = AnimationType.None;
