@@ -1,4 +1,5 @@
-﻿
+﻿@import '../wwwroot/css/mixins.scss';
+@import '../wwwroot/css/variables.scss';
 
 ///////////////////////////////////////////////////////////
 // Plain SASS Trigonometry Algorithm in Taylor Expansion //
@@ -82,41 +83,75 @@ $_precision: 10;
 .floating-circle {
     $maxLayerItems: 12;
 
-    --layer-radius-sm: clamp(4rem, 4vw + 2rem, 12rem);
-    --layer-radius-md: clamp(8rem, 8vw + 6rem, 24rem);
-    --layer-radius-lg: clamp(16rem, 14vw + 8rem, 36rem);
-
+    --layer-radius-sm: clamp(2rem, 4vw + 2rem, 12rem);
+    --layer-radius-md: clamp(4rem, 8vw + 6rem, 24rem);
+    --layer-radius-lg: clamp(8rem, 14vw + 8rem, 36rem);
+    --layer-radius-sm: clamp(5rem, 16vw, 10rem);
+    --layer-radius-md: clamp(10rem, 32vw, 20rem);
+    --layer-radius-lg: clamp(15rem, 48vw, 30rem);
     --circle-size-sm: calc(var(--layer-radius-sm) * 2);
     --circle-size-md: calc(var(--layer-radius-md) * 2);
     --circle-size-lg: calc(var(--layer-radius-lg) * 2);
-
     --layer-radius: var(--layer-radius-sm);
     --layer-animation-speed: 50s;
-
-    --circle-padding: clamp(2rem, 2vw, 6rem);
+    --circle-padding: clamp(2rem, 4vw, 6rem);
     --circle-size: var(--circle-size-sm);
-
     --orbit-thickness: 0.5rem;
     --orbit-color: var(--primary-900);
-
     position: relative;
     width: calc(var(--circle-size) + (var(--circle-padding) * 2));
     aspect-ratio: 1 / 1;
+    margin-inline: auto;
+
+    &[data-size="sm"] {
+        --circle-size: var(--circle-size-sm);
+    }
+
+    &[data-size="md"] {
+        --circle-size: var(--circle-size-md);
+
+        @include screen-width-md {
+            --circle-size: var(--circle-size-sm);
+        }
+    }
+
+    &[data-size="lg"] {
+        --circle-size: var(--circle-size-lg);
+
+        @include screen-width-lg {
+            --circle-size: var(--circle-size-md);
+        }
+    }
 
     ::deep > .floating-circle-layer {
         position: absolute;
         content: '';
-
         inset: 0;
-
         z-index: 0;
-
         pointer-events: none;
-
         display: grid;
         place-items: center;
         overflow: visible;
 
+        &[data-size="sm"] {
+            --layer-radius: var(--layer-radius-sm);
+        }
+
+        &[data-size="md"] {
+            --layer-radius: var(--layer-radius-md);
+
+            @include screen-width-md {
+                display: none;
+            }
+        }
+
+        &[data-size="lg"] {
+            --layer-radius: var(--layer-radius-lg);
+
+            @include screen-width-lg {
+                display: none;
+            }
+        }
 
         &[data-animation="SpinClockwise"] {
             animation: rotate-clockwise var(--layer-animation-speed) linear infinite;
@@ -145,14 +180,11 @@ $_precision: 10;
         &[data-orbit="true"]::before {
             position: absolute;
             content: '';
-
             left: 50%;
             top: 50%;
             translate: -50% -50%;
-
             width: calc(var(--layer-radius) * 2);
             height: calc(var(--layer-radius) * 2);
-
             border: var(--orbit-thickness) var(--orbit-color) dotted;
             border-radius: 50%;
         }
@@ -160,9 +192,7 @@ $_precision: 10;
         > * {
             position: absolute;
             content: '';
-
             pointer-events: auto;
-
             z-index: 1;
         }
     }
@@ -179,10 +209,8 @@ $_precision: 10;
                 $yAngle: cos(($angle * $i) - $angle - 90);
 
                 :nth-child(#{$i}) {
-
                     transform: translate(calc(#{$xAngle} * var(--layer-radius)), calc(#{$yAngle} * var(--layer-radius)));
                     -webkit-transform: translate(calc(#{$xAngle} * var(--layer-radius)), calc(#{$yAngle} * var(--layer-radius)));
-
                     transform-origin: calc(#{$xAngle} * var(--layer-radius) + 50%) calc(#{$yAngle} * var(--layer-radius) + 50%);
                     -webkit-transform-origin: calc(#{$xAngle} * var(--layer-radius) + 50%) calc(#{$yAngle} * var(--layer-radius) + 50%);
                 }

@@ -15,7 +15,7 @@
 .slider-content {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: 80%;
+    grid-auto-columns: 100%;
 
     overflow-x: auto;
     overscroll-behavior-inline: contain;

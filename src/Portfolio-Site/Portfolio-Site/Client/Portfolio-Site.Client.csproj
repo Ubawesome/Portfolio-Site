@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Content Remove="C:\Users\Caleb\.nuget\packages\blazortransitionableroute\4.0.0\contentFiles\any\net6.0\wwwroot\jsInterop.js" />
+    <Content Remove="compilerconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +28,7 @@
 
   <ItemGroup>
     <SassFile Remove="Components\FloatingCircleLayer.razor.scss" />
+    <SassFile Remove="wwwroot\css\variables.scss" />
   </ItemGroup>
 
   <ItemGroup>
@@ -61,7 +63,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="LibSassBuilder" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.1" PrivateAssets="all" />
   </ItemGroup>
@@ -74,4 +75,7 @@
     <Folder Include="wwwroot\css\img\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
+  </ItemGroup>
 </Project>

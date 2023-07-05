@@ -1,0 +1,26 @@
+﻿[
+  {
+    "outputFile": "Components/FloatingCircleLayer.razor.css",
+    "inputFile": "Components/FloatingCircleLayer.razor.scss"
+  },
+  {
+    "outputFile": "Components/FloatingCircle.razor.css",
+    "inputFile": "Components/FloatingCircle.razor.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/variables.css",
+    "inputFile": "wwwroot/css/variables.scss"
+  },
+  {
+    "outputFile": "Components/Tile.razor.css",
+    "inputFile": "Components/Tile.razor.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/styles.css",
+    "inputFile": "wwwroot/css/styles.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/mixins.css",
+    "inputFile": "wwwroot/css/mixins.scss"
+  }
+]
