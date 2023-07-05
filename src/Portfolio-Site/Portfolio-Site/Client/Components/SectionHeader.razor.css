@@ -2,6 +2,7 @@
     width: 100%;
     padding-inline: min(20rem, 12vw);
     overflow: hidden;
+    letter-spacing: -0.05em;
 }
 
 .section-header-text {
