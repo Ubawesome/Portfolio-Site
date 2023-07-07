@@ -22,5 +22,9 @@
   {
     "outputFile": "wwwroot/css/mixins.css",
     "inputFile": "wwwroot/css/mixins.scss"
+  },
+  {
+    "outputFile": "Components/Cursor.razor.css",
+    "inputFile": "Components/Cursor.razor.scss"
   }
 ]

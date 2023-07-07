@@ -18,6 +18,8 @@
     background-color: var(--primary-900);
     box-shadow: 0.15rem 0.15rem 0.15rem var(--primary-000);
 
+    z-index: 5;
+
     &:hover {
         .tile-image {
             scale: 105%;

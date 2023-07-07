@@ -1,0 +1,12 @@
+﻿@inject IJSRuntime JSRuntime
+
+<div id="cursor" @ref="cursor" class="cursor" />
+
+@code {
+    ElementReference cursor;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntime.RegisterCursor(cursor);
+    }
+}
