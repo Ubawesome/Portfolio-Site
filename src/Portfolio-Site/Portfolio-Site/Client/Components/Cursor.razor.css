@@ -1,0 +1,15 @@
+﻿.cursor {
+  position: fixed;
+  width: 25vmin;
+  aspect-ratio: 1/1;
+  /*background-image: radial-gradient(hsl(0 0% 100% / 0.75) 0%, hsl(0 0% 100% / 0) 100%);*/
+  background: white;
+  top: 0;
+  left: 0;
+  translate: -50%;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(2vmin);
+  mix-blend-mode: difference;
+  z-index: 2;
+}

@@ -17,6 +17,7 @@
     <None Remove="Components\Carousel.razor.css" />
     <None Remove="Components\Checkbox.razor.css" />
     <None Remove="Components\Container.razor.css" />
+    <None Remove="Components\Cursor.razor.scss" />
     <None Remove="Components\FloatingCircle.razor.scss" />
     <None Remove="Components\FormField.razor.css" />
     <None Remove="Components\Gallery.razor.css" />
@@ -37,6 +38,7 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Include="Components\Cursor.razor.scss" />
     <Content Include="Components\FloatingCircleLayer.razor.scss" />
     <Content Include="Components\FloatingCircle.razor.scss" />
     <Content Include="Components\FormField.razor.css" />

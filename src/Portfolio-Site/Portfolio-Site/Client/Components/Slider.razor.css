@@ -10,6 +10,8 @@
     display: grid;
     grid-auto-flow: row;
     grid-auto-rows: 1fr auto;
+
+    z-index: 5;
 }
 
 .slider-content {

@@ -11,6 +11,8 @@
     border-radius: 0.25rem;
     color: var(--grey-700);
     overflow: visible;
+
+    z-index: 5;
 }
 
 .card > * {
