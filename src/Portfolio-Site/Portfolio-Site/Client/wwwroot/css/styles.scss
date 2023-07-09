@@ -509,8 +509,8 @@ select {
 }
 
 .spinner {
-    --spinner-height: 20rem;
-    --spinner-width: 1rem;
+    --spinner-height: 50vmin;
+    --spinner-width: 2vmin;
     --spinner-animation-duration: 5000ms;
 
     position: relative;

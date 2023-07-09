@@ -26,5 +26,9 @@
   {
     "outputFile": "Components/Cursor.razor.css",
     "inputFile": "Components/Cursor.razor.scss"
+  },
+  {
+    "outputFile": "Shared/NavMenu.razor.css",
+    "inputFile": "Shared/NavMenu.razor.scss"
   }
 ]

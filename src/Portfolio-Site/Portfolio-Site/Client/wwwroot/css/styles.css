@@ -59,6 +59,7 @@ h5 {
 
 blockquote {
   line-height: 1.8rem;
+  z-index: 4;
 }
 
 /* Tile Styles */
@@ -433,8 +434,8 @@ div.validation-message {
 }
 
 .spinner {
-  --spinner-height: 20rem;
-  --spinner-width: 1rem;
+  --spinner-height: 50vmin;
+  --spinner-width: 2vmin;
   --spinner-animation-duration: 5000ms;
   position: relative;
   width: calc(var(--spinner-height) * 2);
