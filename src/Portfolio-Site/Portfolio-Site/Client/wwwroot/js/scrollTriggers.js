@@ -65,6 +65,10 @@ function setUpNavTriggers() {
 
 function setUpSectionTriggers() {
     const sections = document.querySelectorAll('section');
+    const indicator = document.querySelector('.section-indicator');
+
+    let leftTo = gsap.quickTo(indicator, "left", { duration: 0.5, ease: "power3" }),
+        widthTo = gsap.quickTo(indicator, "width", { duration: 0.5, ease: "power3" });
 
     sections.forEach((section) => {
 
@@ -77,20 +81,24 @@ function setUpSectionTriggers() {
                 trigger: section,
                 start: 'top 10%',
                 end: 'bottom 10%',
+                markers: true,
+                invalidateOnRefresh: true,
                 toggleClass: { targets: item, className: 'active' },
-                onEnter: ({ progress, direction, isActive }) => updateCurrentSection(item),
-                onEnterBack: ({ progress, direction, isActive }) => updateCurrentSection(item),
+                onToggle: ({ progress, direction, isActive }) => isActive ? updateCurrentSection(item, leftTo, widthTo) : null,
             });
         }
     });
 }
 
-function updateCurrentSection(item) {
-    const indicator = document.querySelector('.section-indicator');
-
-    if (indicator != null) {
-        gsap.to(indicator, { left: item.offsetLeft, width: item.offsetWidth, duration: 0.5, ease: 'power3' });
+function updateCurrentSection(item, leftTo, widthTo) {
+    if (item == null) {
+        item = document.querySelector("nav nav-link.active");
     }
+    const bounds = item.getBoundingClientRect();
+
+    leftTo(item.offsetLeft);
+    widthTo(item.offsetWidth);
+    //    gsap.quickTo(indicator, { left: item.offsetLeft, width: item.offsetWidth, duration: 0.5, ease: 'power3' });
 }
 
 function setUpScrollableTriggers() {
