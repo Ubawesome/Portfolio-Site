@@ -77,10 +77,20 @@ function setUpSectionTriggers() {
                 trigger: section,
                 start: 'top 10%',
                 end: 'bottom 10%',
-                toggleClass: { targets: item, className: 'active' }
+                toggleClass: { targets: item, className: 'active' },
+                onEnter: ({ progress, direction, isActive }) => updateCurrentSection(item),
+                onEnterBack: ({ progress, direction, isActive }) => updateCurrentSection(item),
             });
         }
     });
+}
+
+function updateCurrentSection(item) {
+    const indicator = document.querySelector('.section-indicator');
+
+    if (indicator != null) {
+        gsap.to(indicator, { left: item.offsetLeft, width: item.offsetWidth, duration: 0.5, ease: 'power3' });
+    }
 }
 
 function setUpScrollableTriggers() {
