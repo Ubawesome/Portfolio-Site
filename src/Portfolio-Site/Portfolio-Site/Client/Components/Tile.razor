@@ -11,13 +11,17 @@
     <div class="tile-header" @onclick="OnHeaderClicked">
         @if (TileHeader != null)
         {
-            @TileHeader
+            <span>
+                @TileHeader
+            </span>
         }
     </div>
     <div class="tile-body" @onclick="OnBodyClicked">
         @if (TileBody != null)
         {
-            @TileBody
+            <span>
+                @TileBody
+            </span>
         }
     </div>
 </div>
