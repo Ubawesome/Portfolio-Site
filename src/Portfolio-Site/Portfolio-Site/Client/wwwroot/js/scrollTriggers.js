@@ -75,8 +75,8 @@ function setUpSectionTriggers() {
         if (item !== null) {
             ScrollTrigger.create({
                 trigger: section,
-                start: 'top 25%',
-                end: 'bottom 25%',
+                start: 'top 10%',
+                end: 'bottom 10%',
                 toggleClass: { targets: item, className: 'active' }
             });
         }
