@@ -6,7 +6,6 @@
     --tile-body-bg-blur: 0.35rem;
     --tile-body-bg-brightness: 0.75;
     --tile-header-bg-opacity: 1;
-
     position: relative;
     width: 100%;
     max-width: 100%;
@@ -16,11 +15,15 @@
     color: var(--grey-700);
     border-radius: 0.25rem;
     background-color: var(--primary-900);
-    box-shadow: 0.15rem 0.15rem 0.15rem var(--primary-000);
-
+    box-shadow: var(--box-shadow-primary);
     z-index: 5;
 
-    &:hover {
+    &:hover, &:focus-visible, &:focus-within
+    {
+        .tile-header-contents {
+            font-weight: normal;
+        }
+
         .tile-image {
             scale: 105%;
         }
@@ -28,6 +31,10 @@
         &::before {
             opacity: 1;
         }
+    }
+
+    & * {
+        pointer-events: none;
     }
 }
 
@@ -50,6 +57,7 @@
 .tile-image, .tile-header, .tile-body {
     position: absolute;
     inset: 0;
+    pointer-events: initial;
 }
 
 .tile-image {
@@ -63,7 +71,7 @@
 }
 
 .tile::before {
-    --bg-glow-color: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) + 64%) / 10%);
+    --bg-glow-color: hsl(from var(--secondary-700) h s l / 0.1);
     content: '';
     position: absolute;
     border-radius: inherit;
@@ -83,7 +91,9 @@
 }
 
 .tile:not(.expanded) {
-    &:hover {
+    &:hover, &:focus-visible,
+    &:focus-within
+    {
         > .tile-body {
             -webkit-clip-path: polygon(0 0, 0 25%, 25% 0);
             clip-path: polygon(0 0, 0 25%, 25% 0);
@@ -99,7 +109,7 @@
         z-index: 1;
         cursor: pointer;
 
-        &:hover {
+        &:hover, &:focus-visible, &:focus-within {
             filter: brightness(2);
         }
 
@@ -110,7 +120,9 @@
 }
 
 .tile.expanded {
-    &:hover { 
+    &:hover, &:focus-visible,
+    &:focus-within
+    { 
         > .tile-header {
             -webkit-clip-path: polygon(100% 75%, 75% 100%, 100% 100%);
             clip-path: polygon(100% 75%, 75% 100%, 100% 100%);
@@ -124,8 +136,8 @@
     }
 
     .tile-image {
-        filter: brightness(0.75) blur(0.35rem);
-        opacity: var(--tile-body-bg-opacity);
+    //    filter: brightness(0.5) blur(0.25rem);
+    //    opacity: 0.5;
     }
 
     > .tile-header {
@@ -135,7 +147,7 @@
         -webkit-clip-path: polygon(100% 80%, 80% 100%, 100% 100%);
         clip-path: polygon(100% 80%, 80% 100%, 100% 100%);
 
-        &:hover {
+        &:hover, &:focus-visible, &:focus-within {
             filter: brightness(2);
         }
 
@@ -159,17 +171,12 @@
 }
 
 .tile-header {
-    display: grid;
-    align-items: flex-end;
+    display: flex;
 
-    padding-inline: unquote("max(2rem, 2vw)");
-    padding-block-end: unquote("max(2rem, 3vw)");
+    --tile-header-overlay-color-top: var(--primary-500);
+    --tile-header-overlay-color-bottom: var(--primary-300);
 
-    font-size: var(--fs-h-3);
-    font-weight: 500;
-    color: var(--grey-900);
-    text-align: right;
-    background-image: unquote("linear-gradient(hsl(var(--primary) / 40%) 0%, var(--primary-000) 80%)");
+    background-image: linear-gradient(hsl(from var(--tile-header-overlay-color-top) h s l / 0.4) 0%, var(--tile-header-overlay-color-bottom) 80%);
     mix-blend-mode: hard-light;
 
     filter: brightness(1);
@@ -183,24 +190,30 @@
 
         transition: opacity 600ms linear;
     }
+
+    .tile-header-contents {
+        display: grid;
+        align-items: flex-end;
+        flex-grow: 1;
+
+        padding-inline: max(2rem, 2vw);
+        padding-block-end: max(2rem, 3vw);
+
+        font-family: var(--font-header);
+        font-size: var(--fs-h-3);
+        font-weight: lighter;
+        color: var(--grey-900);
+        text-align: right;
+
+        transition: font-weight ease-out 250ms;
+    }
 }
 
 .tile-body {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    padding-inline: unquote("max(2rem, 2vw)");
-    padding-block: unquote("max(2rem, 2vw)");
-
-    font-size: var(--fs-p-3);
-    font-weight: 300;
-    line-height: 1.2;
-    letter-spacing: 0.1rem;
-    color: var(--grey-900);
-
-    background: var(--tile-body-bg-color);
-    mix-blend-mode: hard-light;
+    background: hsl(from var(--tile-body-bg-color) h s l / 0.35);
+    backdrop-filter: contrast(150%) saturate(80%) brightness(50%) blur(0.5rem);
+    //mix-blend-mode: hard-light;
 
     filter: brightness(1);
 
@@ -210,6 +223,22 @@
 
     > * {
         transition: opacity 600ms linear;
+    }
+
+    .tile-body-contents {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-grow: 1;
+
+        padding-inline: max(2rem, 2vw);
+        padding-block: max(2rem, 2vw);
+
+        font-size: var(--fs-p-3);
+        font-weight: 300;
+        line-height: 1.2;
+        letter-spacing: 0.1rem;
+        color: var(--grey-900);
     }
 }
 

@@ -30,5 +30,25 @@
   {
     "outputFile": "Shared/NavMenu.razor.css",
     "inputFile": "Shared/NavMenu.razor.scss"
+  },
+  {
+    "outputFile": "Components/ThemeSwitcher.razor.css",
+    "inputFile": "Components/ThemeSwitcher.razor.scss"
+  },
+  {
+    "outputFile": "Components/Card.razor.css",
+    "inputFile": "Components/Card.razor.scss"
+  },
+  {
+    "outputFile": "Components/Tabs.razor.css",
+    "inputFile": "Components/Tabs.razor.scss"
+  },
+  {
+    "outputFile": "Shared/NavItem.razor.css",
+    "inputFile": "Shared/NavItem.razor.scss"
+  },
+  {
+    "outputFile": "Components/ColorSwatch.razor.css",
+    "inputFile": "Components/ColorSwatch.razor.scss"
   }
 ]

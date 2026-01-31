@@ -21,7 +21,7 @@
 
     background-color: hsl(0 0% 0% / 0.1);
     border: 0.15em dashed transparent;
-    border-bottom: 0.15em solid var(--accent-1-500);
+    border-bottom: 0.15em solid var(--secondary);
 
     cursor: pointer;
 
@@ -35,14 +35,14 @@
 }
 
 .selected-item {
-    border-bottom: 0.15em solid var(--accent-2-900);
+    border-bottom: 0.15em solid var(--accent-2-700);
 }
 
 .gallery.dragging .gallery-item:not(.hovered-item) {
-    border: 0.15em dashed var(--accent-1-500);
+    border: 0.15em dashed var(--secondary);
 }
 
 .hovered-item {
-    border: 0.15em dashed var(--accent-2-500);
+    border: 0.15em dashed var(--accent-2-700);
 }
 

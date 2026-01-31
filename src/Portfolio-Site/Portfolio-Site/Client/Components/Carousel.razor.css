@@ -11,7 +11,7 @@
 
     width: 100%;
     aspect-ratio: 16 / 9;
-    border-bottom: 0.25em solid var(--primary-500);
+    border-bottom: 0.25em solid var(--primary-300);
 
     overflow: hidden;
 }
@@ -107,19 +107,19 @@
     height: var(--progress-indicator-height);
     width: var(--progress-indicator-height);
 
-    background-color: var(--accent-2-900);
+    background-color: var(--accent-1-700);
     border-left: solid var(--progress-indicator-underline-height) var(--accent-1-100);
     border-radius: 50%;
 
     transform: translateY(-100%);
 
-    opacity: 0.25;
+    opacity: 0.45;
     transition: opacity ease-in 250ms 250ms,
                 transform ease-in 250ms 350ms;
 }
 
 .carousel-progress span.previous, .carousel span.next {
-    opacity: 0.5;
+    opacity: 0.65;
     transition: opacity ease-in 250ms 150ms,
                 transform ease-in 250ms 300ms;
 }

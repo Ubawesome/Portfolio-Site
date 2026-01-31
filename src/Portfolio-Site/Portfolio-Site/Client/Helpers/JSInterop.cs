@@ -32,6 +32,6 @@ namespace Portfolio_Site.Client.Helpers
             await js.InvokeVoidAsync("navDragEnd", element);
         }
 
-        public static Task RegisterCursor(this IJSRuntime js, ElementReference element) => js.InvokeVoidAsync("registerCursor", element).AsTask();
+        public static Task RegisterCursor(this IJSRuntime js, ElementReference element, float duration) => js.InvokeVoidAsync("registerCursor", element, duration).AsTask();
     }
 }

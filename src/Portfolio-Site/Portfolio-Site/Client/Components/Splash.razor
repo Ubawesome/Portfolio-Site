@@ -10,14 +10,16 @@
 
     @if (Foreground != null) {
         <div class="scrollable-foreground">@Foreground</div>
-
     }
 
     @if (Title != null) {
-        <div class="scrollable-title" data-scroll-speed="@TitleScrollSpeed" data-scroll-offset="@TitleScrollOffset">@Title</div>
-
+        <h1 class="scrollable-title" data-scroll-speed="@TitleScrollSpeed" data-scroll-offset="@TitleScrollOffset">@Title</h1>
     }
 </div>
+@if (HasSideHeader && Header != null)
+{
+    <span class="section-scroller side-header" data-sticky="true">@Header</span>
+}
 
 @code {
     [Parameter(CaptureUnmatchedValues = true)]
@@ -29,6 +31,11 @@
     public RenderFragment? Foreground { get; set; }
     [Parameter]
     public RenderFragment? Title { get; set; }
+
+    [Parameter]
+    public bool HasSideHeader { get; set; } = false;
+    [Parameter]
+    public string? Header { get; set; }
 
     [Parameter]
     public double ScrollSpeed { get; set; } = 1;
