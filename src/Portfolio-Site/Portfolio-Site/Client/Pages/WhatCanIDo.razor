@@ -1,10 +1,10 @@
 ﻿@inject IJSRuntime JSRuntime
 
 <Section id="what-can-i-do">
-    <Splash ScrollSpeed="1" BackgroundScrollSpeed="-0.5" TitleScrollSpeed="0.5">
-        <Background>
-            <img src="/imgs/Background3.webp" loading="lazy" />
-        </Background>
+    <Splash ScrollSpeed="1" BackgroundScrollSpeed="-0.5" TitleScrollSpeed="0.5" HasSideHeader="true" Header="Skills">
+        @* <Background> *@
+        @*     <img src="/imgs/Background3.webp" loading="lazy" /> *@
+        @* </Background> *@
         <Title>
             What can I do?
         </Title>
@@ -16,7 +16,24 @@
         </blockquote>
     </Container>
 
-    <SectionHeader Title="Solutions" ContainerClass="bg-accent-1-7" TextClass="text-accent-1-1" />
+    <Container Inline Class="skills-grid">
+        <Card>
+            <CardTitle>Front-End</CardTitle>
+            <CardBody>
+                Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
+            </CardBody>
+        </Card>
+        <Card>
+            <CardTitle>
+                Back-End
+            </CardTitle>
+            <CardBody>
+                Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
+            </CardBody>
+        </Card>
+    </Container>
+
+    <SectionHeader Title="Solutions" ContainerClass="bg-secondary-9" TextClass="text-secondary" />
 
     <Container Inline="true">
         <Tabs TabStyle="TabStyle.Card" Orientation="Orientation.Horizontal">
@@ -63,23 +80,25 @@
         </Tabs>
     </Container>
 
-    <SectionHeader Title="Examples" ContainerClass="bg-accent-2-7" TextClass="text-accent-2-1" />
+    <SectionHeader Title="Examples" ContainerClass="bg-accent-1-9" TextClass="text-accent-1" />
 
     <FloatingCircle CircleSize="Size.Large">
-        <FloatingCircleLayer ItemCount="6" LayerSize="Size.Small"
+        <FloatingCircleLayer ItemCount="7" LayerSize="Size.Small"
                              Animation="FloatingCircleLayer.AnimationType.SpinClockwise" AnimationSpeed="100s"
                              Orbit="true" OrbitThickness="0.15rem">
             <Button Color="Color.Primary" Size="Size.Small">Primary</Button>
+            <Button Color="Color.Secondary" Size="Size.Small">Secondary</Button>
             <Button Color="Color.Accent1" Size="Size.Small">Accent 1</Button>
             <Button Color="Color.Accent2" Size="Size.Small">Accent 2</Button>
             <Button Color="Color.Accent3" Size="Size.Small">Accent 3</Button>
             <Button Color="Color.Success" Size="Size.Small">Success</Button>
             <Button Color="Color.Danger" Size="Size.Small">Danger</Button>
         </FloatingCircleLayer>
-        <FloatingCircleLayer ItemCount="6" LayerSize="Size.Medium"
+        <FloatingCircleLayer ItemCount="7" LayerSize="Size.Medium"
                              Animation="FloatingCircleLayer.AnimationType.SpinCounterclockwise" AnimationSpeed="200s"
                              Orbit="true" OrbitThickness="0.15rem">
             <Button Color="Color.Primary">Primary</Button>
+            <Button Color="Color.Secondary">Secondary</Button>
             <Button Color="Color.Accent1">Accent 1</Button>
             <Button Color="Color.Accent2">Accent 2</Button>
             <Button Color="Color.Accent3">Accent 3</Button>
@@ -145,7 +164,7 @@
                                     </InputSelect>
                                 </FormField>
 
-                                <Button Color="Color.Accent1" Size="Size.Small" type="submit">Submit</Button>
+                                <Button Color="Color.Secondary" Size="Size.Small" type="submit">Submit</Button>
                                 <Button Color="Color.Primary" Size="Size.Small" type="reset" @onclick="OnClear">Clear</Button>
                             </EditForm>
                         </div>

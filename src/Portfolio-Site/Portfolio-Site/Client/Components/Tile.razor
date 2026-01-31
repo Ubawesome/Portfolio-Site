@@ -2,28 +2,28 @@
     <img class="tile-button tile-open-button" src="/css/icons/fi-xwsrxl-arrow-corner-solid.svg" />
     <img class="tile-button tile-close-button" src="/css/icons/fi-xwslxl-arrow-corner-solid.svg" />
 
-    <div class="tile-image">
+    <div class="tile-image @ImageClass">
         @if (TileImage != null)
         {
             @TileImage
         }
     </div>
-    <div class="tile-header" @onclick="OnHeaderClicked">
+    <button disabled="@(!Expanded)" class="tile-header @HeaderClass" @onclick="OnHeaderClicked">
         @if (TileHeader != null)
         {
-            <span>
+            <div class="tile-header-contents @HeaderClass">
                 @TileHeader
-            </span>
+            </div>
         }
-    </div>
-    <div class="tile-body" @onclick="OnBodyClicked">
+    </button>
+    <button disabled="@(Expanded)" class="tile-body" @onclick="OnBodyClicked">
         @if (TileBody != null)
         {
-            <span>
+            <div class="tile-body-contents @BodyClass">
                 @TileBody
-            </span>
+            </div>
         }
-    </div>
+    </button>
 </div>
 
 
@@ -38,7 +38,14 @@
     public RenderFragment? TileHeader { get; set; }
 
     [Parameter]
-    public RenderFragment? TileBody{ get; set; }
+    public RenderFragment? TileBody { get; set; }
+
+    [Parameter]
+    public string? ImageClass { get; set; }
+    [Parameter]
+    public string? HeaderClass { get; set; }
+    [Parameter]
+    public string? BodyClass { get; set; }
 
     [Parameter]
     public bool Expanded { get; set; }

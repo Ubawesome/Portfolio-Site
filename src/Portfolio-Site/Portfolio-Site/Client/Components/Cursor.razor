@@ -1,12 +1,24 @@
 ﻿@inject IJSRuntime JSRuntime
 
-<div id="cursor" @ref="cursor" class="cursor" />
+<div id="cursor" @ref="cursor" class="cursor @Class" @attributes="@AdditionalAttributes" />
 
 @code {
     ElementReference cursor;
 
+    [Parameter]
+    public float Duration { get; set; } = 0.5f;
+
+    [Parameter]
+    public string Class { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await JSRuntime.RegisterCursor(cursor);
+        if (firstRender)
+        {
+            await JSRuntime.RegisterCursor(cursor, Duration);
+        }
     }
 }

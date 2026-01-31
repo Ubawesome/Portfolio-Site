@@ -46,6 +46,10 @@ function executeAnimationOnce(elementInput, classInput) {
             const el = elementInput[i];
             const cl = classInput[i];
 
+            if (el === null || cl === null) {
+                continue;
+            }
+
             const callback = () => {
                 el.removeEventListener("animationend", callback, false);
                 el.classList.remove(cl);

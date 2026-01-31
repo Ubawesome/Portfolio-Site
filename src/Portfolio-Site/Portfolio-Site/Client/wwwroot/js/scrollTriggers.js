@@ -1,7 +1,4 @@
-﻿
-gsap.registerPlugin(ScrollTrigger);
-
-
+﻿gsap.registerPlugin(ScrollTrigger);
 function setUpNavTriggers() {
     const nav = document.querySelector('#primary-nav');
     const toggle = document.querySelector('#toggle-capsule');
@@ -27,7 +24,7 @@ function setUpNavTriggers() {
         scrub: true,
         invalidateOnRefresh: true,
         onEnter: () => {
-            if (!window.matchMedia('(min-width: 1329px)').matches)
+            if (window.matchMedia('(width <= 1400px)').matches)
                 return;
 
             nav.classList.add('active');
@@ -37,7 +34,7 @@ function setUpNavTriggers() {
             toggle.classList.add('locked');
         },
         onEnterBack: () => {
-            if (!window.matchMedia('(min-width: 1329px)').matches)
+            if (window.matchMedia('(width <= 1400px)').matches)
                 return;
 
             nav.classList.add('active');
@@ -47,14 +44,14 @@ function setUpNavTriggers() {
             toggle.classList.add('locked');
         },
         onLeave: () => {
-            if (!window.matchMedia('(min-width: 1329px)').matches)
+            if (window.matchMedia('(width <= 1400px)').matches)
                 return;
 
             nav.classList.remove('locked');
             toggle.classList.remove('locked');
         },
         onLeaveBack: () => {
-            if (!window.matchMedia('(min-width: 1329px)').matches)
+            if (window.matchMedia('(width <= 1400px)').matches)
                 return;
 
             nav.classList.remove('locked');
@@ -68,7 +65,18 @@ function setUpSectionTriggers() {
     const indicator = document.querySelector('.section-indicator');
 
     let leftTo = gsap.quickTo(indicator, "left", { duration: 0.5, ease: "power3" }),
+        topTo = gsap.quickTo(indicator, "top", { duration: 0.5, ease: "power3" }),
         widthTo = gsap.quickTo(indicator, "width", { duration: 0.5, ease: "power3" });
+
+    const windowSizeMatch = window.matchMedia('(width <= 1400px)');
+
+    function listener({ matches, media }) {
+        if (!matches) {
+            return;
+        }
+
+        updateCurrentSection(null, leftTo, topTo, widthTo);
+    }
 
     sections.forEach((section) => {
 
@@ -81,22 +89,69 @@ function setUpSectionTriggers() {
                 trigger: section,
                 start: 'top 10%',
                 end: 'bottom 10%',
-                markers: true,
+                markers: false,
                 invalidateOnRefresh: true,
                 toggleClass: { targets: item, className: 'active' },
-                onToggle: ({ progress, direction, isActive }) => isActive ? updateCurrentSection(item, leftTo, widthTo) : null,
+                onToggle: ({ progress, direction, isActive }) => isActive ? updateCurrentSection(item, leftTo, topTo, widthTo) : null,
+            });
+        }
+
+        let sectionScrollers = section.querySelectorAll('.section-scroller');
+
+        if (sectionScrollers !== null) {
+            sectionScrollers.forEach((scroller) => {
+                let sticky = false;
+                if (scroller.hasAttribute('data-sticky')) {
+                    sticky = scroller.getAttribute('data-sticky');
+                }
+
+                ScrollTrigger.create({
+                    trigger: section,
+                    start: 'top top-=100%',
+                    end: 'bottom center',
+                    pin: scroller,
+                    pinSpacing: false,
+                    invalidateOnRefresh: true,
+                    toggleClass: { targets: scroller, className: 'active' }
+                });
+
+                gsap.fromTo(scroller, {
+                    letterSpacing: "0.15em",
+                    fontWeight: "100",
+                    margin: "4rem 1rem",
+                }, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top top-=100%',
+                        end: 'bottom center',
+                        scrub: 2,
+                        invalidateOnRefresh: true,
+                    },
+                    letterSpacing: "0.5em",
+                    fontWeight: "700",
+                    margin: "4rem 1rem",
+                    ease: 'linear'
+                });
             });
         }
     });
+
+    windowSizeMatch.addEventListener('change', listener);
 }
 
-function updateCurrentSection(item, leftTo, widthTo) {
-    if (item == null) {
-        item = document.querySelector("nav nav-link.active");
+function updateCurrentSection(item, leftTo, topTo, widthTo) {
+    if (item === null) {
+        item = document.querySelector("nav .nav-link.active");
     }
     const bounds = item.getBoundingClientRect();
 
-    leftTo(item.offsetLeft);
+    if (window.matchMedia('(width <= 1400px)').matches) {
+        leftTo(0);
+        topTo(item.offsetTop + item.offsetHeight);
+    } else {
+        leftTo(item.offsetLeft);
+        topTo(item.offsetHeight);
+    }
     widthTo(item.offsetWidth);
     //    gsap.quickTo(indicator, { left: item.offsetLeft, width: item.offsetWidth, duration: 0.5, ease: 'power3' });
 }
@@ -118,6 +173,10 @@ function setUpScrollableTriggers() {
             if (child.hasAttribute('data-scroll-offset')) {
                 scrollOffset = child.getAttribute('data-scroll-offset');
             }
+            let sticky = false;
+            if (child.hasAttribute('data-sticky')) {
+                sticky = child.getAttribute('data-sticky');
+            }
 
             gsap.set(child, {
                 translateY: (index, target, targets) => String(height * scrollOffset) + 'px',
@@ -130,13 +189,13 @@ function setUpScrollableTriggers() {
                     trigger: scrollable,
                     start: 'top top',
                     end: 'bottom top',
-                    scrub: true,
+                    scrub: 2,
+                    pin: sticky,
                     invalidateOnRefresh: true,
                 },
                 translateY: (index, target, targets) => String((height * scrollOffset) + (height * scrollSpeed)) + 'px',
                 ease: 'linear'
-            }
-            );
+            });
         });
     });
 }
@@ -148,7 +207,7 @@ function setUpGlideTrigger(container, element, animationSpeed = 1, triggerStart 
             trigger: (container !== null) ? container : element,
             start: triggerStart,
             end: triggerEnd,
-            scrub: true,
+            scrub: 1,
             toggleActions: 'play none reverse none',
             invalidateOnRefresh: true
         },

@@ -45,7 +45,7 @@ function updateNavScroll() {
     let toggle = document.querySelector('#toggle-capsule');
     let scroll = (window.scrollY || window.pageYOffset);
 
-    const isLargeScreen = window.matchMedia('(min-width: 1329px)').matches;
+    const isLargeScreen = window.matchMedia('(width > 1400px)').matches;
 
     if (isLargeScreen) {
         if (scroll < window.innerHeight) {

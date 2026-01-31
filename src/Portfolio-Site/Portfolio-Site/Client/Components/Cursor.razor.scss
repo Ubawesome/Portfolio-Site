@@ -1,18 +1,27 @@
 ﻿.cursor {
     position: fixed;
-    width: 25vmin;
+    width: 1.5rem;
     aspect-ratio: 1 / 1;
 
-    background: white;
+    background: transparent;
     top: 0;
     left: 0;
     translate: -50%;
     border-radius: 50%;
+    border: solid 2px var(--grey-900);
 
     pointer-events: none;
 
-    filter: blur(2vmin);
+    //filter: blur(2vmin);
+    //mix-blend-mode: difference;
     mix-blend-mode: difference;
-    z-index: 2;
+
+    z-index: 100000;
+
+    &.cursor-dot {
+        background: var(--grey-900);
+        border: none;
+        width: 4px;
+    }
 }
 

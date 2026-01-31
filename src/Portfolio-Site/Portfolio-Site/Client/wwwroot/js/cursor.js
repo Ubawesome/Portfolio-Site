@@ -1,6 +1,6 @@
-﻿function registerCursor(cursor) {
-    let xTo = gsap.quickTo(cursor, "x", { duration: 2, ease: "power3" }),
-        yTo = gsap.quickTo(cursor, "y", { duration: 1.5, ease: "power3" });
+﻿function registerCursor(cursor, duration) {
+    let xTo = gsap.quickTo(cursor, "x", { duration: duration, ease: "back" }),
+        yTo = gsap.quickTo(cursor, "y", { duration: duration, ease: "back" });
 
     gsap.set(cursor, { xPercent: -50, yPercent: -50 });
 

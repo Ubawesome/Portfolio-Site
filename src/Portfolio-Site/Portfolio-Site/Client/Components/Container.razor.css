@@ -1,6 +1,7 @@
 ﻿.container, .container-full {
-    box-shadow: 0.1rem 0.1rem 0.15rem 0.15rem var(--primary-000);
-    background-color: var(--primary-100);
+    box-shadow: var(--box-shadow-card);
+    background-color: var(--container-bg-color);
+    border: var(--container-border-color) 2px solid;
 }
 
 .container {
@@ -24,4 +25,5 @@
     padding: 0;
     background: transparent;
     box-shadow: none;
+    border: none;
 }

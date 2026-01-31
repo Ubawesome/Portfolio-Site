@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Components\Card.razor.css" />
     <None Remove="Components\Carousel.razor.css" />
     <None Remove="Components\Checkbox.razor.css" />
     <None Remove="Components\Container.razor.css" />
@@ -23,7 +22,6 @@
     <None Remove="Components\Gallery.razor.css" />
     <None Remove="Components\SectionHeader.razor.css" />
     <None Remove="Components\Slider.razor.css" />
-    <None Remove="Components\Tabs.razor.css" />
     <None Remove="Shared\Loading.razor.css" />
   </ItemGroup>
 
@@ -38,17 +36,18 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Include="Components\ThemeSwitcher.razor.scss" />
     <Content Include="Components\Cursor.razor.scss" />
     <Content Include="Components\FloatingCircleLayer.razor.scss" />
     <Content Include="Components\FloatingCircle.razor.scss" />
     <Content Include="Components\FormField.razor.css" />
     <Content Include="Components\Gallery.razor.css" />
     <Content Include="Components\Slider.razor.css" />
-    <Content Include="Components\Tabs.razor.css">
+    <Content Include="Components\Tabs.razor.scss">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Include="Components\Card.razor.css">
+    <Content Include="Components\Card.razor.scss">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -71,10 +70,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Shared\Portfolio-Site.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\css\img\" />
   </ItemGroup>
 
   <ItemGroup>

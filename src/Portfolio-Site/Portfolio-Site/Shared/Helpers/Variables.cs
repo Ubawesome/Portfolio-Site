@@ -9,11 +9,13 @@ namespace Portfolio_Site.Shared.Helpers
     public enum Color
     {
         Primary,
+        Secondary,
         Accent1,
         Accent2,
         Accent3,
         Success,
-        Danger
+        Danger,
+        Grey
     }
 
     public enum Size
@@ -89,11 +91,13 @@ namespace Portfolio_Site.Shared.Helpers
             switch (color)
             {
                 case Color.Primary: return "primary";
+                case Color.Secondary: return "secondary";
                 case Color.Accent1: return "accent-1";
                 case Color.Accent2: return "accent-2";
                 case Color.Accent3: return "accent-3";
                 case Color.Success: return "success";
                 case Color.Danger: return "danger";
+                case Color.Grey: return "grey";
                 default: return "";
             }
         }
