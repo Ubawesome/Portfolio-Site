@@ -4,8 +4,8 @@
 # For more information, please see https://aka.ms/containercompat
 
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
-# FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
-# WORKDIR /app
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+WORKDIR /app
 # EXPOSE 80
 # EXPOSE 443
 
