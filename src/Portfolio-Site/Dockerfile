@@ -13,10 +13,10 @@ EXPOSE 443
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["Portfolio-Site/Server/Portfolio-Site.Server.csproj", "Portfolio-Site/Server/"]
-COPY ["Portfolio-Site/Client/Portfolio-Site.Client.csproj", "Portfolio-Site/Client/"]
-COPY ["Portfolio-Site/Shared/Portfolio-Site.Shared.csproj", "Portfolio-Site/Shared/"]
+# WORKDIR /src
+COPY ["/src/Portfolio-Site/Server/Portfolio-Site.Server.csproj", "Portfolio-Site/Server/"]
+COPY ["/src/Portfolio-Site/Client/Portfolio-Site.Client.csproj", "Portfolio-Site/Client/"]
+COPY ["/src/Portfolio-Site/Shared/Portfolio-Site.Shared.csproj", "Portfolio-Site/Shared/"]
 RUN dotnet restore "./Portfolio-Site/Server/Portfolio-Site.Server.csproj"
 COPY . .
 WORKDIR "/src/Portfolio-Site/Server"
