@@ -1,4 +1,6 @@
-using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+//builder.Services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(@"C:\temp-keys\"))
+//        .UseCryptographicAlgorithms(new AuthenticatedEncryptorConfiguration()
+//        {
+//            EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
+//            ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
+//        });
 
 var app = builder.Build();
 
@@ -21,7 +30,7 @@ else
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();

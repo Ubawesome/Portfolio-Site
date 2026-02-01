@@ -1,0 +1,6 @@
+services:
+  portfolio-site.server:
+    image: ${DOCKER_REGISTRY-}portfoliositeserver
+    build:
+      context: .
+      dockerfile: Dockerfile
