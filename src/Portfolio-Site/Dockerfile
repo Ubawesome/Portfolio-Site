@@ -13,20 +13,20 @@ EXPOSE 443
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY /Server/Portfolio-Site.Server.csproj ./Portfolio-Site/Server/
+# WORKDIR /src
+COPY /Portfolio-Site/Server/Portfolio-Site.Server.csproj Portfolio-Site/Server/
 # COPY ["/src/Portfolio-Site/Server/Portfolio-Site.Server.csproj", "Portfolio-Site/Server/"]
 COPY ["/src/Portfolio-Site/Client/Portfolio-Site.Client.csproj", "Portfolio-Site/Client/"]
 COPY ["/src/Portfolio-Site/Shared/Portfolio-Site.Shared.csproj", "Portfolio-Site/Shared/"]
 RUN dotnet restore "./Portfolio-Site/Server/Portfolio-Site.Server.csproj"
 COPY . .
-WORKDIR "/src/Portfolio-Site/Server"
-RUN dotnet build "./Portfolio-Site.Server.csproj" -c %BUILD_CONFIGURATION% -o /app/build
+WORKDIR "/Portfolio-Site/Server"
+RUN dotnet build "./Portfolio-Site.Server.csproj" -c %BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Portfolio-Site.Server.csproj" -c %BUILD_CONFIGURATION% -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Portfolio-Site.Server.csproj" -c %BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
