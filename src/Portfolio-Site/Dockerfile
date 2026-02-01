@@ -4,16 +4,16 @@
 # For more information, please see https://aka.ms/containercompat
 
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+# FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+# WORKDIR /app
+# EXPOSE 80
+# EXPOSE 443
 
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BUILD_CONFIGURATION=Release
-WORKDIR "/src/Portfolio-Site"
+WORKDIR /src/Portfolio-Site
 
 COPY ["Server/Portfolio-Site.Server.csproj", "Portfolio-Site/Server/"]
 # COPY ["/src/Portfolio-Site/Server/Portfolio-Site.Server.csproj", "Portfolio-Site/Server/"]
@@ -21,7 +21,7 @@ COPY ["src/Portfolio-Site/Client/Portfolio-Site.Client.csproj", "Portfolio-Site/
 COPY ["src/Portfolio-Site/Shared/Portfolio-Site.Shared.csproj", "Portfolio-Site/Shared/"]
 RUN dotnet restore "./Portfolio-Site/Server/Portfolio-Site.Server.csproj"
 COPY . .
-WORKDIR "/Portfolio-Site/Server"
+WORKDIR /src/Portfolio-Site/Server
 RUN dotnet build "./Portfolio-Site.Server.csproj" -c %BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
