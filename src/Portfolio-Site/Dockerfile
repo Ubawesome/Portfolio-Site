@@ -15,6 +15,8 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src/Portfolio-Site
 
+CMD ["dir"]
+
 COPY ["Server/Portfolio-Site.Server.csproj", "Portfolio-Site/Server/"]
 # COPY ["/src/Portfolio-Site/Server/Portfolio-Site.Server.csproj", "Portfolio-Site/Server/"]
 COPY ["src/Portfolio-Site/Client/Portfolio-Site.Client.csproj", "Portfolio-Site/Client/"]
