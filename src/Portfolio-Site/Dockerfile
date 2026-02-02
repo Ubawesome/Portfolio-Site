@@ -17,9 +17,9 @@ ARG TARGETARCH
 ARG BUILD_CONFIGURATION=Release
 
 COPY . /app
-WORKDIR /app/src/Portfolio-Site
+# WORKDIR /app/src/Portfolio-Site
 
-COPY ["/app/src/Portfolio-Site/Server/Portfolio-Site.Server.csproj", "./Portfolio-Site/Server/"]
+COPY ["/app/src/Portfolio-Site/Portfolio-Site/Server/Portfolio-Site.Server.csproj", "./Portfolio-Site/Server/"]
 # COPY ["/src/Portfolio-Site/Server/Portfolio-Site.Server.csproj", "Portfolio-Site/Server/"]
 COPY ["Client/Portfolio-Site.Client.csproj", "./Portfolio-Site/Client/"]
 COPY ["Shared/Portfolio-Site.Shared.csproj", "./Portfolio-Site/Shared/"]
