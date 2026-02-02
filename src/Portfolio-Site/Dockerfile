@@ -4,21 +4,24 @@
 # For more information, please see https://aka.ms/containercompat
 
 # This stage is used when running from VS in fast mode (Default for Debug configuration)
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
-WORKDIR /app
+# FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+
+# WORKDIR /app
 # EXPOSE 80
 # EXPOSE 443
 
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+ARG TARGETARCH
 ARG BUILD_CONFIGURATION=Release
-# WORKDIR /src/Portfolio-Site
+COPY . /app
+WORKDIR /app/src/Portfolio-Site
 
-COPY ["/repo/src/Portfolio-Site/Server/Portfolio-Site.Server.csproj", "/app/Portfolio-Site/Server/"]
+COPY ["Server/Portfolio-Site.Server.csproj", "./Portfolio-Site/Server/"]
 # COPY ["/src/Portfolio-Site/Server/Portfolio-Site.Server.csproj", "Portfolio-Site/Server/"]
-COPY ["src/Portfolio-Site/Client/Portfolio-Site.Client.csproj", "Portfolio-Site/Client/"]
-COPY ["src/Portfolio-Site/Shared/Portfolio-Site.Shared.csproj", "Portfolio-Site/Shared/"]
+COPY ["Client/Portfolio-Site.Client.csproj", "./Portfolio-Site/Client/"]
+COPY ["Shared/Portfolio-Site.Shared.csproj", "./Portfolio-Site/Shared/"]
 RUN dotnet restore "./Portfolio-Site/Server/Portfolio-Site.Server.csproj"
 COPY . .
 WORKDIR /src/Portfolio-Site/Server
@@ -30,7 +33,7 @@ ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./Portfolio-Site.Server.csproj" -c %BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
-FROM base AS final
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Portfolio-Site.Server.dll"]
