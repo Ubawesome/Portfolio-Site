@@ -17,8 +17,8 @@ ARG TARGETARCH
 ARG BUILD_CONFIGURATION=Release
 
 WORKDIR /app
-COPY . .
-RUN ls .
+COPY . ./
+RUN ls /app
 # WORKDIR /app/src/Portfolio-Site
 
 COPY ["Portfolio-Site/Server/Portfolio-Site.Server.csproj", "./Portfolio-Site/Server/"]
