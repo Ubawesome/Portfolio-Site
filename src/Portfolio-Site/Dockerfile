@@ -16,8 +16,9 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG TARGETARCH
 ARG BUILD_CONFIGURATION=Release
 
-COPY . /app
-RUN ls -la /app
+WORKDIR /app
+COPY . .
+RUN ls -la .
 # WORKDIR /app/src/Portfolio-Site
 
 COPY ["Portfolio-Site/Server/Portfolio-Site.Server.csproj", "./Portfolio-Site/Server/"]
