@@ -20,12 +20,12 @@ ARG BUILD_CONFIGURATION=Release
 
 WORKDIR /src
 
-COPY /src/Portfolio-Site/*.sln ./
-COPY /src/Portfolio-Site/Portfolio-Site/Server/*.csproj ./Server/
-COPY /src/Portfolio-Site/Portfolio-Site/Client/*.csproj ./Client/
-COPY /src/Portfolio-Site/Portfolio-Site/Shared/*.csproj ./Shared/
+COPY src/Portfolio-Site/*.sln ./
+COPY src/Portfolio-Site/Portfolio-Site/Server/*.csproj ./Server/
+COPY src/Portfolio-Site/Portfolio-Site/Client/*.csproj ./Client/
+COPY src/Portfolio-Site/Portfolio-Site/Shared/*.csproj ./Shared/
+RUN ls /src
 RUN dotnet restore
-RUN ls /app
 
 COPY . .
 WORKDIR /src/Server
@@ -33,7 +33,7 @@ RUN dotnet publish -c Release -o /app/publish
 
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
-WORKDIR /app
+WORKDIR /src
 COPY --from=build /app/publish .
 
 ENV ASPNETCORE_URLS=https://0.0.0.0:8080
