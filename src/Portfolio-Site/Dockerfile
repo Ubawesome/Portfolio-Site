@@ -16,27 +16,49 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG TARGETARCH
 ARG BUILD_CONFIGURATION=Release
 
-WORKDIR /app
-# COPY . ./
+
+
+WORKDIR /src
+
+COPY *.sln ./
+COPY Portfolio-Site/Server/*.csproj ./Server/
+COPY Portfolio-Site/Client/*.csproj ./Client/
+COPY Portfolio-Site/Shared/*.csproj ./Shared/
+RUN dotnet restore
 RUN ls /app
+
+COPY . .
+WORKDIR /src/Server
+RUN dotnet publish -c Release -o /app/publish
+
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
+WORKDIR /app
+COPY --from=build /app/publish .
+
+ENV ASPNETCORE_URLS=https://0.0.0.0:8080
+
+ENTRYPOINT [ "dotnet", "Portfolio-Site.Server.dll" ]
+
+# COPY . ./
 # WORKDIR /app/src/Portfolio-Site
 
-COPY ["Portfolio-Site/Server/Portfolio-Site.Server.csproj", "./Portfolio-Site/Server/"]
-# COPY ["/src/Portfolio-Site/Server/Portfolio-Site.Server.csproj", "Portfolio-Site/Server/"]
-COPY ["Client/Portfolio-Site.Client.csproj", "./Portfolio-Site/Client/"]
-COPY ["Shared/Portfolio-Site.Shared.csproj", "./Portfolio-Site/Shared/"]
-RUN dotnet restore "./Portfolio-Site/Server/Portfolio-Site.Server.csproj"
-COPY . .
-WORKDIR /src/Portfolio-Site/Server
-RUN dotnet build "./Portfolio-Site.Server.csproj" -c %BUILD_CONFIGURATION -o /app/build
+# COPY ["Portfolio-Site/Server/Portfolio-Site.Server.csproj", "./Portfolio-Site/Server/"]
+# # COPY ["/src/Portfolio-Site/Server/Portfolio-Site.Server.csproj", "Portfolio-Site/Server/"]
+# COPY ["Client/Portfolio-Site.Client.csproj", "./Portfolio-Site/Client/"]
+# COPY ["Shared/Portfolio-Site.Shared.csproj", "./Portfolio-Site/Shared/"]
+# RUN dotnet restore "./Portfolio-Site/Server/Portfolio-Site.Server.csproj"
+# COPY . .
+# WORKDIR /src/Portfolio-Site/Server
+# RUN dotnet build "./Portfolio-Site.Server.csproj" -c %BUILD_CONFIGURATION -o /app/build
 
-# This stage is used to publish the service project to be copied to the final stage
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Portfolio-Site.Server.csproj" -c %BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+# # This stage is used to publish the service project to be copied to the final stage
+# FROM build AS publish
+# ARG BUILD_CONFIGURATION=Release
+# RUN dotnet publish "./Portfolio-Site.Server.csproj" -c %BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-# This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Portfolio-Site.Server.dll"]
+# # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
+# FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
+# WORKDIR /app
+# COPY --from=publish /app/publish .
+# ENTRYPOINT ["dotnet", "Portfolio-Site.Server.dll"]
