@@ -24,7 +24,7 @@ COPY src/Portfolio-Site/*.sln ./
 COPY src/Portfolio-Site/Portfolio-Site/Server/*.csproj ./Server/
 COPY src/Portfolio-Site/Portfolio-Site/Client/*.csproj ./Client/
 COPY src/Portfolio-Site/Portfolio-Site/Shared/*.csproj ./Shared/
-RUN ls /src
+RUN ls -la /src
 RUN dotnet restore
 
 COPY . .
