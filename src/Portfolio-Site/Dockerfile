@@ -20,7 +20,7 @@ ARG BUILD_CONFIGURATION=Release
 
 WORKDIR /src
 
-COPY *.sln ./
+COPY src/Portfolio-Site/*.sln ./
 COPY src/Portfolio-Site/Portfolio-Site/Server/*.csproj ./Server/
 COPY src/Portfolio-Site/Portfolio-Site/Client/*.csproj ./Client/
 COPY src/Portfolio-Site/Portfolio-Site/Shared/*.csproj ./Shared/
