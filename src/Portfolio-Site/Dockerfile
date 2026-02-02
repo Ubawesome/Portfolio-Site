@@ -17,7 +17,7 @@ ARG TARGETARCH
 ARG BUILD_CONFIGURATION=Release
 
 WORKDIR /app
-COPY . ./
+# COPY . ./
 RUN ls /app
 # WORKDIR /app/src/Portfolio-Site
 
