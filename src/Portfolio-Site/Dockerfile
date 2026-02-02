@@ -21,9 +21,9 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 COPY *.sln ./
-COPY Portfolio-Site/Server/*.csproj ./Server/
-COPY Portfolio-Site/Client/*.csproj ./Client/
-COPY Portfolio-Site/Shared/*.csproj ./Shared/
+COPY src/Portfolio-Site/Portfolio-Site/Server/*.csproj ./Server/
+COPY src/Portfolio-Site/Portfolio-Site/Client/*.csproj ./Client/
+COPY src/Portfolio-Site/Portfolio-Site/Shared/*.csproj ./Shared/
 RUN dotnet restore
 RUN ls /app
 
