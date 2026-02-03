@@ -21,14 +21,15 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 COPY src/Portfolio-Site/*.sln ./
-COPY src/Portfolio-Site/Portfolio-Site/Server/*.csproj ./Server/
-COPY src/Portfolio-Site/Portfolio-Site/Client/*.csproj ./Client/
-COPY src/Portfolio-Site/Portfolio-Site/Shared/*.csproj ./Shared/
-RUN ls -la /src/Server
-RUN dotnet restore
+COPY src/Portfolio-Site/Portfolio-Site/Server/*.csproj ./Portfolio-Site/Server/
+COPY src/Portfolio-Site/Portfolio-Site/Client/*.csproj ./Portfolio-Site/Client/
+COPY src/Portfolio-Site/Portfolio-Site/Shared/*.csproj ./Portfolio-Site/Shared/
+RUN ls /src/Portfolio-Site/Server
+RUN dotnet restore ./Portfolio-Site/Server/Portfolio-Site.Server.csproj
+# RUN dotnet restore
 
 COPY . .
-WORKDIR /src/Server
+WORKDIR /src/Portfolio-Site/Server
 RUN dotnet publish -c Release -o /app/publish
 
 
