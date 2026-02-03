@@ -33,7 +33,8 @@ WORKDIR /src/Portfolio-Site/Server
 RUN dotnet publish -c Release -o /app/publish
 
 
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
+# FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine AS runtime
 WORKDIR /src
 COPY --from=build /app/publish .
 
