@@ -1,0 +1,19 @@
+﻿<button class="btn @Color.EnumToClass() @Size.EnumToClass() @ButtonStyle.EnumToClass()" @attributes="@AdditionalAttributes">@(ChildContent)</button>
+
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public Color Color { get; set; }
+
+    [Parameter]
+    public Size Size { get; set; }
+
+    [Parameter]
+    public ButtonStyle ButtonStyle { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+}

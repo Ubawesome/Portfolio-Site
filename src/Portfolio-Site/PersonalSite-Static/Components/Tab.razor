@@ -1,0 +1,39 @@
+﻿
+@if (Parent != null && Parent.ActiveTab == this)
+{
+    if (ChildContent != null)
+    {
+        @ChildContent
+    }
+}
+
+@code {
+    [CascadingParameter]
+    private Tabs? Parent { get; set; }
+
+    [Parameter]
+    public string? Title { get; set; }
+
+    [Parameter]
+    public RenderFragment? HeaderTemplate { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public bool Clickable { get; set; } = true;
+
+    [Parameter]
+    public bool Hoverable { get; set; } = false;
+
+    [Parameter]
+    public bool Disabled { get; set; } = false;
+
+    protected override void OnInitialized()
+    {
+        if (Parent != null)
+        {
+            Parent.Add(this);
+        }
+    }
+}

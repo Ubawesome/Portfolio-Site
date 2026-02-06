@@ -1,0 +1,220 @@
+﻿@import '../wwwroot/css/mixins.scss';
+@import '../wwwroot/css/variables.scss';
+
+///////////////////////////////////////////////////////////
+// Plain SASS Trigonometry Algorithm in Taylor Expansion //
+//                                                       //
+// Based on                                              //
+//      http://japborst.net/posts/sass-sines-and-cosines //
+///////////////////////////////////////////////////////////
+
+$pi: 3.14159265359;
+$_precision: 10;
+
+@function pow($base, $exp) {
+    $value: $base;
+
+    @if $exp > 1 {
+        @for $i from 2 through $exp {
+            $value: $value * $base;
+        }
+    }
+
+    @if $exp < 1 {
+        @for $i from 0 through -$exp {
+            $value: $value / $base;
+        }
+    }
+
+    @return $value;
+}
+
+@function fact($num) {
+    $fact: 1;
+
+    @if $num > 0 {
+        @for $i from 1 through $num {
+            $fact: $fact * $i;
+        }
+    }
+
+    @return $fact;
+}
+
+@function _to_unitless_rad($angle) {
+    @if unit($angle) == "deg" {
+        $angle: $angle / 180deg * $pi;
+    }
+
+    @if unit($angle) == "rad" {
+        $angle: $angle / 1rad;
+    }
+
+    @return $angle;
+}
+
+@function sin($angle) {
+    $a: _to_unitless_rad($angle);
+    $sin: $a;
+
+    @for $n from 1 through $_precision {
+        $sin: $sin + (pow(-1, $n) / fact(2 * $n + 1) ) * pow($a, (2 * $n + 1));
+    }
+
+    @return $sin;
+}
+
+@function cos($angle) {
+    $a: _to_unitless_rad($angle);
+    $cos: 1;
+
+    @for $n from 1 through $_precision {
+        $cos: $cos + ( pow(-1,$n) / fact(2*$n) ) * pow($a,2*$n);
+    }
+
+    @return $cos;
+}
+
+@function tan($angle) {
+    @return sin($angle) / cos($angle);
+}
+
+
+.floating-circle {
+    $maxLayerItems: 12;
+
+    --layer-radius-sm: clamp(2rem, 4vw + 2rem, 12rem);
+    --layer-radius-md: clamp(4rem, 8vw + 6rem, 24rem);
+    --layer-radius-lg: clamp(8rem, 14vw + 8rem, 36rem);
+    --layer-radius-sm: clamp(5rem, 16vw, 10rem);
+    --layer-radius-md: clamp(10rem, 32vw, 20rem);
+    --layer-radius-lg: clamp(15rem, 48vw, 30rem);
+    --circle-size-sm: calc(var(--layer-radius-sm) * 2);
+    --circle-size-md: calc(var(--layer-radius-md) * 2);
+    --circle-size-lg: calc(var(--layer-radius-lg) * 2);
+    --layer-radius: var(--layer-radius-sm);
+    --layer-animation-speed: 50s;
+    --circle-padding: clamp(2rem, 4vw, 6rem);
+    --circle-size: var(--circle-size-sm);
+    --orbit-thickness: 0.5rem;
+    --orbit-color: var(--primary-900);
+    position: relative;
+    width: calc(var(--circle-size) + (var(--circle-padding) * 2));
+    aspect-ratio: 1 / 1;
+    margin-inline: auto;
+
+    &[data-size="sm"] {
+        --circle-size: var(--circle-size-sm);
+    }
+
+    &[data-size="md"] {
+        --circle-size: var(--circle-size-md);
+
+        @include screen-width-md {
+            --circle-size: var(--circle-size-sm);
+        }
+    }
+
+    &[data-size="lg"] {
+        --circle-size: var(--circle-size-lg);
+
+        @include screen-width-lg {
+            --circle-size: var(--circle-size-md);
+        }
+    }
+
+    ::deep > .floating-circle-layer {
+        position: absolute;
+        content: '';
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        display: grid;
+        place-items: center;
+        overflow: visible;
+
+        &[data-size="sm"] {
+            --layer-radius: var(--layer-radius-sm);
+        }
+
+        &[data-size="md"] {
+            --layer-radius: var(--layer-radius-md);
+
+            @include screen-width-md {
+                display: none;
+            }
+        }
+
+        &[data-size="lg"] {
+            --layer-radius: var(--layer-radius-lg);
+
+            @include screen-width-lg {
+                display: none;
+            }
+        }
+
+        &[data-animation="SpinClockwise"] {
+            animation: rotate-clockwise var(--layer-animation-speed) linear infinite;
+
+            > * {
+                animation: rotate-counterclockwise var(--layer-animation-speed) linear infinite;
+            }
+
+            &[data-orbit="true"]::before {
+                animation: rotate-counterclockwise calc(var(--layer-animation-speed) * 0.75) linear infinite;
+            }
+        }
+
+        &[data-animation="SpinCounterclockwise"] {
+            animation: rotate-counterclockwise var(--layer-animation-speed) linear infinite;
+
+            > * {
+                animation: rotate-clockwise var(--layer-animation-speed) linear infinite;
+            }
+
+            &[data-orbit="true"]::before {
+                animation: rotate-clockwise calc(var(--layer-animation-speed) * 0.75) linear infinite;
+            }
+        }
+
+        &[data-orbit="true"]::before {
+            position: absolute;
+            content: '';
+            left: 50%;
+            top: 50%;
+            translate: -50% -50%;
+            width: calc(var(--layer-radius) * 2);
+            height: calc(var(--layer-radius) * 2);
+            border: var(--orbit-thickness) var(--orbit-color) dotted;
+            border-radius: 50%;
+        }
+
+        > * {
+            position: absolute;
+            content: '';
+            pointer-events: auto;
+            z-index: 1;
+        }
+    }
+
+    @for $layerItemCount from 1 through $maxLayerItems {
+        ::deep > .floating-circle-layer[data-count="#{$layerItemCount}"] {
+
+            $angle: 360deg / $layerItemCount;
+
+            @for $i from 1 through $layerItemCount {
+
+                $alpha: ($i * $angle);
+                $xAngle: sin(($angle * $i) - $angle - 90);
+                $yAngle: cos(($angle * $i) - $angle - 90);
+
+                :nth-child(#{$i}) {
+                    transform: translate(calc(#{$xAngle} * var(--layer-radius)), calc(#{$yAngle} * var(--layer-radius)));
+                    -webkit-transform: translate(calc(#{$xAngle} * var(--layer-radius)), calc(#{$yAngle} * var(--layer-radius)));
+                    transform-origin: calc(#{$xAngle} * var(--layer-radius) + 50%) calc(#{$yAngle} * var(--layer-radius) + 50%);
+                    -webkit-transform-origin: calc(#{$xAngle} * var(--layer-radius) + 50%) calc(#{$yAngle} * var(--layer-radius) + 50%);
+                }
+            }
+        }
+    }
+}
