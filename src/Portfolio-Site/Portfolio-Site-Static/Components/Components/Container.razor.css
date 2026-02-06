@@ -1,0 +1,29 @@
+﻿.container, .container-full {
+    box-shadow: var(--box-shadow-card);
+    background-color: var(--container-bg-color);
+    border: var(--container-border-color) 2px solid;
+}
+
+.container {
+    width: clamp(35rem, 70vw, 2000px);
+    max-width: 100%;
+    margin-inline: auto;
+    margin-block: 2rem;
+    padding-inline: clamp(0.25rem, 4vw, 4rem);
+    padding-block: 2rem;
+}
+
+.container-full {
+    width: 100%;
+    margin-inline: auto;
+    margin-block: 2rem;
+    padding-inline: clamp(0.25rem, 15vw, 800px);
+    padding-block: 2rem;
+}
+
+.container.inline, .container-full.inline {
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}

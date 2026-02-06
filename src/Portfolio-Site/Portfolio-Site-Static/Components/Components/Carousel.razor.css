@@ -1,0 +1,174 @@
+﻿
+.carousel-wrapper {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.carousel {
+    position: relative;
+    display: block;
+
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-bottom: 0.25em solid var(--primary-300);
+
+    overflow: hidden;
+}
+
+.carousel .controls {
+    opacity: 0;
+
+    transition: opacity ease-out 250ms 350ms,
+                background-color ease 250ms;
+}
+
+.carousel:is(:hover, :focus-within) .controls {
+    opacity: 1;
+    transition: opacity ease-in 250ms 50ms,
+                background-color ease 250ms;
+}
+
+.carousel:is(:hover, :focus-within) .carousel-progress span {
+    transform: translateY(0%);
+
+    transition: opacity ease-out 250ms 250ms,
+                transform ease-out 250ms 150ms;
+}
+
+.carousel:is(:hover, :focus-within) .carousel-progress span.previous,
+.carousel:is(:hover, :focus-within) .carousel-progress span.next {
+    transition: opacity ease-out 250ms 250ms,
+                transform ease-out 250ms 100ms;
+}
+
+.carousel:is(:hover, :focus-within) .carousel-progress span.current {
+    transition: opacity ease-out 250ms 250ms,
+                transform ease-out 250ms 50ms;
+}
+
+.controls {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+
+    display: grid;
+    place-items: center;
+
+    width: 10%;
+    height: 100%;
+    border: none;
+
+    z-index: 10;
+
+    cursor: pointer;
+
+    background-color: hsl(0 0% 0% / 0);
+
+    transition: background-color ease 250ms;
+}
+
+.controls:is(:hover, :focus-within) {
+    background-color: hsl(0 0% 0% / 0.15);
+}
+
+.controls.left {
+    left: 0;
+}
+
+.controls.right {
+    right: 0;
+}
+
+.controls > * {
+    max-width: 100%;
+}
+
+.carousel-progress {
+    --progress-indicator-height: clamp(0.5em, 1.2vw, 2em);
+    --progress-indicator-underline-height: calc(var(--progress-indicator-height) * 0.5);
+    --progress-indicator-gap: calc(var(--progress-indicator-height) * 0.5);
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(25%);
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: var(--progress-indicator-gap);
+
+    max-width: 80%;
+    height: auto;
+}
+
+.carousel-progress span {
+    display: block;
+    height: var(--progress-indicator-height);
+    width: var(--progress-indicator-height);
+
+    background-color: var(--accent-1-700);
+    border-left: solid var(--progress-indicator-underline-height) var(--accent-1-100);
+    border-radius: 50%;
+
+    transform: translateY(-100%);
+
+    opacity: 0.45;
+    transition: opacity ease-in 250ms 250ms,
+                transform ease-in 250ms 350ms;
+}
+
+.carousel-progress span.previous, .carousel span.next {
+    opacity: 0.65;
+    transition: opacity ease-in 250ms 150ms,
+                transform ease-in 250ms 300ms;
+}
+
+.carousel-progress span.current {
+    opacity: 1;
+    box-shadow: 0em 0em 1em var(--primary-900);
+
+    transition: opacity ease-in 250ms,
+                transform ease-in 250ms 250ms;
+}
+
+.carousel-slide {
+    position: absolute;
+    inset: 0;
+
+    opacity: 0;
+    transform: translateX(0%);
+}
+
+.carousel-slide ::deep > * {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+.carousel-slide.slide-in-left {
+    animation: slide-in-left 0.5s ease forwards;
+}
+.carousel-slide.slide-in-right {
+    animation: slide-in-right 0.5s ease forwards;
+}
+
+.carousel-slide.slide-out-left {
+    animation: slide-out-left 0.5s ease forwards;
+}
+.carousel-slide.slide-out-right {
+    animation: slide-out-right 0.5s ease forwards;
+}
+
+.carousel-slide.slide-in-down {
+    animation: slide-in-down 0.5s ease forwards;
+}
+.carousel-slide.slide-out-down {
+    animation: slide-out-down 0.5s ease forwards;
+}
+
+.carousel-slide:is(.slide-in-left, .slide-in-right, .slide-out-left, .slide-out-right, .slide-in-down, .slide-out-down),
+.carousel-slide.current {
+    opacity: 1;
+}

@@ -1,0 +1,94 @@
+﻿<CascadingValue Value="this">
+    <div class="tabs @GetContainerClass() @(Orientation.EnumToClass()) @Class" @attributes="@AdditionalAttributes">
+        <div class="tabs-headers">
+            @foreach (var tab in TabList)
+            {
+                <button class="tabs-header @GetActiveClass(tab)" @onclick="@(() => TabClicked(tab))" @onmouseover="@(() => TabHovered(tab))" disabled="@tab.Disabled">
+                    @if (tab.HeaderTemplate != null)
+                    {
+                        @tab.HeaderTemplate
+                    } else
+                    {
+                        @tab.Title
+                    }
+                </button>
+            }
+        </div>
+
+        <div class="tabs-content">
+            @ChildContent
+        </div>
+    </div>
+</CascadingValue>
+
+
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter]
+    public TabStyle TabStyle { get; set; }
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    [Parameter]
+    public Orientation Orientation { get; set; } = Orientation.Vertical;
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+
+    public List<Tab> TabList { get; set; } = new();
+    public Tab? ActiveTab { get; set; }
+
+    public void Add(Tab tab)
+    {
+        if (TabList != null && !TabList.Contains(tab))
+        {
+            TabList.Add(tab);
+            if (TabList.Count == 1)
+            {
+                ActiveTab = tab;
+            }
+
+            StateHasChanged();
+        }
+    }
+
+    public void SelectTab(Tab tab)
+    {
+        if (!tab.Disabled)
+            ActiveTab = tab;
+    }
+
+    public void TabClicked(Tab tab)
+    {
+        if (tab.Clickable)
+            SelectTab(tab);
+    }
+
+    public void TabHovered(Tab tab)
+    {
+        if (tab.Hoverable)
+            SelectTab(tab);
+    }
+
+    public string GetContainerClass()
+    {
+        switch (TabStyle)
+        {
+            case TabStyle.Container: return "tabs-container";
+            case TabStyle.Card: return "tabs-card";
+            default: return "tab-container";
+        }
+    }
+
+    public string GetActiveClass(Tab tab)
+    {
+        if (ActiveTab == tab)
+            return "selected";
+
+        return "";
+    }
+}

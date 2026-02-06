@@ -1,0 +1,126 @@
+﻿@typeparam TItem
+
+<div class="gallery @GetGalleryDraggingClass()" ondragover="event.preventDefault();">
+    @foreach (var item in Items)
+    {
+        <div class="gallery-item @GetItemClass(item)" draggable="true"
+                    @onclick="@((args) => OnClick(args, item))"
+                    @ondrag="@((args) => OnDrag(args, item))"
+                    @ondrop="@((args) => OnDrop(args, item))"
+                    @ondragend="@((args) => OnDragEnd(args, item))"
+                    @ondragenter="@((args) => OnDragEnter(args, item))"
+                    @ondragleave="@((args) => OnDragLeave(args, item))">
+            @if (ItemTemplate != null)
+            {
+                @ItemTemplate(item)
+            }
+        </div>
+    }
+
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment<TItem>? ItemTemplate { get; set; } = null;
+
+    [Parameter]
+    public List<TItem> Items { get; set; } = new List<TItem>();
+
+    [Parameter]
+    public TItem? SelectedItem { get; set; }
+
+    [Parameter]
+    public EventCallback<TItem?> SelectedItemChanged { get; set; }
+
+
+    public bool IsDragging => (currentDragIndex >= 0);
+
+    int currentDragIndex = -1;
+    int currentHoverIndex = -1;
+
+    protected void OnClick(MouseEventArgs args, TItem item)
+    {
+        if (item == null || IsDragging)
+            return;
+
+        if (item.Equals(SelectedItem))
+            return;
+
+        SelectedItem = item;
+
+        SelectedItemChanged.InvokeAsync(item);
+    }
+
+    protected void OnDrag(DragEventArgs args, TItem item)
+    {
+        currentDragIndex = Items.IndexOf(item);
+    }
+
+    protected void OnDrop(DragEventArgs args, TItem item)
+    {
+        if (!IsDragging)
+            return;
+
+        if (item != null)
+        {
+            var dropIndex = Items.IndexOf(item);
+
+            var current = Items[currentDragIndex];
+            Items.RemoveAt(currentDragIndex);
+            Items.Insert(dropIndex, current);
+
+            currentDragIndex = -1;
+            currentHoverIndex = -1;
+
+            StateHasChanged();
+        }
+        currentDragIndex = -1;
+    }
+
+    protected void OnDragEnd(DragEventArgs args, TItem item)
+    {
+        if (!IsDragging)
+            return;
+
+        currentDragIndex = -1;
+        currentHoverIndex = -1;
+    }
+
+    protected void OnDragEnter(DragEventArgs args, TItem item)
+    {
+        if (!IsDragging)
+            return;
+
+        currentHoverIndex = Items.IndexOf(item);
+    }
+
+    protected void OnDragLeave(DragEventArgs args, TItem item)
+    {
+        if (!IsDragging)
+            return;
+
+    }
+
+    protected string GetGalleryDraggingClass()
+    {
+        return (IsDragging) ? "dragging" : "";
+    }
+
+    protected string GetItemClass(TItem item)
+    {
+        string itemClass = "";
+
+        if (item.Equals(SelectedItem))
+        {
+            itemClass = String.Join(' ', itemClass, "selected-item");
+        }
+
+        if (Items.IndexOf(item) == currentHoverIndex)
+        {
+            itemClass = String.Join(' ', itemClass, "hovered-item");
+        }
+
+        return itemClass;
+    }
+
+}

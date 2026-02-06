@@ -1,0 +1,60 @@
+﻿@namespace Portfolio_Site_Static.Components
+@typeparam TItem
+@using System.Linq.Expressions
+
+<div class="form-field @GetDisplayClass()">
+    @if (!String.IsNullOrEmpty(Label)) {
+        <label for="@Id">@Label</label>
+    }
+    @if (ChildContent != null)
+    {
+        @ChildContent(Id)
+    }
+    @if (For != null)
+    {
+        <ValidationMessage For="@For" />
+    }
+</div>
+
+
+@code {
+    [Parameter]
+    public RenderFragment<string>? ChildContent { get; set; }
+
+    [Parameter]
+    public string Id { get; set; } = Guid.NewGuid().ToString();
+
+    [Parameter]
+    public string? Label { get; set; }
+
+    [Parameter]
+    public Expression<Func<TItem>>? For { get; set; }
+
+    [Parameter]
+    public EventCallback<string> IdChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<string?> LabelChanged { get; set; }
+
+    [Parameter]
+    public bool Inline { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        if (String.IsNullOrEmpty(Label) && For != null)
+        {
+            Label = Utilities.GetDisplayName(For);
+        }
+    }
+
+    private string GetDisplayClass()
+    {
+        if (Inline)
+        {
+            return "inline";
+        }
+
+        return "block";
+    }
+}
