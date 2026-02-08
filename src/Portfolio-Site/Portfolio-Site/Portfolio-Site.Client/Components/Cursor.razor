@@ -1,0 +1,27 @@
+﻿@inject IJSRuntime JSRuntime
+@rendermode InteractiveAuto
+
+<div id="cursor" @ref="cursor" class="cursor @Class" data-duration="@Duration" @attributes="@AdditionalAttributes" />
+
+@code {
+    ElementReference cursor;
+
+    [Parameter]
+    public float Duration { get; set; } = 0.5f;
+
+    [Parameter]
+    public string Class { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+        // var module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./scripts.js");
+        // await module.InvokeVoidAsync("registerCursor", cursor, Duration);
+            await JSRuntime.RegisterCursor(cursor, Duration);
+        }
+    }
+}

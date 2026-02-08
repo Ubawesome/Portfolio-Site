@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <ResourcePreloader />
+    @* <link rel="stylesheet" href="@Assets["app.css"]" /> *@
+    <link rel="stylesheet" href="@Assets["Portfolio-Site.styles.css"]" />
+    <ImportMap />
+    <link href="@Assets["css/imports.css"]" rel="stylesheet" />
+    <link href="@Assets["css/variables.css"]" rel="stylesheet" />
+    <link href="@Assets["css/reset.css"]" rel="stylesheet" />
+    <link href="@Assets["css/styles.css"]" rel="stylesheet" />
+
+    <link rel="stylesheet" href="@Assets["css/animations.css"]">
+    <script defer src="https://friconix.com/cdn/friconix.js"></script>
+    <script defer src="/js/friconix.js"></script>
+
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <HeadOutlet @rendermode="InteractiveAuto" />
+</head>
+
+<body>
+    <Routes @rendermode="InteractiveAuto" />
+    <ReconnectModal />
+    <script src="@Assets["_framework/blazor.web.js"]"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/Flip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MorphSVGPlugin.min.js"></script>
+    <script src="@Assets["js/theme-switcher.js"]"></script>
+    <script src="@Assets["js/scrollTriggers.js"]"></script>
+    <script src="@Assets["js/cursor.js"]"></script>
+    <script src="@Assets["js/interop.js"]"></script>
+</body>
+
+</html>

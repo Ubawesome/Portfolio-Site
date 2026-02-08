@@ -1,0 +1,252 @@
+﻿@inject IJSRuntime JSRuntime
+
+<Section id="what-can-i-do">
+    <Splash ScrollSpeed="1" BackgroundScrollSpeed="-0.5" TitleScrollSpeed="0.5" HasSideHeader="true" Header="Skills">
+        @* <Background> *@
+        @*     <img src="/imgs/Background3.webp" loading="lazy" /> *@
+        @* </Background> *@
+        <Title>
+            What can I do?
+        </Title>
+    </Splash>
+
+    <Container Class="m-block-0">
+        <blockquote>
+            With half a decade of professional experience and an unending passion for learning, anything I can't do, I'm eager to learn.
+        </blockquote>
+    </Container>
+
+    <Container Inline Class="skills-grid">
+        <Card>
+            <CardTitle>Front-End</CardTitle>
+            <CardBody>
+                Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
+            </CardBody>
+        </Card>
+        <Card>
+            <CardTitle>
+                Back-End
+            </CardTitle>
+            <CardBody>
+                Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
+            </CardBody>
+        </Card>
+    </Container>
+
+    <SectionHeader Title="Solutions" ContainerClass="bg-secondary-9" TextClass="text-secondary" />
+
+    <Container Inline="true">
+        <Tabs TabStyle="TabStyle.Card" Orientation="Orientation.Horizontal">
+            <Tab Title="Front-End" Hoverable>
+                Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
+                <div class="icon-grid">
+                    <Icon Source="/css/icons/html-5.svg" />
+                    <Icon Source="/css/icons/css-3.svg" />
+                    <Icon Source="/css/icons/less.svg" />
+                    <Icon Source="/css/icons/sass.svg" />
+                    <Icon Source="/css/icons/bootstrap.svg" />
+                    <Icon Source="/css/icons/javascript.svg" />
+                    <Icon Source="/css/icons/jquery-icon.svg" />
+                    <Icon Source="/css/icons/express.svg" />
+                    <Icon Source="/css/icons/react.svg" />
+                    <Icon Source="/css/icons/xamarin.svg" />
+                    <Icon Source="/css/icons/android-icon.svg" />
+                </div>
+            </Tab>
+            <Tab Title="Back-End" Hoverable>
+                Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
+                <div class="flex row wrap">
+                    <Icon Source="/css/icons/c-sharp.svg" />
+                    <Icon Source="/css/icons/dotnet.svg" />
+                    <Icon Source="/css/icons/nodejs-icon.svg" />
+                    <Icon Source="/css/icons/azure.svg" />
+                    <Icon Source="/css/icons/swagger.svg" />
+                    <Icon Source="/css/icons/gatsby.svg" />
+                    <Icon Source="/css/icons/graphql.svg" />
+                    <Icon Source="/css/icons/mongodb.svg" />
+                    <Icon Source="/css/icons/mysql.svg" />
+                    <Icon Source="/css/icons/oracle.svg" />
+                </div>
+            </Tab>
+            <Tab Title=".NET" Hoverable>
+                Cross-platform solutions for both front-end and back-end with MVC or Blazor.
+            </Tab>
+            <Tab Title="Web Design" Hoverable>
+                Responsive and accessible web design with custom, professional controls. Clear UX and security for business-to-business, stylish and unforgettable for business-to-customer.
+            </Tab>
+            <Tab Title="Database Design" Hoverable>
+                Relational databases built with scalability in mind, using anything from SQL Server to MongoDB. Secure password hashing, encryption of sensitive data, and protection from common attacks like SQL injection.
+            </Tab>
+        </Tabs>
+    </Container>
+
+    <SectionHeader Title="Examples" ContainerClass="bg-accent-1-9" TextClass="text-accent-1" />
+
+    <FloatingCircle CircleSize="Size.Large">
+        <FloatingCircleLayer ItemCount="7" LayerSize="Size.Small"
+                             Animation="FloatingCircleLayer.AnimationType.SpinClockwise" AnimationSpeed="100s"
+                             Orbit="true" OrbitThickness="0.15rem">
+            <Button Color="Color.Primary" Size="Size.Small">Primary</Button>
+            <Button Color="Color.Secondary" Size="Size.Small">Secondary</Button>
+            <Button Color="Color.Accent1" Size="Size.Small">Accent 1</Button>
+            <Button Color="Color.Accent2" Size="Size.Small">Accent 2</Button>
+            <Button Color="Color.Accent3" Size="Size.Small">Accent 3</Button>
+            <Button Color="Color.Success" Size="Size.Small">Success</Button>
+            <Button Color="Color.Danger" Size="Size.Small">Danger</Button>
+        </FloatingCircleLayer>
+        <FloatingCircleLayer ItemCount="7" LayerSize="Size.Medium"
+                             Animation="FloatingCircleLayer.AnimationType.SpinCounterclockwise" AnimationSpeed="200s"
+                             Orbit="true" OrbitThickness="0.15rem">
+            <Button Color="Color.Primary">Primary</Button>
+            <Button Color="Color.Secondary">Secondary</Button>
+            <Button Color="Color.Accent1">Accent 1</Button>
+            <Button Color="Color.Accent2">Accent 2</Button>
+            <Button Color="Color.Accent3">Accent 3</Button>
+            <Button Color="Color.Success">Success</Button>
+            <Button Color="Color.Danger">Danger</Button>
+        </FloatingCircleLayer>
+        <FloatingCircleLayer ItemCount="12" LayerSize="Size.Large"
+                             Animation="FloatingCircleLayer.AnimationType.SpinClockwise" AnimationSpeed="300s"
+                             Orbit="true" OrbitThickness="0.15rem">
+            <Button Color="Color.Primary" Size="Size.Large">Primary</Button>
+            <Button Color="Color.Danger" ButtonStyle="ButtonStyle.Outline">Danger</Button>
+            <Button Color="Color.Accent1" Size="Size.Large">Accent 1</Button>
+            <Button Color="Color.Primary" ButtonStyle="ButtonStyle.Outline">Primary</Button>
+            <Button Color="Color.Accent2" Size="Size.Large">Accent 2</Button>
+            <Button Color="Color.Accent1" ButtonStyle="ButtonStyle.Outline">Accent 1</Button>
+            <Button Color="Color.Accent3" Size="Size.Large">Accent 3</Button>
+            <Button Color="Color.Accent2" ButtonStyle="ButtonStyle.Outline">Accent 2</Button>
+            <Button Color="Color.Success" Size="Size.Large">Success</Button>
+            <Button Color="Color.Accent3" ButtonStyle="ButtonStyle.Outline">Accent 3</Button>
+            <Button Color="Color.Danger" Size="Size.Large">Danger</Button>
+            <Button Color="Color.Success" ButtonStyle="ButtonStyle.Outline">Success</Button>
+        </FloatingCircleLayer>
+    </FloatingCircle>
+    <Container Inline>
+        <Slider>
+            <SliderItem>
+                <Card Size="Size.Full">
+                    <CardTitle>
+                        Form Controls!
+                    </CardTitle>
+                    <CardBody>
+                        <p>
+                        </p>
+                        <div class="flex row wrap">
+@*                             <EditForm EditContext="editContext" OnValidSubmit="OnValidSudmit" OnInvalidSubmit="OnInvalidSubmit" class="@((isValidated ? "validated" : ""))">
+                                <DataAnnotationsValidator />
+
+                                <FormField For="@(() => formModel.Email)" Context="fieldId">
+                                    <InputText id="@fieldId" @bind-Value="@formModel.Email" />
+                                </FormField>
+
+                                <FormField For="@(() => formModel.Password)" Context="fieldId">
+                                    <InputText id="@fieldId" @bind-Value="@formModel.Password" type="password" />
+                                </FormField>
+
+                                <FormField For="@(() => formModel.DateOfBirth)" Context="fieldId">
+                                    <InputDate id="@fieldId" @bind-Value="@formModel.DateOfBirth" TValue="DateOnly" />
+                                </FormField>
+
+                                <FormField For="@(() => formModel.PhoneNumber)" Context="fieldId">
+                                    <InputText id="@fieldId" @bind-Value="@formModel.PhoneNumber" />
+                                </FormField>
+
+                                <FormField For="@(() => formModel.RememberMe)" Context="fieldId" Inline="true">
+                                    <Checkbox id="fieldId" @bind-Value="@formModel.RememberMe" />
+                                </FormField>
+
+                                <FormField TItem="string" Context="fieldId">
+                                    <InputSelect TValue="string" @bind-Value="@selectValue">
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                    </InputSelect>
+                                </FormField>
+
+                                <Button Color="Color.Secondary" Size="Size.Small" type="submit">Submit</Button>
+                                <Button Color="Color.Primary" Size="Size.Small" type="reset" @onclick="OnClear">Clear</Button>
+                            </EditForm>
+ *@                        </div>
+                </CardBody>
+                </Card>
+            </SliderItem>
+            <SliderItem>
+                <Card Size="Size.Full">
+                    <CardTitle>
+                        Collapseables
+                    </CardTitle>
+                    <CardBody>
+                        <p>
+                        </p>
+                        <div class="flex row wrap">
+                        </div>
+                    </CardBody>
+                </Card>
+            </SliderItem>
+        </Slider>
+
+        <Card Size="Size.Full">
+            <CardTitle>
+                Carousel + Gallery
+            </CardTitle>
+            <CardBody>
+                <p>
+                    A lovely carousel component along with an image gallery. Each reacts to the other's state, with selection and drag-and-drop reordering included in the gallery!
+                </p>
+                <div class="flex row wrap">
+                    <Carousel Items="slides" @bind-CurrentSlide="selectedSlide" ShowControls Wrap>
+                        <ItemTemplate>
+                            <img src="@context.ImageUrl" loading="lazy" />
+                        </ItemTemplate>
+                    </Carousel>
+                    <Gallery Items="slides" @bind-SelectedItem="selectedSlide">
+                        <ItemTemplate>
+                            <img src="@context.ImageUrl" loading="lazy" draggable="false" />
+                        </ItemTemplate>
+                    </Gallery>
+                </div>
+            </CardBody>
+        </Card>
+    </Container>
+</Section>
+
+@code {
+    User formModel = new();
+    EditContext? editContext;
+    bool isValidated = false;
+
+    string selectValue;
+
+    List<Slide> slides;
+    Slide selectedSlide;
+
+    protected override void OnInitialized()
+    {
+        editContext = new(formModel);
+        editContext.SetFieldCssClassProvider(new FormClassProvider());
+
+        slides = Slide.GetSlides();
+        selectedSlide = slides.FirstOrDefault();
+    }
+
+    private void OnValidSudmit(EditContext context)
+    {
+        isValidated = true;
+        Console.WriteLine("Valid form submitted!");
+    }
+
+    private void OnInvalidSubmit(EditContext context)
+    {
+        isValidated = true;
+        Console.WriteLine("Invalid form submitted!");
+    }
+
+    private void OnClear()
+    {
+        isValidated = false;
+        editContext = new(formModel);
+        editContext.SetFieldCssClassProvider(new FormClassProvider());
+        StateHasChanged();
+    }
+}

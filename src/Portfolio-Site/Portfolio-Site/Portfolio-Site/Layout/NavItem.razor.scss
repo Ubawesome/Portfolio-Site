@@ -1,0 +1,137 @@
+@import '../../wwwroot/css/variables.scss';
+
+.nav-link {
+    --nav-link-color: var(--primary-text);
+    --nav-link-bg-color: light-dark(var(--secondary-300), var(--secondary-500));
+    --nav-link-hover-color: var(--secondary-text);
+    --nav-link-hover-bar-color: var(--primary-900);
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    width: fit-content;
+
+    background: none;
+
+    text-align: center;
+    font-size: 0.9rem;
+    letter-spacing: 0.1ch;
+    text-decoration: none;
+    white-space: nowrap;
+    color: var(--nav-link-color);
+    cursor: pointer;
+
+    transition:
+        background-color ease-out 0.15s,
+        color ease-out 0.15s;
+}
+
+.nav-link ::deep > i {
+    font-size: 1.15rem;
+    color: var(--grey-900);
+}
+
+.nav-link ::deep > :where(img, svg, object) {
+    width: 1.5rem;
+    aspect-ratio: 1 / 1;
+
+    margin: 0;
+    padding: 0;
+    fill: currentColor;
+}
+
+.nav-link::after {
+    position: absolute;
+    content: '';
+    left: 0.15rem;
+    right: 0.15rem;
+    bottom: 0.1rem;
+    height: 0.25rem;
+    border-radius: 0.5rem;
+    z-index: 1;
+    background-color: var(--nav-link-hover-bar-color);
+
+    transform: translateY(100%);
+    opacity: 0;
+
+    transition: transform ease-out 0.15s;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+    background-color: var(--nav-link-bg-color);
+    color: var(--nav-link-hover-color);
+}
+
+/*.nav-link.active::after,
+.nav-link:hover::after,
+.nav-link:focus::after {
+    transform: translateY(0%);
+    opacity: 1;
+}
+*/
+
+/*.nav-link.active {
+    color: var(--nav-link-color);
+}
+*/
+
+.contact-me a {
+    --nav-link-color: var(--primary-500);
+    --nav-link-bg-color: var(--secondary);
+    --nav-link-hover-color: var(--primary-300);
+    --nav-link-hover-bar-color: var(--accent-1-500);
+
+    background: 
+        linear-gradient(20deg, var(--secondary) 0%, var(--accent-1-900) 100%) padding-box,
+        linear-gradient(45deg, var(--accent-2) 0%, var(--accent-3) 100%) border-box;
+    border: transparent 4px solid;
+
+/*    border-radius: 100vw;*/
+    font-size: 1.1rem;
+
+}
+
+
+/* Mobile */
+@media (width <= $screen-size-lg) {
+
+    .nav-link {
+        text-align: left;
+
+        border-bottom-right-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+
+        padding-block: 0.75rem;
+        padding-left: 0.75rem;
+        padding-right: 1rem;
+        margin-block: 1rem;
+
+        width: 100%;
+    }
+
+    .primary-nav > ul > li.push {
+        margin-top: auto;
+    }
+}
+
+/* Desktop / Tablet */
+
+@media (width > $screen-size-lg) {
+    .nav-link {
+        border-radius: 0.25rem;
+
+        height: 100%;
+        padding-inline: clamp(1.5rem, 1.5vw, 4rem);
+    }
+
+    .primary-nav > ul > li.push {
+        margin-left: auto;
+    }
+
+    .contact-me {
+/*        margin-block: calc(var(--nav-list-margin-block) * -1);*/
+    }
+}

@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Portfolio-Site/Portfolio-Site.Client/Portfolio-Site.Client.csproj" />
+  <Project Path="Portfolio-Site/Portfolio-Site/Portfolio-Site.csproj" />
+</Solution>

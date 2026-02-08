@@ -1,0 +1,198 @@
+﻿@import '../../wwwroot/css/variables.scss';
+/* Tab Styles */
+
+.tabs {
+    display: grid;
+    max-width: 100%;
+
+    z-index: 5;
+}
+
+.tabs-container {
+    background-color: var(--card-bg-color);
+    box-shadow: var(--box-shadow-card);
+
+    width: clamp(20rem, 70vw, 2000px);
+
+    margin-inline: auto;
+}
+
+.tabs-container.vertical {
+    grid-auto-rows: auto 1fr;
+    grid-auto-flow: row;
+}
+
+.tabs-container.horizontal {
+    grid-auto-columns: auto 1fr;
+    grid-auto-flow: column;
+}
+
+
+.tabs-card {
+    position: relative;
+
+    gap: 0.35rem;
+
+    margin-block: 0rem;
+    padding-inline: 0rem;
+    padding-block: 0rem;
+
+    background: none;
+    height: fit-content;
+
+    border-radius: 0.25rem;
+    color: var(--primary-text);
+}
+
+.tabs-card.vertical {
+    grid-auto-rows: auto 1fr;
+    grid-auto-flow: row;
+}
+
+.tabs-card.horizontal {
+    grid-auto-columns: auto 1fr;
+    grid-auto-flow: column;
+}
+
+
+
+.tabs-headers {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    justify-content: flex-start;
+    width: 100%;
+    background: none;
+}
+
+.tabs-container .tabs-headers {
+    gap: 1rem;
+    margin-block: 0;
+    margin-inline: 1rem;
+}
+
+.tabs-container.vertical .tabs-headers {
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tabs-container.horizontal .tabs-headers {
+    flex-direction: column;
+    width: max-content;
+    overflow-y: auto;
+}
+
+.tabs-card .tabs-headers {
+    background-color: var(--card-bg-color);
+    box-shadow: var(--box-shadow-card);
+}
+
+.tabs-card.vertical .tabs-headers {
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tabs-card.horizontal .tabs-headers {
+    flex-direction: column;
+    width: max-content;
+    overflow-y: auto;
+}
+
+.tabs-header {
+    position: relative;
+    font-size: var(--fs-p-2);
+    line-height: 1.5em;
+    color: var(--primary-text);
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+
+    width: max-content;
+
+    transition: background-color ease-out 0.15s, color ease-out 0.15s;
+}
+
+.tabs.horizontal .tabs-header {
+    width: 100%;
+}
+
+.tabs-container .tabs-header {
+    padding-inline: clamp(1rem, 1vw, 2rem);
+    padding-block: 0.5rem;
+}
+
+.tabs-card .tabs-header {
+    padding-inline: clamp(0.5rem, 2.5vw, 6rem);
+    padding-block: clamp(0.25rem, 1.5vh, 2rem);
+}
+
+
+
+.tabs-header::after {
+    position: absolute;
+    content: '';
+
+    left: 0.15rem;
+    right: 0.15rem;
+    bottom: 0.1rem;
+    height: 0.1rem;
+
+    border-radius: 0.5rem;
+
+    z-index: 1;
+
+    background-color: var(--card-highlight-color);
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform ease-out 0.15s;
+}
+
+.tabs-header:hover, .tabs-header:focus-visible {
+    background-color: var(--secondary-500);
+    color: var(--secondary-text);
+}
+
+.tabs-header.selected::after,
+.tabs-header:hover::after,
+.tabs-header:focus-within::after {
+    transform: translateY(0%);
+    opacity: 1;
+}
+
+.tabs-content {
+
+}
+
+.tabs-container .tabs-content {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 4rem;
+    padding-block: 2rem;
+}
+
+.tabs-card .tabs-content {
+    padding-block: clamp(2rem, 2vh, 6rem);
+    padding-inline: clamp(2rem, 2vw, 6rem);
+
+    background-color: var(--card-bg-color-sub);
+    box-shadow: var(--box-shadow-card);
+}
+
+@media (width <= $screen-size-lg) {
+    .tabs-container.horizontal,
+    .tabs-card.horizontal {
+        grid-auto-rows: auto 1fr;
+        grid-auto-flow: row;
+    }
+
+    .tabs-container.horizontal .tabs-headers,
+    .tabs-card.horizontal .tabs-headers {
+        flex-direction: row;
+        width: 100%;
+        overflow-x: auto;
+    }
+}
+
