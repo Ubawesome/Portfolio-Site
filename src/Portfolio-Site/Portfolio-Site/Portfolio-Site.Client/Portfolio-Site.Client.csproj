@@ -12,6 +12,14 @@
     <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
 	<OverrideHtmlAssetPlaceholders>true</OverrideHtmlAssetPlaceholders>
   </PropertyGroup>
+	
+  <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.2" />

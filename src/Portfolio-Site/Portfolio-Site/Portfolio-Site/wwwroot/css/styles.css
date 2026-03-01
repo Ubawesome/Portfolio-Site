@@ -2,8 +2,8 @@
 @import 'animations.css';
 @import 'variables.css';
 :root {
-  --font-title: "Stack Sans Text", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   --font-header: "Stack Sans Notch", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-title: "Major Mono Display", monospace;
   --font-body: "Stack Sans Text", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   --primary: hsl(233 22% 23%);
   --secondary: hsl(126 61% 80%);
@@ -126,12 +126,14 @@
   :root {
     --color-scheme: light;
     color-scheme: light;
+    --background-image: url("img/topography-light.svg");
   }
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --color-scheme: dark;
     color-scheme: dark;
+    --background-image: url("img/topography-dark.svg");
   }
 }
 
@@ -213,14 +215,14 @@ html, body {
 }
 
 html.dark {
-  --grain-opacity: 0.25;
+  --grain-opacity: 0.15;
 }
 html.dark body {
   background-image: url("img/topography-dark.svg");
 }
 
 html.light {
-  --grain-opacity: 0.35;
+  --grain-opacity: 0.25;
 }
 html.light body {
   background-image: url("img/topography-light.svg");
@@ -235,6 +237,7 @@ body {
   --background-box-size: 16vmin;
   --background-small-box-size: calc(var(--background-box-size) / 4);
   background-size: 25vmin;
+  background-image: url(light-dark("img/topography-light.svg", "img/topography-dark.svg"));
   animation: background-drift 120s linear -30s infinite;
 }
 
@@ -254,7 +257,7 @@ body {
   z-index: -100;
   opacity: var(--grain-opacity, 0.25);
   background-image: url("img/spaced-noise-md.png");
-  background-size: 10rem;
+  background-size: 15vmax;
   animation: grain 1s steps(1, jump-end) infinite;
 }
 
@@ -618,7 +621,7 @@ div.validation-message {
 
 .splash-block {
   position: relative;
-  left: -25%;
+  left: -50%;
   width: min(60vmin, 48rem);
   aspect-ratio: 1/1;
   filter: drop-shadow(0.25rem 0.15rem 0.1rem hsl(from var(--grey-100) h s l/0.35)) drop-shadow(0.5rem 0.25rem 0.5rem hsl(from var(--grey-100) h s l/0.25));
@@ -649,14 +652,13 @@ div.validation-message {
 
 .splash-block-title {
   position: absolute;
-  top: 25%;
   left: 25%;
-  width: max-content;
   font-family: var(--font-title);
-  font-size: clamp(2rem, 10vmin, 8rem);
-  font-weight: 500;
+  font-size: clamp(2rem, 15vmin, 12rem);
+  font-weight: 900;
+  text-align: left;
   /*letter-spacing: clamp(0.25rem, 0.75vw, 1rem);*/
-  letter-spacing: -0.02em;
+  letter-spacing: -0.06em;
   color: var(--primary-900);
   text-shadow: none;
   background: linear-gradient(60deg, var(--accent-1-700) 50%, var(--accent-1-500) 100%);

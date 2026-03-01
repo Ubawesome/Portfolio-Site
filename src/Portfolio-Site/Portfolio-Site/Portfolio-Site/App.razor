@@ -7,16 +7,16 @@
     <base href="/" />
     <ResourcePreloader />
     @* <link rel="stylesheet" href="@Assets["app.css"]" /> *@
-    <link rel="stylesheet" href="Portfolio-Site.styles.css" type="text/css" />
+    <link rel="stylesheet" href="@Assets["Portfolio-Site.styles.css"]" type="text/css" />
     <ImportMap />
-    <link href="css/imports.css" rel="stylesheet" type="text/css" />
-    <link href="css/variables.css" rel="stylesheet" type="text/css" />
-    <link href="css/reset.css" rel="stylesheet" type="text/css" />
-    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+    <link href="@Assets["css/imports.css"]" rel="stylesheet" type="text/css" />
+    <link href="@Assets["css/variables.css"]" rel="stylesheet" type="text/css" />
+    <link href="@Assets["css/reset.css"]" rel="stylesheet" type="text/css" />
+    <link href="@Assets["css/styles.css"]" rel="stylesheet" type="text/css" />
 
-    <link rel="stylesheet" href="css/animations.css" type="text/css">
+    <link rel="stylesheet" href="@Assets["css/animations.css"]" type="text/css">
     <script defer src="https://friconix.com/cdn/friconix.js" type="text/javascript"></script>
-    <script defer src="/js/friconix.js" type="text/javascript"></script>
+    <script defer src="@Assets["/js/friconix.js"]" type="text/javascript"></script>
 
     <link rel="icon" type="image/png" href="favicon.png" />
     <HeadOutlet @rendermode="InteractiveAuto" />
@@ -25,15 +25,19 @@
 <body>
     <Routes @rendermode="InteractiveAuto" />
     @* <ReconnectModal /> *@
-    <script src="_framework/blazor.web.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/Flip.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MorphSVGPlugin.min.js" type="text/javascript"></script>
-    <script src="js/theme-switcher.js" type="text/javascript"></script>
-    <script src="js/scrollTriggers.js" type="text/javascript"></script>
-    <script src="js/cursor.js" type="text/javascript"></script>
-    <script src="js/interop.js" type="text/javascript"></script>
+    @* <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/Observer.min.js" type="text/javascript"></script> *@
+
+    <script src="@Assets["js/observer.js"]" type="text/javascript"></script>
+    <script src="@Assets["js/nav-menu.js"]" type="text/javascript"></script>
+    <script src="@Assets["js/theme-switcher.js"]" type="text/javascript"></script>
+    <script src="@Assets["js/scrollTriggers.js"]" type="text/javascript"></script>
+    <script src="@Assets["js/cursor.js"]" type="text/javascript"></script>
+    <script src="@Assets["js/interop.js"]" type="text/javascript"></script>
+    <script src="@Assets["_framework/blazor.web.js"]" type="text/javascript"></script>
 </body>
 
 </html>

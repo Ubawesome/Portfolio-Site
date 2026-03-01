@@ -75,7 +75,7 @@ html, body {
 }
 
 html.dark {
-    --grain-opacity: 0.25;
+    --grain-opacity: 0.15;
 
     body {
         background-image: url('img/topography-dark.svg');
@@ -83,7 +83,7 @@ html.dark {
 }
 
 html.light {
-    --grain-opacity: 0.35;
+    --grain-opacity: 0.25;
 
     body {
         background-image: url('img/topography-light.svg');
@@ -105,6 +105,7 @@ body {
     //                   linear-gradient(90deg, var(--background-line-color-2) var(--background-line-size-2), transparent var(--background-line-size-2));
 
     background-size: 25vmin;
+    background-image: url(light-dark('img/topography-light.svg', 'img/topography-dark.svg'));
     //background-size: var(--background-box-size) var(--background-box-size),
     //                 var(--background-box-size) var(--background-box-size),
     //                 var(--background-small-box-size) var(--background-small-box-size),
@@ -150,7 +151,7 @@ body {
     opacity: var(--grain-opacity, 0.25);
 
     background-image: url('img/spaced-noise-md.png');
-    background-size: 10rem; //max(12vmin, 10rem);
+    background-size: 15vmax; //max(12vmin, 10rem);
     animation: grain 1s steps(1, jump-end) infinite;
 }
 
@@ -566,7 +567,7 @@ select {
 
 .splash-block {
     position: relative;
-    left: -25%;
+    left: -50%;
 
     width: min(60vmin, 48rem);
     aspect-ratio: 1 / 1;
@@ -604,16 +605,17 @@ select {
 
 .splash-block-title {
     position: absolute;
-    top: 25%;
+    //top: 25%;
     left: 25%;
 
-    width: max-content;
+    //width: max-content;
 
     font-family: var(--font-title);
-    font-size: clamp(2rem, 10vmin, 8rem);
-    font-weight: 500;
+    font-size: clamp(2rem, 15vmin, 12rem);
+    font-weight: 900;
+    text-align: left;
     /*letter-spacing: clamp(0.25rem, 0.75vw, 1rem);*/
-    letter-spacing: -0.02em;
+    letter-spacing: -0.06em;
 
     color: var(--primary-900);
     text-shadow: none;

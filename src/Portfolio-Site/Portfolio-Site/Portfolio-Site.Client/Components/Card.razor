@@ -1,9 +1,10 @@
 ﻿@inject IJSRuntime JSRuntime
 
-<div @ref="card" class="card @(Size.EnumToClass()) @(Orientation.EnumToClass()) @((ImagePosition.EnumToClass())) @Class" @attributes="@AdditionalAttributes">
+<div @ref="card" class="card @(Size.EnumToClass()) @(Orientation.EnumToClass()) @((ImagePosition.EnumToClass())) @Class" @attributes="@AdditionalAttributes"
+    data-animated="@Animated.ToString()" data-trigger-start="@TriggerStart" data-trigger-end="@TriggerEnd">
     @if (CardImage != null)
     {
-        <div @ref="cardImage" class="card-image">
+        <div @ref="cardImage" class="card-image" data-animation-speed="@AnimatedImageSpeed">
             @CardImage
         </div>
     }
@@ -17,7 +18,7 @@
 
     @if (CardBody != null)
     {
-        <div @ref="cardBody" class="card-body">
+        <div @ref="cardBody" class="card-body" data-animation-speed="@AnimatedBodySpeed">
                 @CardBody
         </div>
     }
@@ -73,8 +74,8 @@
     {
         if (firstRender && Animated)
         {
-            await JSRuntime.InvokeVoidAsync("setUpGlideTrigger", card, cardImage, AnimatedImageSpeed, TriggerStart, TriggerEnd);
-            await JSRuntime.InvokeVoidAsync("setUpGlideTrigger", card, cardBody, AnimatedBodySpeed, TriggerStart, TriggerEnd);
+            // await JSRuntime.InvokeVoidAsync("setUpGlideTrigger", card, cardImage, AnimatedImageSpeed, TriggerStart, TriggerEnd);
+            // await JSRuntime.InvokeVoidAsync("setUpGlideTrigger", card, cardBody, AnimatedBodySpeed, TriggerStart, TriggerEnd);
         }
     }
 }

@@ -4,6 +4,8 @@ using Portfolio_Site;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//builder.Services.AddRazorComponents()
+//    .AddInteractiveServerComponents();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
@@ -31,29 +33,34 @@ else
 }
 app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
 app.UseHttpsRedirection();
+
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 });
 
-app.UseBlazorFrameworkFiles();
-app.UseStaticFiles();
-//app.UseStaticFiles(new StaticFileOptions
-//{
-//    OnPrepareResponse = ctx =>
-//    {
-//        // Optional: Add caching headers for framework files
-//        if (ctx.File.Name.EndsWith(".js") || ctx.File.Name.EndsWith(".wasm"))
-//        {
-//            ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=31536000");
-//        }
-//    }
-//});
+app.UseRouting();
+//app.UseBlazorFrameworkFiles();
+//app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        // Optional: Add caching headers for framework files
+        if (ctx.File.Name.EndsWith(".js") || ctx.File.Name.EndsWith(".wasm"))
+        {
+            ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=31536000");
+        }
+    }
+});
 
 app.UseAuthentication();
 app.UseAntiforgery();
 
 app.MapStaticAssets();
+//app.MapRazorComponents<App>()
+//    .AddInteractiveServerRenderMode()
+//    .AddAdditionalAssemblies(typeof(Portfolio_Site.Client._Imports).Assembly);
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()

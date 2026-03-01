@@ -6,15 +6,21 @@ $screen-size-lg: 1400px;
     @media (prefers-color-scheme: light) {
         --color-scheme: light;
         color-scheme: light;
+
+        --background-image: url('img/topography-light.svg');
     }
 
     @media (prefers-color-scheme: dark) {
         --color-scheme: dark;
         color-scheme: dark;
+
+        --background-image: url('img/topography-dark.svg');
     }
 
-    --font-title: 'Stack Sans Text', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;;
+    //--font-title: 'Stack Sans Text', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;;
     --font-header: 'Stack Sans Notch', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-title: 'Major Mono Display', monospace;
+    //--font-header: 'Major Mono Display', monospace;
     --font-body: 'Stack Sans Text', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
     --primary: hsl(233 22% 23%);

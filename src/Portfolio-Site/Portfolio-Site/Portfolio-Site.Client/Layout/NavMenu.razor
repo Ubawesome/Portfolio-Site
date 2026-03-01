@@ -1,35 +1,36 @@
 ﻿@inject IJSRuntime JSRuntime
 
 <div id="nav-wrapper">
-    <div @ref="toggleTracker" id="toggle-tracker"
+    @* <div @ref="toggleTracker" id="toggle-tracker"
                                 @ontouchmove="OnTouchMove" @ontouchmove:stopPropagation="true" @ontouchmove:preventDefault="true"
                                 @ontouchend="OnTouchEnd" @ontouchend:stopPropagation="true" @ontouchend:preventDefault="true"
                                 @ontouchcancel="OnCancel" @ontouchcancel:stopPropagation="true" @ontouchcancel:preventDefault="true"
                                 @onmousemove="OnMouseMove" @onmousemove:stopPropagation="true" @onmousemove:preventDefault="true"
                                 @onmouseup="OnMouseEnd" @onmouseup:stopPropagation="true" @onmouseup:preventDefault="true"
                                 @onmouseout="OnMouseEnd" @onmouseout:stopPropagation="true" @onmouseout:preventDefault="true">
-                            </div>
-    <div @ref="toggle" id="toggle-capsule">
-        <div class="toggle-capsule-left"></div>
+                            </div> *@
+    @* <div @ref="toggle" id="toggle-capsule" class="locked">
+        @* <div class="toggle-capsule-left"></div>
         <div class="toggle-capsule-right"></div>
-        <div class="nav-toggle"
-                                @ontouchstart="OnTouchStart" @ontouchstart:stopPropagation="true" @ontouchstart:preventDefault="true"
-                                @ontouchmove="OnTouchMove" @ontouchmove:stopPropagation="true" @ontouchmove:preventDefault="true"
-                                @ontouchend="OnTouchEnd" @ontouchend:stopPropagation="true" @ontouchend:preventDefault="true"
-                                @ontouchcancel="OnCancel" @ontouchcancel:stopPropagation="true" @ontouchcancel:preventDefault="true"
-                                @onmousedown="OnMouseStart" @onmousedown:stopPropagation="true" @onmousedown:preventDefault="true"
-                                @onmousemove="OnMouseMove" @onmousemove:stopPropagation="true" @onmousemove:preventDefault="true"
-                                @onmouseup="OnMouseEnd" @onmouseup:stopPropagation="true" @onmouseup:preventDefault="true">
+        <div class="nav-toggle">
             <img src="/css/icons/fi-xnsuxl-three-bars-solid.svg" />
         </div>
-    </div>
-    <nav @ref="nav" id="primary-nav" class="primary-nav">
-        <a href="home" class="nav-logo">CF</a>
-        <ul class="nav-list">
-            @NavItems
-            <div class="section-indicator" />
-        </ul>
-        <ThemeSwitcher />
+    </div> *@
+    <nav @ref="nav" id="primary-nav" class="primary-nav locked">
+        <svg id="nav-bg" preserveAspectRatio="none">
+            <path id="nav-bg-path" fill="var(--nav-bg-color)" d="M 0 0 H 0 L 0 50 L 40 50 q 4 0 4 4 l 4 0 q 0 -4 4 -4 L 100 50 L 100 0 z" />
+        </svg>
+        <div class="nav-content">
+            <a href="home" class="nav-logo">CF</a>
+            <ul class="nav-list">
+                @NavItems
+                <div class="section-indicator" />
+            </ul>
+            <ThemeSwitcher />
+        </div>
+        <div class="nav-toggle">
+            <img src="/css/icons/fi-xnsuxl-three-bars-solid.svg" />
+        </div>
     </nav>
 </div>
 
@@ -46,21 +47,21 @@
     {
         if (!following)
         {
-            await JSRuntime.ToggleClass(toggle, "active");
-            await JSRuntime.ToggleClass(nav, "active");
+            await JSRuntime.ToggleClass(toggle, Variables.ACTIVE_CLASS);
+            await JSRuntime.ToggleClass(nav, Variables.INACTIVE_CLASS);
         }
     }
 
     public async Task ShowNav()
     {
-        await JSRuntime.AddClass(toggle, "active");
-        await JSRuntime.AddClass(nav, "active");
+        await JSRuntime.AddClass(toggle, Variables.ACTIVE_CLASS);
+        await JSRuntime.RemoveClass(nav, Variables.INACTIVE_CLASS);
     }
 
     public async Task HideNav()
     {
-        await JSRuntime.RemoveClass(toggle, "active");
-        await JSRuntime.RemoveClass(nav, "active");
+        await JSRuntime.RemoveClass(toggle, Variables.ACTIVE_CLASS);
+        await JSRuntime.AddClass(nav, Variables.INACTIVE_CLASS);
     }
 
     private bool following;
@@ -73,7 +74,7 @@
         xDown = args.ClientX;
         yDown = args.ClientY;
 
-        await JSRuntime.AddClass(toggleTracker, "active");
+        await JSRuntime.AddClass(toggleTracker, Variables.ACTIVE_CLASS);
 
         await OnMouseMove(args);
     }
@@ -90,7 +91,7 @@
     {
         following = false;
 
-        await JSRuntime.RemoveClass(toggleTracker, "active");
+        await JSRuntime.RemoveClass(toggleTracker, Variables.ACTIVE_CLASS);
         await JSRuntime.EndNavDrag(toggle);
 
         if (xDown == null || yDown == null)
@@ -157,7 +158,7 @@
     {
         following = false;
 
-        await JSRuntime.RemoveClass(toggleTracker, "active");
+        await JSRuntime.RemoveClass(toggleTracker, Variables.ACTIVE_CLASS);
         await JSRuntime.EndNavDrag(toggle);
 
         if (xDown == null || yDown == null)
@@ -206,7 +207,7 @@
     private async Task OnCancel()
     {
         following = false;
-        await JSRuntime.RemoveClass(toggleTracker, "active");
+        await JSRuntime.RemoveClass(toggleTracker, Variables.ACTIVE_CLASS);
         await JSRuntime.EndNavDrag(toggle);
         xDown = yDown = null;
     }

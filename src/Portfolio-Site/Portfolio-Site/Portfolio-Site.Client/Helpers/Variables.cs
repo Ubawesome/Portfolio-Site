@@ -52,6 +52,14 @@ namespace Portfolio_Site.Helpers
         Card
     }
 
+    public static class Variables
+    {
+        public const string ACTIVE_CLASS = "active";
+        public const string INACTIVE_CLASS = "inactive";
+        public const string HIDDEN_CLASS = "hidden";
+        public const string LOCKED_CLASS = "locked";
+    }
+
     public static class Helpers
     {
         public static string EnumToClass(this Size size)
